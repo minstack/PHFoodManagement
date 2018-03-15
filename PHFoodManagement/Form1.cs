@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace PHFoodManagement
 {
-    public partial class PHFoodOrderMgmtForm : Form
+    public partial class Form1 : Form
     {
-        public PHFoodOrderMgmtForm()
+        public Form1()
         {
             InitializeComponent();
         }
