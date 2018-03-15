@@ -1,6 +1,6 @@
 ﻿namespace PHFoodManagement
 {
-    partial class Form1
+    partial class PHFoodOrderMgmtForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,9 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // PHFoodOrderMgmtForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(763, 474);
+            this.Name = "PHFoodOrderMgmtForm";
+            this.Text = "PH Food Order Management";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
