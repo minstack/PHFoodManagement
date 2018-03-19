@@ -28,7 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PHFoodOrderMgmtForm));
             this._grpQuickOrder = new System.Windows.Forms.GroupBox();
+            this._lblProductList = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this._lstProducts = new System.Windows.Forms.ListBox();
             this._lstClients = new System.Windows.Forms.ListBox();
             this._picLogo = new System.Windows.Forms.PictureBox();
@@ -39,20 +42,18 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._grpManage = new System.Windows.Forms.GroupBox();
-            this._grpQuickOrderDetails = new System.Windows.Forms.GroupBox();
-            this._grpRecentOrders = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this._lblProductList = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this._txtQOClient = new System.Windows.Forms.TextBox();
-            this._lstQOProducts = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this._lstRecentOrders = new System.Windows.Forms.ListBox();
-            this._btnOrders = new System.Windows.Forms.Button();
-            this._btnClients = new System.Windows.Forms.Button();
             this._btnProducts = new System.Windows.Forms.Button();
+            this._btnClients = new System.Windows.Forms.Button();
+            this._btnOrders = new System.Windows.Forms.Button();
+            this._grpQuickOrderDetails = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this._lstQOProducts = new System.Windows.Forms.ListBox();
+            this._txtQOClient = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this._grpRecentOrders = new System.Windows.Forms.GroupBox();
+            this._lstRecentOrders = new System.Windows.Forms.ListBox();
+            this.button2 = new System.Windows.Forms.Button();
             this._grpQuickOrder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._picLogo)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -63,6 +64,9 @@
             // 
             // _grpQuickOrder
             // 
+            this._grpQuickOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this._grpQuickOrder.Controls.Add(this._lblProductList);
             this._grpQuickOrder.Controls.Add(this.label1);
             this._grpQuickOrder.Controls.Add(this._lstProducts);
@@ -74,6 +78,26 @@
             this._grpQuickOrder.TabIndex = 0;
             this._grpQuickOrder.TabStop = false;
             this._grpQuickOrder.Text = "Quick Order";
+            // 
+            // _lblProductList
+            // 
+            this._lblProductList.AutoSize = true;
+            this._lblProductList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._lblProductList.Location = new System.Drawing.Point(341, 61);
+            this._lblProductList.Name = "_lblProductList";
+            this._lblProductList.Size = new System.Drawing.Size(108, 29);
+            this._lblProductList.TabIndex = 3;
+            this._lblProductList.Text = "Products";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(30, 61);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(87, 29);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Clients";
             // 
             // _lstProducts
             // 
@@ -87,6 +111,8 @@
             // 
             // _lstClients
             // 
+            this._lstClients.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this._lstClients.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._lstClients.FormattingEnabled = true;
             this._lstClients.ItemHeight = 29;
@@ -142,13 +168,13 @@
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(252, 30);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(175, 30);
             this.toolStripMenuItem1.Text = "&View Help";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(175, 30);
             this.aboutToolStripMenuItem.Text = "&About";
             // 
             // _grpManage
@@ -164,8 +190,36 @@
             this._grpManage.TabStop = false;
             this._grpManage.Text = "Manage";
             // 
+            // _btnProducts
+            // 
+            this._btnProducts.Location = new System.Drawing.Point(41, 181);
+            this._btnProducts.Name = "_btnProducts";
+            this._btnProducts.Size = new System.Drawing.Size(147, 41);
+            this._btnProducts.TabIndex = 2;
+            this._btnProducts.Text = "Products";
+            this._btnProducts.UseVisualStyleBackColor = true;
+            // 
+            // _btnClients
+            // 
+            this._btnClients.Location = new System.Drawing.Point(41, 122);
+            this._btnClients.Name = "_btnClients";
+            this._btnClients.Size = new System.Drawing.Size(147, 41);
+            this._btnClients.TabIndex = 1;
+            this._btnClients.Text = "Clients";
+            this._btnClients.UseVisualStyleBackColor = true;
+            // 
+            // _btnOrders
+            // 
+            this._btnOrders.Location = new System.Drawing.Point(41, 56);
+            this._btnOrders.Name = "_btnOrders";
+            this._btnOrders.Size = new System.Drawing.Size(147, 41);
+            this._btnOrders.TabIndex = 0;
+            this._btnOrders.Text = "Orders";
+            this._btnOrders.UseVisualStyleBackColor = true;
+            // 
             // _grpQuickOrderDetails
             // 
+            this._grpQuickOrderDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this._grpQuickOrderDetails.Controls.Add(this.button1);
             this._grpQuickOrderDetails.Controls.Add(this._lstQOProducts);
             this._grpQuickOrderDetails.Controls.Add(this._txtQOClient);
@@ -179,47 +233,31 @@
             this._grpQuickOrderDetails.TabStop = false;
             this._grpQuickOrderDetails.Text = "Quick Order Details";
             // 
-            // _grpRecentOrders
+            // button1
             // 
-            this._grpRecentOrders.Controls.Add(this._lstRecentOrders);
-            this._grpRecentOrders.Controls.Add(this.button2);
-            this._grpRecentOrders.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._grpRecentOrders.Location = new System.Drawing.Point(985, 402);
-            this._grpRecentOrders.Name = "_grpRecentOrders";
-            this._grpRecentOrders.Size = new System.Drawing.Size(288, 231);
-            this._grpRecentOrders.TabIndex = 5;
-            this._grpRecentOrders.TabStop = false;
-            this._grpRecentOrders.Text = "Recent Orders";
+            this.button1.Location = new System.Drawing.Point(58, 291);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(170, 44);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Open Order";
+            this.button1.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // _lstQOProducts
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(30, 61);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(87, 29);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Clients";
+            this._lstQOProducts.FormattingEnabled = true;
+            this._lstQOProducts.ItemHeight = 29;
+            this._lstQOProducts.Location = new System.Drawing.Point(11, 107);
+            this._lstQOProducts.Name = "_lstQOProducts";
+            this._lstQOProducts.Size = new System.Drawing.Size(270, 178);
+            this._lstQOProducts.TabIndex = 7;
             // 
-            // _lblProductList
+            // _txtQOClient
             // 
-            this._lblProductList.AutoSize = true;
-            this._lblProductList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._lblProductList.Location = new System.Drawing.Point(341, 61);
-            this._lblProductList.Name = "_lblProductList";
-            this._lblProductList.Size = new System.Drawing.Size(108, 29);
-            this._lblProductList.TabIndex = 3;
-            this._lblProductList.Text = "Products";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(33, 43);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 25);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Client:";
+            this._txtQOClient.Location = new System.Drawing.Point(107, 43);
+            this._txtQOClient.Name = "_txtQOClient";
+            this._txtQOClient.ReadOnly = true;
+            this._txtQOClient.Size = new System.Drawing.Size(174, 35);
+            this._txtQOClient.TabIndex = 6;
             // 
             // label3
             // 
@@ -231,31 +269,37 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "Products:";
             // 
-            // _txtQOClient
+            // label2
             // 
-            this._txtQOClient.Location = new System.Drawing.Point(107, 43);
-            this._txtQOClient.Name = "_txtQOClient";
-            this._txtQOClient.ReadOnly = true;
-            this._txtQOClient.Size = new System.Drawing.Size(174, 35);
-            this._txtQOClient.TabIndex = 6;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(33, 43);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(68, 25);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Client:";
             // 
-            // _lstQOProducts
+            // _grpRecentOrders
             // 
-            this._lstQOProducts.FormattingEnabled = true;
-            this._lstQOProducts.ItemHeight = 29;
-            this._lstQOProducts.Location = new System.Drawing.Point(11, 107);
-            this._lstQOProducts.Name = "_lstQOProducts";
-            this._lstQOProducts.Size = new System.Drawing.Size(270, 178);
-            this._lstQOProducts.TabIndex = 7;
+            this._grpRecentOrders.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this._grpRecentOrders.Controls.Add(this._lstRecentOrders);
+            this._grpRecentOrders.Controls.Add(this.button2);
+            this._grpRecentOrders.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._grpRecentOrders.Location = new System.Drawing.Point(985, 402);
+            this._grpRecentOrders.Name = "_grpRecentOrders";
+            this._grpRecentOrders.Size = new System.Drawing.Size(288, 231);
+            this._grpRecentOrders.TabIndex = 5;
+            this._grpRecentOrders.TabStop = false;
+            this._grpRecentOrders.Text = "Recent Orders";
             // 
-            // button1
+            // _lstRecentOrders
             // 
-            this.button1.Location = new System.Drawing.Point(58, 291);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(170, 44);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Open Order";
-            this.button1.UseVisualStyleBackColor = true;
+            this._lstRecentOrders.FormattingEnabled = true;
+            this._lstRecentOrders.ItemHeight = 29;
+            this._lstRecentOrders.Location = new System.Drawing.Point(11, 34);
+            this._lstRecentOrders.Name = "_lstRecentOrders";
+            this._lstRecentOrders.Size = new System.Drawing.Size(270, 149);
+            this._lstRecentOrders.TabIndex = 9;
             // 
             // button2
             // 
@@ -265,42 +309,6 @@
             this.button2.TabIndex = 9;
             this.button2.Text = "Open Order";
             this.button2.UseVisualStyleBackColor = true;
-            // 
-            // _lstRecentOrders
-            // 
-            this._lstRecentOrders.FormattingEnabled = true;
-            this._lstRecentOrders.ItemHeight = 29;
-            this._lstRecentOrders.Location = new System.Drawing.Point(38, 34);
-            this._lstRecentOrders.Name = "_lstRecentOrders";
-            this._lstRecentOrders.Size = new System.Drawing.Size(209, 149);
-            this._lstRecentOrders.TabIndex = 9;
-            // 
-            // _btnOrders
-            // 
-            this._btnOrders.Location = new System.Drawing.Point(41, 56);
-            this._btnOrders.Name = "_btnOrders";
-            this._btnOrders.Size = new System.Drawing.Size(147, 41);
-            this._btnOrders.TabIndex = 0;
-            this._btnOrders.Text = "Orders";
-            this._btnOrders.UseVisualStyleBackColor = true;
-            // 
-            // _btnClients
-            // 
-            this._btnClients.Location = new System.Drawing.Point(41, 122);
-            this._btnClients.Name = "_btnClients";
-            this._btnClients.Size = new System.Drawing.Size(147, 41);
-            this._btnClients.TabIndex = 1;
-            this._btnClients.Text = "Clients";
-            this._btnClients.UseVisualStyleBackColor = true;
-            // 
-            // _btnProducts
-            // 
-            this._btnProducts.Location = new System.Drawing.Point(41, 181);
-            this._btnProducts.Name = "_btnProducts";
-            this._btnProducts.Size = new System.Drawing.Size(147, 41);
-            this._btnProducts.TabIndex = 2;
-            this._btnProducts.Text = "Products";
-            this._btnProducts.UseVisualStyleBackColor = true;
             // 
             // PHFoodOrderMgmtForm
             // 
@@ -313,6 +321,7 @@
             this.Controls.Add(this._picLogo);
             this.Controls.Add(this._grpQuickOrder);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "PHFoodOrderMgmtForm";
             this.Text = "PH Food Order Management";
