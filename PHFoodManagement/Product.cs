@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PHFoodManagement
 {
-    class Product
+    public class Product
     {
     }
 }
