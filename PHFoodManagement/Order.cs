@@ -18,7 +18,7 @@ namespace PHFoodManagement
         //TODO need OrderItem and Client classes to have the constructor created
         //public Order (Client client, OrderItem item)
         //{
-            
+        //      
         //}
 
         public decimal CalculateTotal()

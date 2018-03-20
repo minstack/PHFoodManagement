@@ -36,14 +36,15 @@
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this._txtOrderNum = new System.Windows.Forms.TextBox();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this._lblDelDate = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this._lblClient = new System.Windows.Forms.Label();
-            this._lblOrderDate = new System.Windows.Forms.Label();
             this._lblOrderNum = new System.Windows.Forms.Label();
+            this._grpDates = new System.Windows.Forms.GroupBox();
+            this._dpOrderDate = new System.Windows.Forms.DateTimePicker();
+            this._lblOrderDate = new System.Windows.Forms.Label();
+            this._lblDelDate = new System.Windows.Forms.Label();
+            this._dpDeliveryDate = new System.Windows.Forms.DateTimePicker();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this._lblOrder = new System.Windows.Forms.Label();
             this._btnDelete = new System.Windows.Forms.Button();
@@ -52,10 +53,9 @@
             this._btnCancel = new System.Windows.Forms.Button();
             this._btnEdit = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this._grpDates = new System.Windows.Forms.GroupBox();
             this._grpOrderInfo.SuspendLayout();
-            this.panel1.SuspendLayout();
             this._grpDates.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // _grpOrderInfo
@@ -103,7 +103,7 @@
             // 
             // _btnAddClient
             // 
-            this._btnAddClient.Location = new System.Drawing.Point(424, 193);
+            this._btnAddClient.Location = new System.Drawing.Point(424, 194);
             this._btnAddClient.Name = "_btnAddClient";
             this._btnAddClient.Size = new System.Drawing.Size(36, 31);
             this._btnAddClient.TabIndex = 12;
@@ -130,7 +130,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(123, 193);
+            this.textBox1.Location = new System.Drawing.Point(122, 193);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(296, 32);
             this.textBox1.TabIndex = 9;
@@ -142,30 +142,6 @@
             this._txtOrderNum.ReadOnly = true;
             this._txtOrderNum.Size = new System.Drawing.Size(133, 32);
             this._txtOrderNum.TabIndex = 8;
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(105, 74);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(296, 32);
-            this.dateTimePicker2.TabIndex = 7;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Checked = false;
-            this.dateTimePicker1.Location = new System.Drawing.Point(105, 32);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(296, 32);
-            this.dateTimePicker1.TabIndex = 6;
-            // 
-            // _lblDelDate
-            // 
-            this._lblDelDate.AutoSize = true;
-            this._lblDelDate.Location = new System.Drawing.Point(4, 79);
-            this._lblDelDate.Name = "_lblDelDate";
-            this._lblDelDate.Size = new System.Drawing.Size(97, 26);
-            this._lblDelDate.TabIndex = 5;
-            this._lblDelDate.Text = "Delivery:";
             // 
             // label5
             // 
@@ -194,6 +170,36 @@
             this._lblClient.TabIndex = 2;
             this._lblClient.Text = "Client:";
             // 
+            // _lblOrderNum
+            // 
+            this._lblOrderNum.AutoSize = true;
+            this._lblOrderNum.Location = new System.Drawing.Point(16, 39);
+            this._lblOrderNum.Name = "_lblOrderNum";
+            this._lblOrderNum.Size = new System.Drawing.Size(101, 26);
+            this._lblOrderNum.TabIndex = 0;
+            this._lblOrderNum.Text = "OrderNo.";
+            // 
+            // _grpDates
+            // 
+            this._grpDates.Controls.Add(this._dpOrderDate);
+            this._grpDates.Controls.Add(this._lblOrderDate);
+            this._grpDates.Controls.Add(this._lblDelDate);
+            this._grpDates.Controls.Add(this._dpDeliveryDate);
+            this._grpDates.Location = new System.Drawing.Point(19, 73);
+            this._grpDates.Name = "_grpDates";
+            this._grpDates.Size = new System.Drawing.Size(437, 116);
+            this._grpDates.TabIndex = 15;
+            this._grpDates.TabStop = false;
+            this._grpDates.Text = "Dates";
+            // 
+            // _dpOrderDate
+            // 
+            this._dpOrderDate.Checked = false;
+            this._dpOrderDate.Location = new System.Drawing.Point(105, 32);
+            this._dpOrderDate.Name = "_dpOrderDate";
+            this._dpOrderDate.Size = new System.Drawing.Size(296, 32);
+            this._dpOrderDate.TabIndex = 6;
+            // 
             // _lblOrderDate
             // 
             this._lblOrderDate.AutoSize = true;
@@ -203,14 +209,21 @@
             this._lblOrderDate.TabIndex = 1;
             this._lblOrderDate.Text = "Order:";
             // 
-            // _lblOrderNum
+            // _lblDelDate
             // 
-            this._lblOrderNum.AutoSize = true;
-            this._lblOrderNum.Location = new System.Drawing.Point(16, 39);
-            this._lblOrderNum.Name = "_lblOrderNum";
-            this._lblOrderNum.Size = new System.Drawing.Size(101, 26);
-            this._lblOrderNum.TabIndex = 0;
-            this._lblOrderNum.Text = "OrderNo.";
+            this._lblDelDate.AutoSize = true;
+            this._lblDelDate.Location = new System.Drawing.Point(4, 79);
+            this._lblDelDate.Name = "_lblDelDate";
+            this._lblDelDate.Size = new System.Drawing.Size(97, 26);
+            this._lblDelDate.TabIndex = 5;
+            this._lblDelDate.Text = "Delivery:";
+            // 
+            // _dpDeliveryDate
+            // 
+            this._dpDeliveryDate.Location = new System.Drawing.Point(105, 74);
+            this._dpDeliveryDate.Name = "_dpDeliveryDate";
+            this._dpDeliveryDate.Size = new System.Drawing.Size(296, 32);
+            this._dpDeliveryDate.TabIndex = 7;
             // 
             // listBox1
             // 
@@ -291,19 +304,6 @@
             this.panel1.Size = new System.Drawing.Size(782, 62);
             this.panel1.TabIndex = 8;
             // 
-            // _grpDates
-            // 
-            this._grpDates.Controls.Add(this.dateTimePicker1);
-            this._grpDates.Controls.Add(this._lblOrderDate);
-            this._grpDates.Controls.Add(this._lblDelDate);
-            this._grpDates.Controls.Add(this.dateTimePicker2);
-            this._grpDates.Location = new System.Drawing.Point(19, 73);
-            this._grpDates.Name = "_grpDates";
-            this._grpDates.Size = new System.Drawing.Size(437, 116);
-            this._grpDates.TabIndex = 15;
-            this._grpDates.TabStop = false;
-            this._grpDates.Text = "Dates";
-            // 
             // OrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 26F);
@@ -322,9 +322,9 @@
             this.Text = "Manage Orders";
             this._grpOrderInfo.ResumeLayout(false);
             this._grpOrderInfo.PerformLayout();
-            this.panel1.ResumeLayout(false);
             this._grpDates.ResumeLayout(false);
             this._grpDates.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -335,8 +335,8 @@
         private System.Windows.Forms.GroupBox _grpOrderInfo;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label _lblOrder;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker _dpDeliveryDate;
+        private System.Windows.Forms.DateTimePicker _dpOrderDate;
         private System.Windows.Forms.Label _lblDelDate;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
