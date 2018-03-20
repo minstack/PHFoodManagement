@@ -19,10 +19,6 @@ namespace PHFoodManagement
             InitializeComponent();
         }
 
-        private void _btnOrders_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void ordersToolStripMenuItem_Click(object sender, EventArgs e)
         {
