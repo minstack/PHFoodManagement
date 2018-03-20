@@ -22,7 +22,7 @@ namespace PHFoodManagement
 
         private void ordersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //_orderForm.Show();
+            _orderForm.Show();
         }
 
         private void _txtClientSearch_Enter(object sender, EventArgs e)

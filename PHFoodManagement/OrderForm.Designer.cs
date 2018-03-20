@@ -34,7 +34,7 @@
             this._btnAddClient = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this._txtClient = new System.Windows.Forms.TextBox();
             this._txtOrderNum = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -65,7 +65,7 @@
             this._grpOrderInfo.Controls.Add(this._btnAddClient);
             this._grpOrderInfo.Controls.Add(this.textBox2);
             this._grpOrderInfo.Controls.Add(this.listBox2);
-            this._grpOrderInfo.Controls.Add(this.textBox1);
+            this._grpOrderInfo.Controls.Add(this._txtClient);
             this._grpOrderInfo.Controls.Add(this._txtOrderNum);
             this._grpOrderInfo.Controls.Add(this.label5);
             this._grpOrderInfo.Controls.Add(this.label4);
@@ -128,12 +128,12 @@
             this.listBox2.Size = new System.Drawing.Size(395, 134);
             this.listBox2.TabIndex = 10;
             // 
-            // textBox1
+            // _txtClient
             // 
-            this.textBox1.Location = new System.Drawing.Point(122, 193);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(296, 32);
-            this.textBox1.TabIndex = 9;
+            this._txtClient.Location = new System.Drawing.Point(122, 193);
+            this._txtClient.Name = "_txtClient";
+            this._txtClient.Size = new System.Drawing.Size(296, 32);
+            this._txtClient.TabIndex = 9;
             // 
             // _txtOrderNum
             // 
@@ -346,7 +346,7 @@
         private System.Windows.Forms.TextBox _txtOrderNum;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.ListBox listBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox _txtClient;
         private System.Windows.Forms.Button _btnDelete;
         private System.Windows.Forms.Button _btnSave;
         private System.Windows.Forms.Button _btnNew;

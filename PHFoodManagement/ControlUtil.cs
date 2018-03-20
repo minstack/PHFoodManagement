@@ -22,11 +22,11 @@ namespace PHFoodManagement
         /// <param name="btns">Buttons to be enabled</param>
         public static void EnableButtons(params Button[] btns)
         {
-            EnableButtons(true, btns);
+            EnableControls(true, btns);
         }
 
         /// <summary>
-        /// Disables give (variable length) buttons.
+        /// Disables given (variable length) buttons.
         /// <code>
         ///     DisableButtons(btn1, btn2, btn3);
         /// </code> 
@@ -34,7 +34,31 @@ namespace PHFoodManagement
         /// <param name="btns">Buttons to be disabled.</param>
         public static void DisableButtons(params Button[] btns)
         {
-            EnableButtons(false, btns);
+            EnableControls(false, btns);
+        }
+
+        /// <summary>
+        /// Disables given (variable length) DateTimePickers.
+        /// <code>
+        ///     DisableDatePickers(dp1, dp2...);
+        /// </code>  
+        /// </summary>
+        /// <param name="dps">DateTimePickers to be disabled.</param>
+        public static void DisableDatePickers(params DateTimePicker[] dps)
+        {
+            EnableControls(false, dps);
+        }
+
+        /// <summary>
+        /// Enables given (variable length) DateTimePickers.
+        /// <code>
+        ///     EnableDatePickers(dp1, dp2..);
+        /// </code>  
+        /// </summary>
+        /// <param name="dps">DateTimePickers to be disabled.</param>
+        public static void EnableDatePickers(params DateTimePicker[] dps)
+        {
+            EnableControls(true, dps);
         }
 
         /// <summary>
@@ -61,11 +85,11 @@ namespace PHFoodManagement
             ReadOnlyTextBoxes(true, tboxes);
         }
 
-        private static void EnableButtons(bool on, params Button[] btns)
+        private static void EnableControls(bool on, params Control[] controls)
         {
-            foreach(Button b in btns)
+            foreach(Control c in controls)
             {
-                b.Enabled = on;
+                c.Enabled = on;
             }
         }
 
@@ -76,6 +100,5 @@ namespace PHFoodManagement
                 tb.ReadOnly = on;
             }
         }
-
     }
 }
