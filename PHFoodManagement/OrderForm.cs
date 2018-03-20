@@ -10,18 +10,11 @@ using System.Windows.Forms;
 
 namespace PHFoodManagement
 {
-    public partial class PHFoodOrderMgmtForm : Form
+    public partial class OrderForm : Form
     {
-        private OrderForm _orderForm = new OrderForm();
-
-        public PHFoodOrderMgmtForm()
+        public OrderForm()
         {
             InitializeComponent();
-        }
-
-        private void _btnOrders_Click(object sender, EventArgs e)
-        {
-            //_orderForm.Show();
         }
     }
 }

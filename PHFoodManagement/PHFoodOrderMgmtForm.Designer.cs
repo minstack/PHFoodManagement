@@ -34,7 +34,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this._lstProducts = new System.Windows.Forms.ListBox();
             this._lstClients = new System.Windows.Forms.ListBox();
-            this._picLogo = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,12 +53,13 @@
             this._grpRecentOrders = new System.Windows.Forms.GroupBox();
             this._lstRecentOrders = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
+            this._picLogo = new System.Windows.Forms.PictureBox();
             this._grpQuickOrder.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._picLogo)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this._grpManage.SuspendLayout();
             this._grpQuickOrderDetails.SuspendLayout();
             this._grpRecentOrders.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._picLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // _grpQuickOrder
@@ -120,16 +120,6 @@
             this._lstClients.Name = "_lstClients";
             this._lstClients.Size = new System.Drawing.Size(275, 439);
             this._lstClients.TabIndex = 0;
-            // 
-            // _picLogo
-            // 
-            this._picLogo.Image = global::PHFoodManagement.Properties.Resources.phfoodlogo;
-            this._picLogo.Location = new System.Drawing.Point(12, 55);
-            this._picLogo.Name = "_picLogo";
-            this._picLogo.Size = new System.Drawing.Size(250, 250);
-            this._picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this._picLogo.TabIndex = 1;
-            this._picLogo.TabStop = false;
             // 
             // menuStrip1
             // 
@@ -192,7 +182,7 @@
             // 
             // _btnProducts
             // 
-            this._btnProducts.Location = new System.Drawing.Point(41, 181);
+            this._btnProducts.Location = new System.Drawing.Point(41, 216);
             this._btnProducts.Name = "_btnProducts";
             this._btnProducts.Size = new System.Drawing.Size(147, 41);
             this._btnProducts.TabIndex = 2;
@@ -201,7 +191,7 @@
             // 
             // _btnClients
             // 
-            this._btnClients.Location = new System.Drawing.Point(41, 122);
+            this._btnClients.Location = new System.Drawing.Point(41, 137);
             this._btnClients.Name = "_btnClients";
             this._btnClients.Size = new System.Drawing.Size(147, 41);
             this._btnClients.TabIndex = 1;
@@ -216,6 +206,7 @@
             this._btnOrders.TabIndex = 0;
             this._btnOrders.Text = "Orders";
             this._btnOrders.UseVisualStyleBackColor = true;
+            this._btnOrders.Click += new System.EventHandler(this._btnOrders_Click);
             // 
             // _grpQuickOrderDetails
             // 
@@ -310,6 +301,16 @@
             this.button2.Text = "Open Order";
             this.button2.UseVisualStyleBackColor = true;
             // 
+            // _picLogo
+            // 
+            this._picLogo.Image = global::PHFoodManagement.Properties.Resources.phfoodlogo;
+            this._picLogo.Location = new System.Drawing.Point(12, 55);
+            this._picLogo.Name = "_picLogo";
+            this._picLogo.Size = new System.Drawing.Size(250, 250);
+            this._picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this._picLogo.TabIndex = 1;
+            this._picLogo.TabStop = false;
+            // 
             // PHFoodOrderMgmtForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -327,13 +328,13 @@
             this.Text = "PH Food Order Management";
             this._grpQuickOrder.ResumeLayout(false);
             this._grpQuickOrder.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._picLogo)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this._grpManage.ResumeLayout(false);
             this._grpQuickOrderDetails.ResumeLayout(false);
             this._grpQuickOrderDetails.PerformLayout();
             this._grpRecentOrders.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this._picLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
