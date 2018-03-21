@@ -8,6 +8,7 @@ namespace PHFoodManagement
 {
     public enum ClientType
     {
-        //comment
+        Restaurant,
+        Supermarket
     }
 }
