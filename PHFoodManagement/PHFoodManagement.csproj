@@ -60,7 +60,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client.cs" />
+    <Compile Include="ClientType.cs" />
     <Compile Include="ControlUtil.cs" />
+    <Compile Include="Delivery.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderForm.cs">
       <SubType>Form</SubType>
