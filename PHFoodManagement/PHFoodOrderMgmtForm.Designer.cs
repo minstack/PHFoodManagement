@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PHFoodOrderMgmtForm));
             this._grpQuickOrder = new System.Windows.Forms.GroupBox();
+            this._txtQOProdQty = new System.Windows.Forms.TextBox();
+            this._txtProdSearch = new System.Windows.Forms.TextBox();
+            this._txtClientSearch = new System.Windows.Forms.TextBox();
             this._lblProductList = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this._lstProducts = new System.Windows.Forms.ListBox();
@@ -37,6 +40,9 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ordersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clientsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.productsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,13 +55,8 @@
             this._grpRecentOrders = new System.Windows.Forms.GroupBox();
             this._lstRecentOrders = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.ordersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clientsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.productsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._btnAddProdQuick = new System.Windows.Forms.Button();
-            this._txtClientSearch = new System.Windows.Forms.TextBox();
-            this._txtProdSearch = new System.Windows.Forms.TextBox();
-            this._txtQOProdQty = new System.Windows.Forms.TextBox();
+            this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._grpQuickOrder.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this._grpQuickOrderDetails.SuspendLayout();
@@ -78,6 +79,33 @@
             this._grpQuickOrder.TabIndex = 0;
             this._grpQuickOrder.TabStop = false;
             this._grpQuickOrder.Text = "Quick Order";
+            // 
+            // _txtQOProdQty
+            // 
+            this._txtQOProdQty.Location = new System.Drawing.Point(520, 549);
+            this._txtQOProdQty.Name = "_txtQOProdQty";
+            this._txtQOProdQty.Size = new System.Drawing.Size(100, 35);
+            this._txtQOProdQty.TabIndex = 6;
+            this._txtQOProdQty.Enter += new System.EventHandler(this._txtQOProdQty_Enter);
+            this._txtQOProdQty.Leave += new System.EventHandler(this._txtQOProdQty_Leave);
+            // 
+            // _txtProdSearch
+            // 
+            this._txtProdSearch.Location = new System.Drawing.Point(345, 549);
+            this._txtProdSearch.Name = "_txtProdSearch";
+            this._txtProdSearch.Size = new System.Drawing.Size(170, 35);
+            this._txtProdSearch.TabIndex = 5;
+            this._txtProdSearch.Enter += new System.EventHandler(this._txtProdSearch_Enter);
+            this._txtProdSearch.Leave += new System.EventHandler(this._txtProdSearch_Leave);
+            // 
+            // _txtClientSearch
+            // 
+            this._txtClientSearch.Location = new System.Drawing.Point(34, 549);
+            this._txtClientSearch.Name = "_txtClientSearch";
+            this._txtClientSearch.Size = new System.Drawing.Size(275, 35);
+            this._txtClientSearch.TabIndex = 4;
+            this._txtClientSearch.Enter += new System.EventHandler(this._txtClientSearch_Enter);
+            this._txtClientSearch.Leave += new System.EventHandler(this._txtClientSearch_Leave);
             // 
             // _lblProductList
             // 
@@ -136,6 +164,8 @@
             // 
             // fileToolStripMenuItem
             // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.closeToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(50, 29);
             this.fileToolStripMenuItem.Text = "&File";
@@ -149,6 +179,25 @@
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(88, 29);
             this.editToolStripMenuItem.Text = "&Manage";
+            // 
+            // ordersToolStripMenuItem
+            // 
+            this.ordersToolStripMenuItem.Name = "ordersToolStripMenuItem";
+            this.ordersToolStripMenuItem.Size = new System.Drawing.Size(166, 30);
+            this.ordersToolStripMenuItem.Text = "&Orders";
+            this.ordersToolStripMenuItem.Click += new System.EventHandler(this.ordersToolStripMenuItem_Click);
+            // 
+            // clientsToolStripMenuItem
+            // 
+            this.clientsToolStripMenuItem.Name = "clientsToolStripMenuItem";
+            this.clientsToolStripMenuItem.Size = new System.Drawing.Size(166, 30);
+            this.clientsToolStripMenuItem.Text = "&Clients";
+            // 
+            // productsToolStripMenuItem
+            // 
+            this.productsToolStripMenuItem.Name = "productsToolStripMenuItem";
+            this.productsToolStripMenuItem.Size = new System.Drawing.Size(166, 30);
+            this.productsToolStripMenuItem.Text = "&Products";
             // 
             // helpToolStripMenuItem
             // 
@@ -264,25 +313,6 @@
             this.button2.Text = "Open Order";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // ordersToolStripMenuItem
-            // 
-            this.ordersToolStripMenuItem.Name = "ordersToolStripMenuItem";
-            this.ordersToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
-            this.ordersToolStripMenuItem.Text = "&Orders";
-            this.ordersToolStripMenuItem.Click += new System.EventHandler(this.ordersToolStripMenuItem_Click);
-            // 
-            // clientsToolStripMenuItem
-            // 
-            this.clientsToolStripMenuItem.Name = "clientsToolStripMenuItem";
-            this.clientsToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
-            this.clientsToolStripMenuItem.Text = "&Clients";
-            // 
-            // productsToolStripMenuItem
-            // 
-            this.productsToolStripMenuItem.Name = "productsToolStripMenuItem";
-            this.productsToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
-            this.productsToolStripMenuItem.Text = "&Products";
-            // 
             // _btnAddProdQuick
             // 
             this._btnAddProdQuick.Location = new System.Drawing.Point(695, 227);
@@ -292,32 +322,11 @@
             this._btnAddProdQuick.Text = "Add >";
             this._btnAddProdQuick.UseVisualStyleBackColor = true;
             // 
-            // _txtClientSearch
+            // closeToolStripMenuItem
             // 
-            this._txtClientSearch.Location = new System.Drawing.Point(34, 549);
-            this._txtClientSearch.Name = "_txtClientSearch";
-            this._txtClientSearch.Size = new System.Drawing.Size(275, 35);
-            this._txtClientSearch.TabIndex = 4;
-            this._txtClientSearch.Enter += new System.EventHandler(this._txtClientSearch_Enter);
-            this._txtClientSearch.Leave += new System.EventHandler(this._txtClientSearch_Leave);
-            // 
-            // _txtProdSearch
-            // 
-            this._txtProdSearch.Location = new System.Drawing.Point(345, 549);
-            this._txtProdSearch.Name = "_txtProdSearch";
-            this._txtProdSearch.Size = new System.Drawing.Size(170, 35);
-            this._txtProdSearch.TabIndex = 5;
-            this._txtProdSearch.Enter += new System.EventHandler(this._txtProdSearch_Enter);
-            this._txtProdSearch.Leave += new System.EventHandler(this._txtProdSearch_Leave);
-            // 
-            // _txtQOProdQty
-            // 
-            this._txtQOProdQty.Location = new System.Drawing.Point(520, 549);
-            this._txtQOProdQty.Name = "_txtQOProdQty";
-            this._txtQOProdQty.Size = new System.Drawing.Size(100, 35);
-            this._txtQOProdQty.TabIndex = 6;
-            this._txtQOProdQty.Enter += new System.EventHandler(this._txtQOProdQty_Enter);
-            this._txtQOProdQty.Leave += new System.EventHandler(this._txtQOProdQty_Leave);
+            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.closeToolStripMenuItem.Text = "&Close";
             // 
             // PHFoodOrderMgmtForm
             // 
@@ -375,6 +384,7 @@
         private System.Windows.Forms.TextBox _txtProdSearch;
         private System.Windows.Forms.TextBox _txtClientSearch;
         private System.Windows.Forms.Button _btnAddProdQuick;
+        private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
     }
 }
 
