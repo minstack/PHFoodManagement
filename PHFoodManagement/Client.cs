@@ -12,7 +12,7 @@ namespace PHFoodManagement
         public string name { get; set; }
         public string phoneNumber { get; set; }
         public string address { get; set; }
-        //public Zone zone { get; set; }
+        public Zone zone { get; set; }
         public decimal additionalDiscount { get; set; }
 
 
