@@ -6,18 +6,19 @@ using System.Threading.Tasks;
 
 namespace PHFoodManagement
 {
-    class OrderItem
+    public class OrderItem
     {
         private Product _product;
-        private double _quantity;
-
-        public Product Product { get; set; }
+        public Product Product = new Product();
         public double Quantity { get; set; }
 
-        public static decimal GetTotalCost(Product p, double q)
+        public OrderItem()
         {
-            decimal cost = (p.Price * (decimal)q);
-            return cost;
+            Quantity = 22;
+        }
+        public decimal GetTotalCost()
+        {
+            return (Convert.ToDecimal(Quantity) * Product.Price);
         }
     }
 }

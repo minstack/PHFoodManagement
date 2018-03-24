@@ -14,10 +14,7 @@ namespace PHFoodManagement
         private bool _organic;
 
         public string ProductName { get; set; }
-        public decimal Price {
-            get { return _price; }
-            set { _price = value; }
-        }
+        public decimal Price { get; set; }
         public string Description { get; set; }
         public bool Organic { get; set; }
 
