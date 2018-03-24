@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SMUtil;
 
 namespace PHFoodManagement
 {
     public partial class OrderForm : Form
     {
-       
+
         public OrderForm()
         {
             InitializeComponent();
@@ -29,16 +30,16 @@ namespace PHFoodManagement
 
         public void SetEditState()
         {
-            ControlUtil.DisableButtons(_btnNew);
-            ControlUtil.EnableButtons(_btnEdit, _btnDelete, _btnCancel, _btnSave);
+            ControlUtil.DisableButtons(_btnNew, _btnDelete);
+            ControlUtil.EnableButtons(_btnEdit, _btnCancel, _btnSave);
             ControlUtil.EnableTextBoxes(_txtClient);
             ControlUtil.EnableDatePickers(_dpDeliveryDate, _dpOrderDate);
         }
 
         public void SetItemSelectedState()
         {
-            ControlUtil.DisableButtons(_btnSave);
-            ControlUtil.EnableButtons(_btnEdit, _btnDelete, _btnCancel, _btnNew);
+            ControlUtil.DisableButtons(_btnSave, _btnCancel);
+            ControlUtil.EnableButtons(_btnEdit, _btnDelete, _btnNew);
             ControlUtil.DisableTextBoxes(_txtClient);
             ControlUtil.DisableDatePickers(_dpDeliveryDate, _dpOrderDate);
         }
