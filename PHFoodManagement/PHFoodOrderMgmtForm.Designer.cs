@@ -39,6 +39,7 @@
             this._lstClients = new System.Windows.Forms.ListBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ordersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clientsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,7 +57,6 @@
             this._lstRecentOrders = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
             this._btnAddProdQuick = new System.Windows.Forms.Button();
-            this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._grpQuickOrder.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this._grpQuickOrderDetails.SuspendLayout();
@@ -170,6 +170,12 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(50, 29);
             this.fileToolStripMenuItem.Text = "&File";
             // 
+            // closeToolStripMenuItem
+            // 
+            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(139, 30);
+            this.closeToolStripMenuItem.Text = "&Close";
+            // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -183,21 +189,23 @@
             // ordersToolStripMenuItem
             // 
             this.ordersToolStripMenuItem.Name = "ordersToolStripMenuItem";
-            this.ordersToolStripMenuItem.Size = new System.Drawing.Size(166, 30);
+            this.ordersToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
             this.ordersToolStripMenuItem.Text = "&Orders";
             this.ordersToolStripMenuItem.Click += new System.EventHandler(this.ordersToolStripMenuItem_Click);
             // 
             // clientsToolStripMenuItem
             // 
             this.clientsToolStripMenuItem.Name = "clientsToolStripMenuItem";
-            this.clientsToolStripMenuItem.Size = new System.Drawing.Size(166, 30);
+            this.clientsToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
             this.clientsToolStripMenuItem.Text = "&Clients";
+            this.clientsToolStripMenuItem.Click += new System.EventHandler(this.clientsToolStripMenuItem_Click);
             // 
             // productsToolStripMenuItem
             // 
             this.productsToolStripMenuItem.Name = "productsToolStripMenuItem";
-            this.productsToolStripMenuItem.Size = new System.Drawing.Size(166, 30);
+            this.productsToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
             this.productsToolStripMenuItem.Text = "&Products";
+            this.productsToolStripMenuItem.Click += new System.EventHandler(this.productsToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -321,12 +329,6 @@
             this._btnAddProdQuick.TabIndex = 6;
             this._btnAddProdQuick.Text = "Add >";
             this._btnAddProdQuick.UseVisualStyleBackColor = true;
-            // 
-            // closeToolStripMenuItem
-            // 
-            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
-            this.closeToolStripMenuItem.Text = "&Close";
             // 
             // PHFoodOrderMgmtForm
             // 

@@ -12,7 +12,9 @@ namespace PHFoodManagement
 {
     public partial class PHFoodOrderMgmtForm : Form
     {
-        private OrderForm _orderForm = new OrderForm();
+        private OrderForm _orderForm;
+        private ClientForm _clientForm;
+        private ProductForm _productForm;
 
         public PHFoodOrderMgmtForm()
         {
@@ -22,7 +24,8 @@ namespace PHFoodManagement
 
         private void ordersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _orderForm.Show();
+            if (_orderForm == null) { _orderForm = new OrderForm(); }
+            _orderForm.ShowDialog();
         }
 
         private void _txtClientSearch_Enter(object sender, EventArgs e)
@@ -52,10 +55,12 @@ namespace PHFoodManagement
             AddText(_txtQOProdQty, "Quantity");
         }
 
-        private void RemoveText(TextBox tbox)
+        private void RemoveText(params TextBox[] tboxes)
         {
-            
-            tbox.Text = "";
+
+            foreach (TextBox t in tboxes) {
+                t.Clear();       
+            }
 
         }
 
@@ -75,6 +80,25 @@ namespace PHFoodManagement
         private void _txtQOProdQty_Leave(object sender, EventArgs e)
         {
             AddText(_txtQOProdQty, "Quantity");
+        }
+
+        private void clientsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_clientForm == null) { _clientForm = new ClientForm(); }
+
+            _clientForm.ShowDialog();
+        }
+
+        private void OpenForm(Form frm)
+        {
+            
+        }
+
+        private void productsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(_productForm == null) { _productForm = new ProductForm(); }
+
+            _productForm.ShowDialog();
         }
     }
 }

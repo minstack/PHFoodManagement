@@ -203,7 +203,7 @@
             // _lblOrderDate
             // 
             this._lblOrderDate.AutoSize = true;
-            this._lblOrderDate.Location = new System.Drawing.Point(28, 37);
+            this._lblOrderDate.Location = new System.Drawing.Point(25, 37);
             this._lblOrderDate.Name = "_lblOrderDate";
             this._lblOrderDate.Size = new System.Drawing.Size(73, 26);
             this._lblOrderDate.TabIndex = 1;
@@ -212,7 +212,7 @@
             // _lblDelDate
             // 
             this._lblDelDate.AutoSize = true;
-            this._lblDelDate.Location = new System.Drawing.Point(4, 79);
+            this._lblDelDate.Location = new System.Drawing.Point(1, 79);
             this._lblDelDate.Name = "_lblDelDate";
             this._lblDelDate.Size = new System.Drawing.Size(97, 26);
             this._lblDelDate.TabIndex = 5;
