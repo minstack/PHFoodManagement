@@ -16,5 +16,13 @@ namespace PHFoodManagement
         {
             InitializeComponent();
         }
+
+        private void ClientForm_Load(object sender, EventArgs e)
+        {
+            // load the combo with the values of enum class
+            this._cmbZone.DataSource = Enum.GetValues(typeof(Zone));
+            
+            this._cmbType.DataSource = Enum.GetValues(typeof(ClientType));
+        }
     }
 }
