@@ -72,6 +72,7 @@
     </Compile>
     <Compile Include="ClientList.cs" />
     <Compile Include="ClientType.cs" />
+    <Compile Include="ControlUtil.cs" />
     <Compile Include="Delivery.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderForm.cs">
