@@ -26,9 +26,17 @@ namespace PHFoodManagement
             Organic = false;
         }
 
+        public Product(string name, decimal price, string dec, bool org)
+        {
+            ProductName = name;
+            Price = price;
+            Description = dec;
+            Organic = org;
+        }
+
         public override string ToString()
         {
-            return string.Format("{0}, {1} {2}", ProductName, Price, Description);
+            return string.Format("{0} - {1}", ProductName, Price);
         }
     }
 }

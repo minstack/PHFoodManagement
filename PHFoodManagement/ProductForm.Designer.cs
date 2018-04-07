@@ -153,6 +153,7 @@
             this._btnCancel.TabIndex = 6;
             this._btnCancel.Text = "Cancel";
             this._btnCancel.UseVisualStyleBackColor = true;
+            this._btnCancel.Click += new System.EventHandler(this._btnCancel_Click);
             // 
             // _btnEdit
             // 
@@ -162,6 +163,7 @@
             this._btnEdit.TabIndex = 7;
             this._btnEdit.Text = "Edit";
             this._btnEdit.UseVisualStyleBackColor = true;
+            this._btnEdit.Click += new System.EventHandler(this._btnEdit_Click);
             // 
             // _btnDelete
             // 
@@ -171,6 +173,7 @@
             this._btnDelete.TabIndex = 3;
             this._btnDelete.Text = "Delete";
             this._btnDelete.UseVisualStyleBackColor = true;
+            this._btnDelete.Click += new System.EventHandler(this._btnDelete_Click);
             // 
             // _btnSave
             // 
@@ -180,18 +183,21 @@
             this._btnSave.TabIndex = 4;
             this._btnSave.Text = "Save";
             this._btnSave.UseVisualStyleBackColor = true;
+            this._btnSave.Click += new System.EventHandler(this._btnSave_Click);
             // 
             // _lvProducts
             // 
             this._lvProducts.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Name,
             this.Price});
+            this._lvProducts.GridLines = true;
             this._lvProducts.Location = new System.Drawing.Point(513, 27);
             this._lvProducts.Name = "_lvProducts";
             this._lvProducts.Size = new System.Drawing.Size(300, 331);
             this._lvProducts.TabIndex = 10;
             this._lvProducts.UseCompatibleStateImageBehavior = false;
             this._lvProducts.View = System.Windows.Forms.View.Details;
+            this._lvProducts.SelectedIndexChanged += new System.EventHandler(this._lvProducts_SelectedIndexChanged);
             // 
             // Name
             // 
@@ -213,6 +219,7 @@
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
+            //this.Name = "ProductForm";
             this.Text = "Manage Products";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
