@@ -13,35 +13,96 @@ namespace PHFoodManagement
 {
     public partial class OrderForm : Form
     {
+        public List<Order> Orders { get; set; }
+        private BindingSource _bndOrders = new BindingSource();
+        private Dictionary<Control, Label> _requiredFieldLbls = new Dictionary<Control, Label>();
+        private Dictionary<Control, string> _requiredErrors = new Dictionary<Control, string>();
 
         public OrderForm()
         {
             InitializeComponent();
             SetInitialState();
+
+            Control[] requiredControls = {
+                 _dpDeliveryDate,
+                 _cboOrderClient,
+                 _lstOrderProducts                 
+            };
+
+            InitRequiredDictionary(requiredControls);
+            InitRequiredErrors(requiredControls);
         }
 
-        public void SetInitialState()
+        private void InitRequiredErrors(Control[] ctrls)
+        {
+            string[] temp = {
+                "Delivery date must not be before today.",
+                "A client must be selected.",
+                "At least one product must be selected."
+            };
+            
+            for (int i = 0; i < ctrls.Length; i ++)
+            {
+                _requiredErrors.Add(ctrls[i], temp[i]);
+            }
+        }
+
+        private void InitRequiredDictionary(Control[] ctrls)
+        {
+            Label[] temp = {
+                _lblDelDate,
+                _lblClient,
+                _lblOrderProducts
+            };
+
+            for (int i = 0; i < ctrls.Length; i++)
+            {
+                _requiredFieldLbls.Add(ctrls[i], temp[i]);
+            }
+        }
+
+        private void SetInitialState()
         {
             ControlUtil.DisableButtons(_btnEdit, _btnDelete, _btnCancel, _btnSave);
             ControlUtil.EnableButtons(_btnNew);
-            ControlUtil.DisableTextBoxes(_txtClient);
+            ControlUtil.DisableComboBoxes(_cboOrderClient);
             ControlUtil.DisableDatePickers(_dpDeliveryDate, _dpOrderDate);
         }
 
-        public void SetEditState()
+        private void SetEditState()
         {
             ControlUtil.DisableButtons(_btnNew, _btnDelete);
             ControlUtil.EnableButtons(_btnEdit, _btnCancel, _btnSave);
-            ControlUtil.EnableTextBoxes(_txtClient);
+            ControlUtil.EnableComboBoxes(_cboOrderClient);
             ControlUtil.EnableDatePickers(_dpDeliveryDate, _dpOrderDate);
         }
 
-        public void SetItemSelectedState()
+        private void SetItemSelectedState()
         {
             ControlUtil.DisableButtons(_btnSave, _btnCancel);
             ControlUtil.EnableButtons(_btnEdit, _btnDelete, _btnNew);
-            ControlUtil.DisableTextBoxes(_txtClient);
+            ControlUtil.DisableComboBoxes(_cboOrderClient);
             ControlUtil.DisableDatePickers(_dpDeliveryDate, _dpOrderDate);
+        }
+
+        private void DisablInputForm()
+        {
+            _grpOrderInfo.Enabled = false;
+        }
+
+        private void EnableInputForm()
+        {
+            _grpOrderInfo.Enabled = true;
+            ControlUtil.DisableTextBoxes(_txtTotalCost, _txtOrderNum);
+        }
+
+        private void OrderForm_Load(object sender, EventArgs e)
+        {
+            _lstOrders.DataSource = _bndOrders;
+            _bndOrders.DataSource = Orders;
+
+            _bndOrders.ResetBindings(false);
+
         }
     }
 }

@@ -15,6 +15,10 @@ namespace PHFoodManagement
         private OrderForm _orderForm;
         private ClientForm _clientForm;
         private ProductForm _productForm;
+        private ProductList _prodList;
+        private ClientList _clientList;
+        private OrderList _orderList;
+
 
         public PHFoodOrderMgmtForm()
         {
@@ -25,6 +29,9 @@ namespace PHFoodManagement
         private void ordersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (_orderForm == null) { _orderForm = new OrderForm(); }
+            if (_orderList == null) { _orderList = new OrderList(); }
+
+
             _orderForm.ShowDialog();
         }
 
@@ -85,6 +92,7 @@ namespace PHFoodManagement
         private void clientsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (_clientForm == null) { _clientForm = new ClientForm(); }
+            if (_clientList == null) { _clientList = new ClientList(); }
 
             _clientForm.ShowDialog();
         }
@@ -97,6 +105,7 @@ namespace PHFoodManagement
         private void productsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if(_productForm == null) { _productForm = new ProductForm(); }
+            if (_prodList == null) { _prodList = new ProductList(); }
 
             _productForm.ShowDialog();
         }

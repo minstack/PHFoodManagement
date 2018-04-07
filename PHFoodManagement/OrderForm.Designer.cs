@@ -31,13 +31,11 @@
             this._grpOrderInfo = new System.Windows.Forms.GroupBox();
             this._btnRemoveProduct = new System.Windows.Forms.Button();
             this._btnAddProduct = new System.Windows.Forms.Button();
-            this._btnAddClient = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
-            this._txtClient = new System.Windows.Forms.TextBox();
+            this._txtTotalCost = new System.Windows.Forms.TextBox();
+            this._lstOrderProducts = new System.Windows.Forms.ListBox();
             this._txtOrderNum = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this._lblOrderProducts = new System.Windows.Forms.Label();
             this._lblClient = new System.Windows.Forms.Label();
             this._lblOrderNum = new System.Windows.Forms.Label();
             this._grpDates = new System.Windows.Forms.GroupBox();
@@ -45,7 +43,7 @@
             this._lblOrderDate = new System.Windows.Forms.Label();
             this._lblDelDate = new System.Windows.Forms.Label();
             this._dpDeliveryDate = new System.Windows.Forms.DateTimePicker();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this._lstOrders = new System.Windows.Forms.ListBox();
             this._lblOrder = new System.Windows.Forms.Label();
             this._btnDelete = new System.Windows.Forms.Button();
             this._btnSave = new System.Windows.Forms.Button();
@@ -53,6 +51,7 @@
             this._btnCancel = new System.Windows.Forms.Button();
             this._btnEdit = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this._cboOrderClient = new System.Windows.Forms.ComboBox();
             this._grpOrderInfo.SuspendLayout();
             this._grpDates.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -60,15 +59,14 @@
             // 
             // _grpOrderInfo
             // 
+            this._grpOrderInfo.Controls.Add(this._cboOrderClient);
             this._grpOrderInfo.Controls.Add(this._btnRemoveProduct);
             this._grpOrderInfo.Controls.Add(this._btnAddProduct);
-            this._grpOrderInfo.Controls.Add(this._btnAddClient);
-            this._grpOrderInfo.Controls.Add(this.textBox2);
-            this._grpOrderInfo.Controls.Add(this.listBox2);
-            this._grpOrderInfo.Controls.Add(this._txtClient);
+            this._grpOrderInfo.Controls.Add(this._txtTotalCost);
+            this._grpOrderInfo.Controls.Add(this._lstOrderProducts);
             this._grpOrderInfo.Controls.Add(this._txtOrderNum);
             this._grpOrderInfo.Controls.Add(this.label5);
-            this._grpOrderInfo.Controls.Add(this.label4);
+            this._grpOrderInfo.Controls.Add(this._lblOrderProducts);
             this._grpOrderInfo.Controls.Add(this._lblClient);
             this._grpOrderInfo.Controls.Add(this._lblOrderNum);
             this._grpOrderInfo.Controls.Add(this._grpDates);
@@ -101,39 +99,23 @@
             this._btnAddProduct.Text = "+";
             this._btnAddProduct.UseVisualStyleBackColor = true;
             // 
-            // _btnAddClient
+            // _txtTotalCost
             // 
-            this._btnAddClient.Location = new System.Drawing.Point(424, 194);
-            this._btnAddClient.Name = "_btnAddClient";
-            this._btnAddClient.Size = new System.Drawing.Size(36, 31);
-            this._btnAddClient.TabIndex = 12;
-            this._btnAddClient.Text = "+";
-            this._btnAddClient.UseVisualStyleBackColor = true;
+            this._txtTotalCost.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._txtTotalCost.Location = new System.Drawing.Point(224, 405);
+            this._txtTotalCost.Name = "_txtTotalCost";
+            this._txtTotalCost.ReadOnly = true;
+            this._txtTotalCost.Size = new System.Drawing.Size(195, 32);
+            this._txtTotalCost.TabIndex = 11;
             // 
-            // textBox2
+            // _lstOrderProducts
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(224, 405);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(195, 32);
-            this.textBox2.TabIndex = 11;
-            // 
-            // listBox2
-            // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 26;
-            this.listBox2.Location = new System.Drawing.Point(24, 265);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(395, 134);
-            this.listBox2.TabIndex = 10;
-            // 
-            // _txtClient
-            // 
-            this._txtClient.Location = new System.Drawing.Point(122, 193);
-            this._txtClient.Name = "_txtClient";
-            this._txtClient.Size = new System.Drawing.Size(296, 32);
-            this._txtClient.TabIndex = 9;
+            this._lstOrderProducts.FormattingEnabled = true;
+            this._lstOrderProducts.ItemHeight = 26;
+            this._lstOrderProducts.Location = new System.Drawing.Point(24, 265);
+            this._lstOrderProducts.Name = "_lstOrderProducts";
+            this._lstOrderProducts.Size = new System.Drawing.Size(395, 134);
+            this._lstOrderProducts.TabIndex = 10;
             // 
             // _txtOrderNum
             // 
@@ -152,14 +134,14 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "Total:";
             // 
-            // label4
+            // _lblOrderProducts
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 236);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(104, 26);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Products:";
+            this._lblOrderProducts.AutoSize = true;
+            this._lblOrderProducts.Location = new System.Drawing.Point(16, 236);
+            this._lblOrderProducts.Name = "_lblOrderProducts";
+            this._lblOrderProducts.Size = new System.Drawing.Size(104, 26);
+            this._lblOrderProducts.TabIndex = 3;
+            this._lblOrderProducts.Text = "Products:";
             // 
             // _lblClient
             // 
@@ -225,16 +207,16 @@
             this._dpDeliveryDate.Size = new System.Drawing.Size(296, 32);
             this._dpDeliveryDate.TabIndex = 7;
             // 
-            // listBox1
+            // _lstOrders
             // 
-            this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 26;
-            this.listBox1.Location = new System.Drawing.Point(525, 42);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(275, 420);
-            this.listBox1.TabIndex = 1;
+            this._lstOrders.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._lstOrders.FormattingEnabled = true;
+            this._lstOrders.ItemHeight = 26;
+            this._lstOrders.Location = new System.Drawing.Point(525, 42);
+            this._lstOrders.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this._lstOrders.Name = "_lstOrders";
+            this._lstOrders.Size = new System.Drawing.Size(275, 420);
+            this._lstOrders.TabIndex = 1;
             // 
             // _lblOrder
             // 
@@ -304,13 +286,21 @@
             this.panel1.Size = new System.Drawing.Size(782, 62);
             this.panel1.TabIndex = 8;
             // 
+            // _cboOrderClient
+            // 
+            this._cboOrderClient.FormattingEnabled = true;
+            this._cboOrderClient.Location = new System.Drawing.Point(123, 193);
+            this._cboOrderClient.Name = "_cboOrderClient";
+            this._cboOrderClient.Size = new System.Drawing.Size(296, 34);
+            this._cboOrderClient.TabIndex = 16;
+            // 
             // OrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 26F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(812, 542);
             this.Controls.Add(this._lblOrder);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this._lstOrders);
             this.Controls.Add(this._grpOrderInfo);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -320,6 +310,7 @@
             this.Name = "OrderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Manage Orders";
+            this.Load += new System.EventHandler(this.OrderForm_Load);
             this._grpOrderInfo.ResumeLayout(false);
             this._grpOrderInfo.PerformLayout();
             this._grpDates.ResumeLayout(false);
@@ -333,20 +324,19 @@
         #endregion
 
         private System.Windows.Forms.GroupBox _grpOrderInfo;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox _lstOrders;
         private System.Windows.Forms.Label _lblOrder;
         private System.Windows.Forms.DateTimePicker _dpDeliveryDate;
         private System.Windows.Forms.DateTimePicker _dpOrderDate;
         private System.Windows.Forms.Label _lblDelDate;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label _lblOrderProducts;
         private System.Windows.Forms.Label _lblClient;
         private System.Windows.Forms.Label _lblOrderDate;
         private System.Windows.Forms.Label _lblOrderNum;
         private System.Windows.Forms.TextBox _txtOrderNum;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.ListBox listBox2;
-        private System.Windows.Forms.TextBox _txtClient;
+        private System.Windows.Forms.TextBox _txtTotalCost;
+        private System.Windows.Forms.ListBox _lstOrderProducts;
         private System.Windows.Forms.Button _btnDelete;
         private System.Windows.Forms.Button _btnSave;
         private System.Windows.Forms.Button _btnNew;
@@ -355,7 +345,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button _btnRemoveProduct;
         private System.Windows.Forms.Button _btnAddProduct;
-        private System.Windows.Forms.Button _btnAddClient;
         private System.Windows.Forms.GroupBox _grpDates;
+        private System.Windows.Forms.ComboBox _cboOrderClient;
     }
 }
