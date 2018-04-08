@@ -8,10 +8,9 @@ namespace PHFoodManagement
 {
     public class Order
     {
-        private int _orderNumber;
-        //private List<OrderItem> _orderItems;
         private DateTime _deliveryDate;
         
+        public int OrderNumber { get; set; }
         public bool Paid { get; set; }
         public DateTime OrderDate { get; set; }
         public Client Client { get; set; }

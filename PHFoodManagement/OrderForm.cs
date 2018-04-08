@@ -14,6 +14,7 @@ namespace PHFoodManagement
     public partial class OrderForm : Form
     {
         public List<Order> Orders { get; set; }
+        public List<Client> Clients { get; set; }
         public int NextOrderNum { get; set; }
         private BindingSource _bndOrders = new BindingSource();
         private BindingSource _bndOrderItems = new BindingSource();
@@ -23,6 +24,7 @@ namespace PHFoodManagement
         private Order _currNewOrder;
         private Label _prevErrLabel;
         private bool _editing = false;
+        
 
         public OrderForm()
         {
@@ -106,21 +108,35 @@ namespace PHFoodManagement
         }
 
         private void OrderForm_Load(object sender, EventArgs e)
-        {
-            _bndOrders.DataSource = Orders;
-            _lstOrders.DataSource = _bndOrders;
-           
-
-            _bndOrders.ResetBindings(false);
-
+        {            
+            ResetOrderList();
+            ResetDates();
+            SetInitialState();
+            
         }
 
-        private void ResetOrderProductsList()
+        private void ResetDates()
         {
-            _bndOrderItems.DataSource = _currNewOrder.OrderItems;
-            _lstOrderProducts.DataSource = _bndOrderItems;
+            _dpOrderDate.Value = DateTime.Today;
+            _dpDeliveryDate.Value = DateTime.Today;
+        }
 
-            _bndOrderItems.ResetBindings(false);
+        private void ResetOrderList()
+        {
+            ResetList(Orders, _bndOrders, _lstOrders);
+        }
+
+        private void ResetOrderItemList()
+        {
+            ResetList(_currNewOrder.OrderItems, _bndOrderItems, _lstOrderProducts);
+        }
+
+        private void ResetList<T>(List<T> lst, BindingSource bsrc, ListBox lbox)
+        {
+            bsrc.DataSource = lst;
+            lbox.DataSource = bsrc;
+
+            bsrc.ResetBindings(false);
         }
 
         private void _btnNew_Click(object sender, EventArgs e)
@@ -133,7 +149,7 @@ namespace PHFoodManagement
         private void CreateNewOrder()
         {
             _currNewOrder = new Order();
-            ResetOrderProductsList();
+            ResetOrderItemList();
         }
 
         private void _btnSave_Click(object sender, EventArgs e)
