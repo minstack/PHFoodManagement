@@ -52,9 +52,12 @@
             this._btnCancel = new System.Windows.Forms.Button();
             this._btnEdit = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this._stsOrderStatus = new System.Windows.Forms.StatusStrip();
+            this._toolStatErrorLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this._grpOrderInfo.SuspendLayout();
             this._grpDates.SuspendLayout();
             this.panel1.SuspendLayout();
+            this._stsOrderStatus.SuspendLayout();
             this.SuspendLayout();
             // 
             // _grpOrderInfo
@@ -254,6 +257,7 @@
             this._btnSave.TabIndex = 4;
             this._btnSave.Text = "Save";
             this._btnSave.UseVisualStyleBackColor = true;
+            this._btnSave.Click += new System.EventHandler(this._btnSave_Click);
             // 
             // _btnNew
             // 
@@ -295,11 +299,29 @@
             this.panel1.Size = new System.Drawing.Size(782, 62);
             this.panel1.TabIndex = 8;
             // 
+            // _stsOrderStatus
+            // 
+            this._stsOrderStatus.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this._stsOrderStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this._toolStatErrorLabel});
+            this._stsOrderStatus.Location = new System.Drawing.Point(0, 552);
+            this._stsOrderStatus.Name = "_stsOrderStatus";
+            this._stsOrderStatus.Size = new System.Drawing.Size(812, 28);
+            this._stsOrderStatus.TabIndex = 9;
+            this._stsOrderStatus.Text = "statusStrip1";
+            // 
+            // _toolStatErrorLabel
+            // 
+            this._toolStatErrorLabel.ForeColor = System.Drawing.Color.Red;
+            this._toolStatErrorLabel.Name = "_toolStatErrorLabel";
+            this._toolStatErrorLabel.Size = new System.Drawing.Size(0, 23);
+            // 
             // OrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 26F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(812, 542);
+            this.ClientSize = new System.Drawing.Size(812, 580);
+            this.Controls.Add(this._stsOrderStatus);
             this.Controls.Add(this._lblOrder);
             this.Controls.Add(this._lstOrders);
             this.Controls.Add(this._grpOrderInfo);
@@ -307,7 +329,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(834, 598);
+            this.MaximumSize = new System.Drawing.Size(834, 650);
             this.Name = "OrderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Manage Orders";
@@ -317,6 +339,8 @@
             this._grpDates.ResumeLayout(false);
             this._grpDates.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this._stsOrderStatus.ResumeLayout(false);
+            this._stsOrderStatus.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -348,5 +372,7 @@
         private System.Windows.Forms.Button _btnAddProduct;
         private System.Windows.Forms.GroupBox _grpDates;
         private System.Windows.Forms.ComboBox _cboOrderClient;
+        private System.Windows.Forms.StatusStrip _stsOrderStatus;
+        private System.Windows.Forms.ToolStripStatusLabel _toolStatErrorLabel;
     }
 }

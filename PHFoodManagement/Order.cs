@@ -15,6 +15,7 @@ namespace PHFoodManagement
         private DateTime _deliveryDate;
         private DateTime _orderDate;
 
+        public List<OrderItem> OrderItems { get; set; }
         //TODO need OrderItem and Client classes to have the constructor created
         //public Order (Client client, OrderItem item)
         //{
