@@ -19,6 +19,9 @@ namespace PHFoodManagement
         private ProductList _prodList = new ProductList();
         private ClientList _clientList = new ClientList();
         private OrderList _orderList = new OrderList();
+        private BindingSource _bndRecOrders = new BindingSource();
+        private BindingSource _bndClients = new BindingSource();
+        private BindingSource _bndProducts = new BindingSource();
 
 
         public PHFoodOrderMgmtForm()
@@ -36,6 +39,15 @@ namespace PHFoodManagement
             _orderForm.Products = _prodList.Products;
             _orderForm.Clients = _clientList.Clients;
             _orderForm.ShowDialog();
+
+            _orderList.Orders = _orderForm.Orders;
+            ResetRecentOrderList();
+            
+        }
+
+        private void ResetRecentOrderList()
+        {
+            ControlUtil.ResetList(_orderList.Orders, _bndRecOrders, _lstRecentOrders, "ToString");
         }
 
         private void _txtClientSearch_Enter(object sender, EventArgs e)

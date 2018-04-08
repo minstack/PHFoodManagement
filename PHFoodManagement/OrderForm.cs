@@ -136,12 +136,12 @@ namespace PHFoodManagement
 
         private void ResetProductCombo()
         {
-            ResetList(Products, _bndProductCbo, _cboProductSelect, "ToString");
+            ControlUtil.ResetList(Products, _bndProductCbo, _cboProductSelect, "ToString");
         }
 
         private void ResetClientCombo()
         {
-            ResetList(Clients, _bndClientCbo, _cboOrderClient, "name");
+            ControlUtil.ResetList(Clients, _bndClientCbo, _cboOrderClient, "name");
             
         }
 
@@ -153,33 +153,33 @@ namespace PHFoodManagement
 
         private void ResetOrderList()
         {
-            ResetList(Orders, _bndOrders, _lstOrders, "ToString");
+            ControlUtil.ResetList(Orders, _bndOrders, _lstOrders, "ToString");
         }
 
         private void ResetOrderItemList()
         {
-            ResetList(_currOrder.OrderItems, _bndOrderItems, _lstOrderProducts, "ToString");
+            ControlUtil.ResetList(_currOrder.OrderItems, _bndOrderItems, _lstOrderProducts, "ToString");
         }
 
-        private void ResetList<T>(List<T> lst, BindingSource bsrc, Control ctrl, string dispMem)
-        {
-            bsrc.DataSource = lst;
+        //private void ResetList<T>(List<T> lst, BindingSource bsrc, Control ctrl, string dispMem)
+        //{
+        //    bsrc.DataSource = lst;
 
-            if (ctrl is ListBox)
-            {
-                ListBox tempLst = (ListBox)ctrl;
-                tempLst.DataSource = bsrc;
-                tempLst.DisplayMember = dispMem;
-            }
-            else if (ctrl is ComboBox)
-            {
-                ComboBox tempCbo = (ComboBox)ctrl;
-                tempCbo.DataSource = bsrc;
-                tempCbo.DisplayMember = dispMem;
-            }
+        //    if (ctrl is ListBox)
+        //    {
+        //        ListBox tempLst = (ListBox)ctrl;
+        //        tempLst.DataSource = bsrc;
+        //        tempLst.DisplayMember = dispMem;
+        //    }
+        //    else if (ctrl is ComboBox)
+        //    {
+        //        ComboBox tempCbo = (ComboBox)ctrl;
+        //        tempCbo.DataSource = bsrc;
+        //        tempCbo.DisplayMember = dispMem;
+        //    }
             
-            bsrc.ResetBindings(false);
-        }
+        //    bsrc.ResetBindings(false);
+        //}
 
         private void _btnNew_Click(object sender, EventArgs e)
         {

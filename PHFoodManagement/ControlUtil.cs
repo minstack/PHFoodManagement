@@ -122,6 +122,28 @@ namespace SMUtil
             EnableControls(false, lboxes);
         }
 
+        public static void ResetList<T>(List<T> list, BindingSource bsrc, Control ctrl, string dispMember)
+        {
+
+            bsrc.DataSource = list;
+
+            if (ctrl is ListBox)
+            {
+                ListBox tempLst = (ListBox)ctrl;
+                tempLst.DataSource = bsrc;
+                tempLst.DisplayMember = dispMember;
+            }
+            else if (ctrl is ComboBox)
+            {
+                ComboBox tempCbo = (ComboBox)ctrl;
+                tempCbo.DataSource = bsrc;
+                tempCbo.DisplayMember = dispMember;
+            }
+
+            bsrc.ResetBindings(false);
+        }
+
+
         /// <summary>
         /// Enables the provided combo boxes (variable length parameter).
         /// </summary>
