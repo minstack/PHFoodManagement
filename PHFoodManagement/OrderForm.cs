@@ -400,5 +400,21 @@ namespace PHFoodManagement
         {
             _txtTotalCost.Text = _currOrder.CalculateTotal().ToString();
         }
+
+        private void _lstOrders_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Order selected = (Order)_lstOrders.SelectedItem;
+
+            if (selected != null)
+            {
+                PopulateOrder(selected);
+                SetItemSelectedState();
+            }
+            else
+            {
+                SetInitialState();
+            }
+            
+        }
     }
 }

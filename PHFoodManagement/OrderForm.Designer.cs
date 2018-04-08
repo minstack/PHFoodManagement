@@ -272,6 +272,7 @@
             this._lstOrders.Name = "_lstOrders";
             this._lstOrders.Size = new System.Drawing.Size(275, 394);
             this._lstOrders.TabIndex = 1;
+            this._lstOrders.SelectedIndexChanged += new System.EventHandler(this._lstOrders_SelectedIndexChanged);
             // 
             // _lblOrder
             // 
