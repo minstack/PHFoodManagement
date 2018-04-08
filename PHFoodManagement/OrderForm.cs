@@ -22,6 +22,7 @@ namespace PHFoodManagement
         private Control[] _requiredControls;
         private Order _currNewOrder;
         private Label _prevErrLabel;
+        private bool _editing = false;
 
         public OrderForm()
         {
@@ -145,6 +146,11 @@ namespace PHFoodManagement
             Control errorControl;
 
             RevertPreviousErrorLabel();
+
+            int orderNum = int.Parse(_txtOrderNum.Text);
+            DateTime orderDate = _dpOrderDate.Value;
+            DateTime deliveryDate = _dpDeliveryDate.Value;
+            decimal total = decimal.Parse(_txtTotalCost.Text);
 
             if (ValidInputs(out errorControl))
             {

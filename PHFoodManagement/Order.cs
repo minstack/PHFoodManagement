@@ -9,13 +9,23 @@ namespace PHFoodManagement
     public class Order
     {
         private int _orderNumber;
-        //private Client _client;
-        private bool _paid;
         //private List<OrderItem> _orderItems;
         private DateTime _deliveryDate;
-        private DateTime _orderDate;
-
+        
+        public bool Paid { get; set; }
+        public DateTime OrderDate { get; set; }
+        public Client Client { get; set; }
         public List<OrderItem> OrderItems { get; set; }
+        public DateTime DeliveryDate
+        {
+            get { return _deliveryDate; }
+
+            set
+            {
+                //removing time discrepancies at this level
+                _deliveryDate = value.Date;
+            }
+        }
         //TODO need OrderItem and Client classes to have the constructor created
         //public Order (Client client, OrderItem item)
         //{
@@ -26,13 +36,24 @@ namespace PHFoodManagement
         {
             //iterate through all orderitems and calculate the total of this order
             //sum of product quantity * (product cost - client.extraDiscount)
-            throw new NotImplementedException("Not yet implemented");
+            decimal totalCost = 0;
+            foreach (OrderItem oi in OrderItems)
+            {
+                totalCost += (oi.GetTotalCost() - (oi.Product.Price * (decimal)oi.Quantity));
+            }
+
+            return totalCost;
         }
 
         public void AddProduct(Product product, double quantity)
         {
             //add the product with quantity to orderitem list
-            //_orderItems.Add(new OrderItem(product, quantity));
+            OrderItem newOrderItem = new OrderItem();
+
+            newOrderItem.Product = product;
+            newOrderItem.Quantity = quantity;
+
+            OrderItems.Add(newOrderItem);
         }
     }
 }
