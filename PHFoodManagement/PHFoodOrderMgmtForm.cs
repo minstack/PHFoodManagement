@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SMUtil;
 
 namespace PHFoodManagement
 {
@@ -64,16 +65,12 @@ namespace PHFoodManagement
 
         private void RemoveText(params TextBox[] tboxes)
         {
-
-            foreach (TextBox t in tboxes) {
-                t.Clear();       
-            }
-
+            ControlUtil.ClearTextBoxes(tboxes);
         }
 
         private void AddText(TextBox txtbox, string placeholder)
         {
-            if (String.IsNullOrWhiteSpace(txtbox.Text))
+            if (string.IsNullOrWhiteSpace(txtbox.Text))
             {
                 txtbox.Text = placeholder;
             }
@@ -94,6 +91,7 @@ namespace PHFoodManagement
             if (_clientForm == null) { _clientForm = new ClientForm(); }
             if (_clientList == null) { _clientList = new ClientList(); }
 
+            _clientForm.listClient = _clientList.Clients;
             _clientForm.ShowDialog();
         }
 
