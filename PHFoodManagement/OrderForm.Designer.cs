@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this._grpOrderInfo = new System.Windows.Forms.GroupBox();
+            this._cboOrderClient = new System.Windows.Forms.ComboBox();
             this._btnRemoveProduct = new System.Windows.Forms.Button();
             this._btnAddProduct = new System.Windows.Forms.Button();
             this._txtTotalCost = new System.Windows.Forms.TextBox();
@@ -51,7 +52,6 @@
             this._btnCancel = new System.Windows.Forms.Button();
             this._btnEdit = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this._cboOrderClient = new System.Windows.Forms.ComboBox();
             this._grpOrderInfo.SuspendLayout();
             this._grpDates.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -79,6 +79,14 @@
             this._grpOrderInfo.TabIndex = 0;
             this._grpOrderInfo.TabStop = false;
             this._grpOrderInfo.Text = "Order Information";
+            // 
+            // _cboOrderClient
+            // 
+            this._cboOrderClient.FormattingEnabled = true;
+            this._cboOrderClient.Location = new System.Drawing.Point(123, 193);
+            this._cboOrderClient.Name = "_cboOrderClient";
+            this._cboOrderClient.Size = new System.Drawing.Size(296, 34);
+            this._cboOrderClient.TabIndex = 16;
             // 
             // _btnRemoveProduct
             // 
@@ -255,6 +263,7 @@
             this._btnNew.TabIndex = 5;
             this._btnNew.Text = "New";
             this._btnNew.UseVisualStyleBackColor = true;
+            this._btnNew.Click += new System.EventHandler(this._btnNew_Click);
             // 
             // _btnCancel
             // 
@@ -285,14 +294,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(782, 62);
             this.panel1.TabIndex = 8;
-            // 
-            // _cboOrderClient
-            // 
-            this._cboOrderClient.FormattingEnabled = true;
-            this._cboOrderClient.Location = new System.Drawing.Point(123, 193);
-            this._cboOrderClient.Name = "_cboOrderClient";
-            this._cboOrderClient.Size = new System.Drawing.Size(296, 34);
-            this._cboOrderClient.TabIndex = 16;
             // 
             // OrderForm
             // 

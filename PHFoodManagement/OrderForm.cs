@@ -14,10 +14,11 @@ namespace PHFoodManagement
     public partial class OrderForm : Form
     {
         public List<Order> Orders { get; set; }
+        public int NextOrderNum { get; set; }
         private BindingSource _bndOrders = new BindingSource();
         private Dictionary<Control, Label> _requiredFieldLbls = new Dictionary<Control, Label>();
         private Dictionary<Control, string> _requiredErrors = new Dictionary<Control, string>();
-
+        
         public OrderForm()
         {
             InitializeComponent();
@@ -28,6 +29,9 @@ namespace PHFoodManagement
                  _cboOrderClient,
                  _lstOrderProducts                 
             };
+
+            //temporary until DB implementation
+            NextOrderNum = 1;
 
             InitRequiredDictionary(requiredControls);
             InitRequiredErrors(requiredControls);
@@ -71,8 +75,8 @@ namespace PHFoodManagement
 
         private void SetEditState()
         {
-            ControlUtil.DisableButtons(_btnNew, _btnDelete);
-            ControlUtil.EnableButtons(_btnEdit, _btnCancel, _btnSave);
+            ControlUtil.DisableButtons(_btnNew, _btnDelete, _btnEdit);
+            ControlUtil.EnableButtons(_btnCancel, _btnSave);
             ControlUtil.EnableComboBoxes(_cboOrderClient);
             ControlUtil.EnableDatePickers(_dpDeliveryDate, _dpOrderDate);
         }
@@ -103,6 +107,11 @@ namespace PHFoodManagement
 
             _bndOrders.ResetBindings(false);
 
+        }
+
+        private void _btnNew_Click(object sender, EventArgs e)
+        {
+            SetEditState();
         }
     }
 }

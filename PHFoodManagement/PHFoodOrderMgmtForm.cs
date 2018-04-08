@@ -94,6 +94,7 @@ namespace PHFoodManagement
             if (_clientForm == null) { _clientForm = new ClientForm(); }
             if (_clientList == null) { _clientList = new ClientList(); }
 
+            _clientForm.listClient = _clientList.Clients;
             _clientForm.ShowDialog();
         }
 
