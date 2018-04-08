@@ -159,6 +159,7 @@
             this._btnRemoveProduct.TabIndex = 14;
             this._btnRemoveProduct.Text = "X";
             this._btnRemoveProduct.UseVisualStyleBackColor = true;
+            this._btnRemoveProduct.Click += new System.EventHandler(this._btnRemoveProduct_Click);
             // 
             // _btnAddProduct
             // 
@@ -356,12 +357,13 @@
             // 
             // _stsOrderStatus
             // 
+            this._stsOrderStatus.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._stsOrderStatus.ImageScalingSize = new System.Drawing.Size(24, 24);
             this._stsOrderStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._toolStatErrorLabel});
-            this._stsOrderStatus.Location = new System.Drawing.Point(0, 572);
+            this._stsOrderStatus.Location = new System.Drawing.Point(0, 566);
             this._stsOrderStatus.Name = "_stsOrderStatus";
-            this._stsOrderStatus.Size = new System.Drawing.Size(812, 22);
+            this._stsOrderStatus.Size = new System.Drawing.Size(812, 28);
             this._stsOrderStatus.TabIndex = 9;
             this._stsOrderStatus.Text = "statusStrip1";
             // 

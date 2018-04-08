@@ -40,6 +40,8 @@ namespace PHFoodManagement
                  _nmbProductQty
             };
 
+            _toolStatErrorLabel.Text = "lsdkjflsdjfklsdjf";
+
             //temporary until DB implementation
             NextOrderNum = 1;
 
@@ -455,6 +457,17 @@ namespace PHFoodManagement
             SetChangedState();
             RevertPreviousErrorLabel();
             ResetErrors();
+        }
+
+        private void _btnRemoveProduct_Click(object sender, EventArgs e)
+        {
+            OrderItem selected = (OrderItem)_lstOrderProducts.SelectedItem;
+
+            if (selected != null)
+            {
+                _currOrder.OrderItems.Remove(selected);
+                ResetOrderItemList();
+            }
         }
     }
 }
