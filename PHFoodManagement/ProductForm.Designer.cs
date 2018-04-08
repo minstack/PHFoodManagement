@@ -43,7 +43,7 @@
             this._btnDelete = new System.Windows.Forms.Button();
             this._btnSave = new System.Windows.Forms.Button();
             this._lvProducts = new System.Windows.Forms.ListView();
-            this.Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ProductName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Price = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -58,7 +58,7 @@
             this.groupBox1.Controls.Add(this._txtDescription);
             this.groupBox1.Controls.Add(this._txtPrice);
             this.groupBox1.Controls.Add(this._txtName);
-            this.groupBox1.Location = new System.Drawing.Point(31, 37);
+            this.groupBox1.Location = new System.Drawing.Point(21, 25);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(465, 321);
             this.groupBox1.TabIndex = 0;
@@ -78,7 +78,7 @@
             // _lblDescription
             // 
             this._lblDescription.AutoSize = true;
-            this._lblDescription.Location = new System.Drawing.Point(14, 149);
+            this._lblDescription.Location = new System.Drawing.Point(18, 149);
             this._lblDescription.Name = "_lblDescription";
             this._lblDescription.Size = new System.Drawing.Size(109, 24);
             this._lblDescription.TabIndex = 5;
@@ -140,7 +140,7 @@
             this.panel1.Controls.Add(this._btnDelete);
             this.panel1.Controls.Add(this._btnNew);
             this.panel1.Controls.Add(this._btnSave);
-            this.panel1.Location = new System.Drawing.Point(31, 376);
+            this.panel1.Location = new System.Drawing.Point(21, 364);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(782, 62);
             this.panel1.TabIndex = 9;
@@ -188,10 +188,10 @@
             // _lvProducts
             // 
             this._lvProducts.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Name,
+            this.ProductName,
             this.Price});
             this._lvProducts.GridLines = true;
-            this._lvProducts.Location = new System.Drawing.Point(513, 27);
+            this._lvProducts.Location = new System.Drawing.Point(503, 22);
             this._lvProducts.Name = "_lvProducts";
             this._lvProducts.Size = new System.Drawing.Size(300, 331);
             this._lvProducts.TabIndex = 10;
@@ -199,10 +199,10 @@
             this._lvProducts.View = System.Windows.Forms.View.Details;
             this._lvProducts.SelectedIndexChanged += new System.EventHandler(this._lvProducts_SelectedIndexChanged);
             // 
-            // Name
+            // ProductName
             // 
-            this.Name.Text = "Name";
-            this.Name.Width = 183;
+            this.ProductName.Text = "Name";
+            this.ProductName.Width = 183;
             // 
             // Price
             // 
@@ -213,13 +213,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(845, 469);
+            this.ClientSize = new System.Drawing.Size(821, 440);
             this.Controls.Add(this._lvProducts);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
-            //this.Name = "ProductForm";
+            this.Name = "ProductForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Manage Products";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -245,7 +247,7 @@
         private System.Windows.Forms.Button _btnDelete;
         private System.Windows.Forms.Button _btnSave;
         private System.Windows.Forms.ListView _lvProducts;
-        private System.Windows.Forms.ColumnHeader Name;
+        private System.Windows.Forms.ColumnHeader ProductName;
         private System.Windows.Forms.ColumnHeader Price;
     }
 }
