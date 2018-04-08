@@ -16,9 +16,9 @@ namespace PHFoodManagement
         private OrderForm _orderForm;
         private ClientForm _clientForm;
         private ProductForm _productForm;
-        private ProductList _prodList;
-        private ClientList _clientList;
-        private OrderList _orderList;
+        private ProductList _prodList = new ProductList();
+        private ClientList _clientList = new ClientList();
+        private OrderList _orderList = new OrderList();
 
 
         public PHFoodOrderMgmtForm()
@@ -32,7 +32,9 @@ namespace PHFoodManagement
             if (_orderForm == null) { _orderForm = new OrderForm(); }
             if (_orderList == null) { _orderList = new OrderList(); }
 
-
+            _orderForm.Orders = _orderList.Orders;
+            _orderForm.Products = _prodList.Products;
+            _orderForm.Clients = _clientList.Clients;
             _orderForm.ShowDialog();
         }
 
@@ -104,7 +106,7 @@ namespace PHFoodManagement
         {
             if(_productForm == null) { _productForm = new ProductForm(); }
             if (_prodList == null) { _prodList = new ProductList(); }
-
+            
             _productForm.ShowDialog();
         }
     }

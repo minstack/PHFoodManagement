@@ -25,6 +25,12 @@ namespace PHFoodManagement
                 _deliveryDate = value.Date;
             }
         }
+
+        public Order()
+        {
+            OrderItems = new List<OrderItem>();
+        }
+
         //TODO need OrderItem and Client classes to have the constructor created
         //public Order (Client client, OrderItem item)
         //{
@@ -38,7 +44,7 @@ namespace PHFoodManagement
             decimal totalCost = 0;
             foreach (OrderItem oi in OrderItems)
             {
-                totalCost += (oi.GetTotalCost() - (oi.Product.Price * (decimal)oi.Quantity));
+                totalCost += oi.GetTotalCost();
             }
 
             return totalCost;
@@ -75,6 +81,11 @@ namespace PHFoodManagement
                     OrderItems.Remove(oi);
                 }
             }
+        }
+
+        public override string ToString()
+        {
+            return string.Format("#{0} - {1}", OrderNumber, Client.name);
         }
     }
 }

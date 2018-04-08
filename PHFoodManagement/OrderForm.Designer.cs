@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this._grpOrderInfo = new System.Windows.Forms.GroupBox();
+            this._cboOrderClient = new System.Windows.Forms.ComboBox();
+            this._lblClient = new System.Windows.Forms.Label();
+            this._lblProductQty = new System.Windows.Forms.Label();
+            this._lblBoxes = new System.Windows.Forms.Label();
+            this._nmbProductQty = new System.Windows.Forms.NumericUpDown();
+            this._cboProductSelect = new System.Windows.Forms.ComboBox();
             this._btnRemoveProduct = new System.Windows.Forms.Button();
             this._btnAddProduct = new System.Windows.Forms.Button();
             this._txtTotalCost = new System.Windows.Forms.TextBox();
@@ -52,17 +58,11 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this._stsOrderStatus = new System.Windows.Forms.StatusStrip();
             this._toolStatErrorLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this._cboProductSelect = new System.Windows.Forms.ComboBox();
-            this._nmbProductQty = new System.Windows.Forms.NumericUpDown();
-            this._lblBoxes = new System.Windows.Forms.Label();
-            this._lblProductQty = new System.Windows.Forms.Label();
-            this._cboOrderClient = new System.Windows.Forms.ComboBox();
-            this._lblClient = new System.Windows.Forms.Label();
             this._grpOrderInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._nmbProductQty)).BeginInit();
             this._grpDates.SuspendLayout();
             this.panel1.SuspendLayout();
             this._stsOrderStatus.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._nmbProductQty)).BeginInit();
             this.SuspendLayout();
             // 
             // _grpOrderInfo
@@ -92,6 +92,57 @@
             this._grpOrderInfo.TabStop = false;
             this._grpOrderInfo.Text = "Order Information";
             // 
+            // _cboOrderClient
+            // 
+            this._cboOrderClient.FormattingEnabled = true;
+            this._cboOrderClient.Location = new System.Drawing.Point(123, 74);
+            this._cboOrderClient.Name = "_cboOrderClient";
+            this._cboOrderClient.Size = new System.Drawing.Size(296, 34);
+            this._cboOrderClient.TabIndex = 22;
+            // 
+            // _lblClient
+            // 
+            this._lblClient.AutoSize = true;
+            this._lblClient.Location = new System.Drawing.Point(43, 77);
+            this._lblClient.Name = "_lblClient";
+            this._lblClient.Size = new System.Drawing.Size(74, 26);
+            this._lblClient.TabIndex = 21;
+            this._lblClient.Text = "Client:";
+            // 
+            // _lblProductQty
+            // 
+            this._lblProductQty.AutoSize = true;
+            this._lblProductQty.Location = new System.Drawing.Point(65, 275);
+            this._lblProductQty.Name = "_lblProductQty";
+            this._lblProductQty.Size = new System.Drawing.Size(52, 26);
+            this._lblProductQty.TabIndex = 20;
+            this._lblProductQty.Text = "Qty:";
+            // 
+            // _lblBoxes
+            // 
+            this._lblBoxes.AutoSize = true;
+            this._lblBoxes.Location = new System.Drawing.Point(249, 275);
+            this._lblBoxes.Name = "_lblBoxes";
+            this._lblBoxes.Size = new System.Drawing.Size(70, 26);
+            this._lblBoxes.TabIndex = 19;
+            this._lblBoxes.Text = "boxes";
+            // 
+            // _nmbProductQty
+            // 
+            this._nmbProductQty.DecimalPlaces = 1;
+            this._nmbProductQty.Location = new System.Drawing.Point(123, 273);
+            this._nmbProductQty.Name = "_nmbProductQty";
+            this._nmbProductQty.Size = new System.Drawing.Size(120, 32);
+            this._nmbProductQty.TabIndex = 18;
+            // 
+            // _cboProductSelect
+            // 
+            this._cboProductSelect.FormattingEnabled = true;
+            this._cboProductSelect.Location = new System.Drawing.Point(123, 233);
+            this._cboProductSelect.Name = "_cboProductSelect";
+            this._cboProductSelect.Size = new System.Drawing.Size(296, 34);
+            this._cboProductSelect.TabIndex = 17;
+            // 
             // _btnRemoveProduct
             // 
             this._btnRemoveProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -110,6 +161,7 @@
             this._btnAddProduct.TabIndex = 13;
             this._btnAddProduct.Text = "+";
             this._btnAddProduct.UseVisualStyleBackColor = true;
+            this._btnAddProduct.Click += new System.EventHandler(this._btnAddProduct_Click);
             // 
             // _txtTotalCost
             // 
@@ -308,57 +360,6 @@
             this._toolStatErrorLabel.Name = "_toolStatErrorLabel";
             this._toolStatErrorLabel.Size = new System.Drawing.Size(0, 17);
             // 
-            // _cboProductSelect
-            // 
-            this._cboProductSelect.FormattingEnabled = true;
-            this._cboProductSelect.Location = new System.Drawing.Point(123, 233);
-            this._cboProductSelect.Name = "_cboProductSelect";
-            this._cboProductSelect.Size = new System.Drawing.Size(296, 34);
-            this._cboProductSelect.TabIndex = 17;
-            // 
-            // _nmbProductQty
-            // 
-            this._nmbProductQty.DecimalPlaces = 1;
-            this._nmbProductQty.Location = new System.Drawing.Point(123, 273);
-            this._nmbProductQty.Name = "_nmbProductQty";
-            this._nmbProductQty.Size = new System.Drawing.Size(120, 32);
-            this._nmbProductQty.TabIndex = 18;
-            // 
-            // _lblBoxes
-            // 
-            this._lblBoxes.AutoSize = true;
-            this._lblBoxes.Location = new System.Drawing.Point(249, 275);
-            this._lblBoxes.Name = "_lblBoxes";
-            this._lblBoxes.Size = new System.Drawing.Size(70, 26);
-            this._lblBoxes.TabIndex = 19;
-            this._lblBoxes.Text = "boxes";
-            // 
-            // _lblProductQty
-            // 
-            this._lblProductQty.AutoSize = true;
-            this._lblProductQty.Location = new System.Drawing.Point(65, 275);
-            this._lblProductQty.Name = "_lblProductQty";
-            this._lblProductQty.Size = new System.Drawing.Size(52, 26);
-            this._lblProductQty.TabIndex = 20;
-            this._lblProductQty.Text = "Qty:";
-            // 
-            // _cboOrderClient
-            // 
-            this._cboOrderClient.FormattingEnabled = true;
-            this._cboOrderClient.Location = new System.Drawing.Point(123, 74);
-            this._cboOrderClient.Name = "_cboOrderClient";
-            this._cboOrderClient.Size = new System.Drawing.Size(296, 34);
-            this._cboOrderClient.TabIndex = 22;
-            // 
-            // _lblClient
-            // 
-            this._lblClient.AutoSize = true;
-            this._lblClient.Location = new System.Drawing.Point(43, 77);
-            this._lblClient.Name = "_lblClient";
-            this._lblClient.Size = new System.Drawing.Size(74, 26);
-            this._lblClient.TabIndex = 21;
-            this._lblClient.Text = "Client:";
-            // 
             // OrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 26F);
@@ -380,12 +381,12 @@
             this.Load += new System.EventHandler(this.OrderForm_Load);
             this._grpOrderInfo.ResumeLayout(false);
             this._grpOrderInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._nmbProductQty)).EndInit();
             this._grpDates.ResumeLayout(false);
             this._grpDates.PerformLayout();
             this.panel1.ResumeLayout(false);
             this._stsOrderStatus.ResumeLayout(false);
             this._stsOrderStatus.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._nmbProductQty)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

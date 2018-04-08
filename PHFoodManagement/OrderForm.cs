@@ -36,7 +36,8 @@ namespace PHFoodManagement
             _requiredControls = new Control[]{
                  _dpDeliveryDate,
                  _cboOrderClient,
-                 _lstOrderProducts                 
+                 _lstOrderProducts,
+                 _nmbProductQty
             };
 
             //temporary until DB implementation
@@ -51,7 +52,8 @@ namespace PHFoodManagement
             string[] temp = {
                 "Delivery date must not be before today.",
                 "A client must be selected.",
-                "At least one product must be selected."
+                "At least one product must be selected and added.",
+                "Quantity must be greater than 0 and denominations of 0.5"
             };
             
             for (int i = 0; i < ctrls.Length; i ++)
@@ -65,7 +67,8 @@ namespace PHFoodManagement
             Label[] temp = {
                 _lblDelDate,
                 _lblClient,
-                _lblOrderProducts
+                _lblOrderProducts,
+                _lblProductQty
             };
 
             for (int i = 0; i < ctrls.Length; i++)
@@ -78,7 +81,7 @@ namespace PHFoodManagement
         {
             ControlUtil.DisableButtons(_btnEdit, _btnDelete, _btnCancel, _btnSave);
             ControlUtil.EnableButtons(_btnNew);
-            ControlUtil.DisableComboBoxes(_cboOrderClient);
+            ControlUtil.DisableComboBoxes(_cboOrderClient, _cboProductSelect);
             ControlUtil.DisableDatePickers(_dpDeliveryDate, _dpOrderDate);
         }
 
@@ -86,7 +89,7 @@ namespace PHFoodManagement
         {
             ControlUtil.DisableButtons(_btnNew, _btnDelete, _btnEdit);
             ControlUtil.EnableButtons(_btnCancel, _btnSave);
-            ControlUtil.EnableComboBoxes(_cboOrderClient);
+            ControlUtil.EnableComboBoxes(_cboOrderClient, _cboProductSelect);
             ControlUtil.EnableDatePickers(_dpDeliveryDate, _dpOrderDate);
         }
 
@@ -94,7 +97,7 @@ namespace PHFoodManagement
         {
             ControlUtil.DisableButtons(_btnSave, _btnCancel);
             ControlUtil.EnableButtons(_btnEdit, _btnDelete, _btnNew);
-            ControlUtil.DisableComboBoxes(_cboOrderClient);
+            ControlUtil.DisableComboBoxes(_cboOrderClient,_cboProductSelect);
             ControlUtil.DisableDatePickers(_dpDeliveryDate, _dpOrderDate);
         }
 
@@ -110,24 +113,33 @@ namespace PHFoodManagement
         }
 
         private void OrderForm_Load(object sender, EventArgs e)
-        {            
+        {
+            Products.Add(new Product("prod1", 3.3M, "product 1", false));
+            Products.Add(new Product("prod2", 2.3M, "product 2", false));
+            Products.Add(new Product("prod2", 1.3M, "product 3", false));
+
+            Clients.Add(new Client { name = "client 1" });
+            Clients.Add(new Client { name = "client 2" });
+            Clients.Add(new Client { name = "client 3" });
             ResetOrderList();
             ResetClientCombo();
             ResetProductCombo();
             ResetDates();
             SetInitialState();
             _currOrder = null;
-            
+
+           
         }
 
         private void ResetProductCombo()
         {
-            ResetList(Products, _bndProductCbo, _cboProductSelect);
+            ResetList(Products, _bndProductCbo, _cboProductSelect, "ToString");
         }
 
         private void ResetClientCombo()
         {
-            ResetList(Clients, _bndClientCbo, _cboOrderClient);
+            ResetList(Clients, _bndClientCbo, _cboOrderClient, "name");
+            
         }
 
         private void ResetDates()
@@ -138,27 +150,31 @@ namespace PHFoodManagement
 
         private void ResetOrderList()
         {
-            ResetList(Orders, _bndOrders, _lstOrders);
+            ResetList(Orders, _bndOrders, _lstOrders, "ToString");
         }
 
         private void ResetOrderItemList()
         {
-            ResetList(_currOrder.OrderItems, _bndOrderItems, _lstOrderProducts);
+            ResetList(_currOrder.OrderItems, _bndOrderItems, _lstOrderProducts, "ToString");
         }
 
-        private void ResetList<T>(List<T> lst, BindingSource bsrc, Control ctrl)
+        private void ResetList<T>(List<T> lst, BindingSource bsrc, Control ctrl, string dispMem)
         {
             bsrc.DataSource = lst;
 
             if (ctrl is ListBox)
             {
-                ((ListBox) ctrl).DataSource = bsrc;
+                ListBox tempLst = (ListBox)ctrl;
+                tempLst.DataSource = bsrc;
+                tempLst.DisplayMember = dispMem;
             }
             else if (ctrl is ComboBox)
             {
-                ((ComboBox)ctrl).DataSource = bsrc;
+                ComboBox tempCbo = (ComboBox)ctrl;
+                tempCbo.DataSource = bsrc;
+                tempCbo.DisplayMember = dispMem;
             }
-
+            
             bsrc.ResetBindings(false);
         }
 
@@ -166,7 +182,7 @@ namespace PHFoodManagement
         {
             SetEditState();
             CreateNewOrder();
-            
+            _txtOrderNum.Text = NextOrderNum.ToString();
         }
 
         private void CreateNewOrder()
@@ -188,7 +204,7 @@ namespace PHFoodManagement
 
             DateTime orderDate = _dpOrderDate.Value;
             DateTime deliveryDate = _dpDeliveryDate.Value;
-            decimal total = decimal.Parse(_txtTotalCost.Text);
+            //decimal total = decimal.Parse(_txtTotalCost.Text);
 
             if (ValidInputs(out errorControl))
             {
@@ -202,6 +218,7 @@ namespace PHFoodManagement
                 if (_editing)
                 {
                     Orders.Add(currOrder);
+                    NextOrderNum++;
                 }
 
                 ResetOrderList();
@@ -223,7 +240,7 @@ namespace PHFoodManagement
             ClearFields();
 
             ////for cases when user is searching and list is not just the
-            ////original _movies
+            ////original orders
             //List<Order> currList = (_searching) ? _searchList : _movieList.Movies;
 
             //prevents possible awkward bug of editing something that doesn't exist
@@ -344,6 +361,32 @@ namespace PHFoodManagement
         private void OrderForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Hide();
+        }
+
+        private void _btnAddProduct_Click(object sender, EventArgs e)
+        {
+            double qty = (double)_nmbProductQty.Value;
+            RevertPreviousErrorLabel();
+
+            if (qty == 0 || qty % .5 != 0)
+            {
+                SetError(_nmbProductQty, _requiredErrors[_nmbProductQty]);
+                return;
+            }
+
+            AddNewOrderItem((Product)_cboProductSelect.SelectedItem, qty);
+        }
+
+        private void AddNewOrderItem(Product prod, double qty)
+        {
+            _currOrder.AddProduct(prod, qty);
+            ResetOrderItemList();
+            UpdateTotalCost();
+        }
+
+        private void UpdateTotalCost()
+        {
+            _txtTotalCost.Text = _currOrder.CalculateTotal().ToString();
         }
     }
 }
