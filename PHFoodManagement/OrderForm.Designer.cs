@@ -94,6 +94,7 @@
             // 
             // _cboOrderClient
             // 
+            this._cboOrderClient.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this._cboOrderClient.FormattingEnabled = true;
             this._cboOrderClient.Location = new System.Drawing.Point(123, 74);
             this._cboOrderClient.Name = "_cboOrderClient";
@@ -142,6 +143,7 @@
             // 
             // _cboProductSelect
             // 
+            this._cboProductSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this._cboProductSelect.FormattingEnabled = true;
             this._cboProductSelect.Location = new System.Drawing.Point(123, 233);
             this._cboProductSelect.Name = "_cboProductSelect";
@@ -298,6 +300,7 @@
             this._btnDelete.TabIndex = 3;
             this._btnDelete.Text = "Delete";
             this._btnDelete.UseVisualStyleBackColor = true;
+            this._btnDelete.Click += new System.EventHandler(this._btnDelete_Click);
             // 
             // _btnSave
             // 
@@ -327,6 +330,7 @@
             this._btnCancel.TabIndex = 6;
             this._btnCancel.Text = "Cancel";
             this._btnCancel.UseVisualStyleBackColor = true;
+            this._btnCancel.Click += new System.EventHandler(this._btnCancel_Click);
             // 
             // _btnEdit
             // 

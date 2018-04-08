@@ -81,29 +81,30 @@ namespace PHFoodManagement
         {
             ControlUtil.DisableButtons(_btnEdit, _btnDelete, _btnCancel, _btnSave, _btnAddProduct, _btnRemoveProduct);
             ControlUtil.EnableButtons(_btnNew);
-            ControlUtil.DisableComboBoxes(_cboOrderClient, _cboProductSelect);
-            ControlUtil.DisableDatePickers(_dpDeliveryDate, _dpOrderDate);
+            DisablInputForm();
         }
 
         private void SetEditState()
         {
             ControlUtil.DisableButtons(_btnNew, _btnDelete, _btnEdit);
             ControlUtil.EnableButtons(_btnCancel, _btnSave, _btnAddProduct, _btnRemoveProduct);
-            ControlUtil.EnableComboBoxes(_cboOrderClient, _cboProductSelect);
-            ControlUtil.EnableDatePickers(_dpDeliveryDate, _dpOrderDate);
+            EnableInputForm();
+            ControlUtil.DisableListBoxes(_lstOrders);
         }
 
         private void SetItemSelectedState()
         {
             ControlUtil.DisableButtons(_btnSave, _btnCancel, _btnAddProduct, _btnRemoveProduct);
             ControlUtil.EnableButtons(_btnEdit, _btnDelete, _btnNew);
-            ControlUtil.DisableComboBoxes(_cboOrderClient,_cboProductSelect);
-            ControlUtil.DisableDatePickers(_dpDeliveryDate, _dpOrderDate);
+            DisablInputForm();
+            ControlUtil.EnableListBoxes(_lstOrders);
+            
         }
 
         private void DisablInputForm()
         {
             _grpOrderInfo.Enabled = false;
+            
         }
 
         private void EnableInputForm()
@@ -258,7 +259,7 @@ namespace PHFoodManagement
             else
             {
                 _lstOrders.SelectedIndex = 0;
-                SetSelectedState();
+                SetItemSelectedState();
                 PopulateOrder((Order)_lstOrders.SelectedItem);
             }
         }
@@ -272,6 +273,7 @@ namespace PHFoodManagement
                 _dpOrderDate.Value = order.OrderDate;
                 _txtTotalCost.Text = order.CalculateTotal().ToString();
                 _currOrder = order;
+                _cboOrderClient.SelectedItem = order.Client;
                 ResetOrderItemList();
             }
         }
@@ -373,7 +375,7 @@ namespace PHFoodManagement
         {
             double qty = (double)_nmbProductQty.Value;
             RevertPreviousErrorLabel();
-
+            
             if (qty == 0 || qty % .5 != 0)
             {
                 SetError(_nmbProductQty, _requiredErrors[_nmbProductQty]);
@@ -382,6 +384,15 @@ namespace PHFoodManagement
 
             AddNewOrderItem((Product)_cboProductSelect.SelectedItem, qty);
             ClearOrderItems();
+        }
+
+        private bool IsValidProduct(Product selectedItem)
+        {
+            foreach(Product p in Products)
+            {
+                
+            }
+            return true;
         }
 
         private void ClearOrderItems()
@@ -422,6 +433,28 @@ namespace PHFoodManagement
         {
             SetEditState();
             _editing = true;
+        }
+
+        private void _btnDelete_Click(object sender, EventArgs e)
+        {
+            Order selected = (Order)_lstOrders.SelectedItem;
+
+            if (selected != null)
+            {
+                Orders.Remove(selected);
+                ResetOrderList();
+                
+            }
+        }
+
+        private void _btnCancel_Click(object sender, EventArgs e)
+        {
+            
+            ResetOrderItemList();
+            _currOrder = null;
+            SetChangedState();
+            RevertPreviousErrorLabel();
+            ResetErrors();
         }
     }
 }
