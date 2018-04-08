@@ -204,6 +204,7 @@ namespace PHFoodManagement
 
             DateTime orderDate = _dpOrderDate.Value;
             DateTime deliveryDate = _dpDeliveryDate.Value;
+            Client client = (Client)_cboOrderClient.SelectedItem;
             //decimal total = decimal.Parse(_txtTotalCost.Text);
 
             if (ValidInputs(out errorControl))
@@ -214,8 +215,10 @@ namespace PHFoodManagement
                 currOrder.OrderDate = orderDate;
                 currOrder.DeliveryDate = deliveryDate;
                 currOrder.OrderItems = GetOrderItems();
+                currOrder.Client = client;
+                currOrder.OrderNumber = int.Parse(_txtOrderNum.Text);
 
-                if (_editing)
+                if (!_editing)
                 {
                     Orders.Add(currOrder);
                     NextOrderNum++;
@@ -224,6 +227,7 @@ namespace PHFoodManagement
                 ResetOrderList();
                 _lstOrders.SelectedItem = currOrder;
 
+                SetItemSelectedState();
                 ResetErrors();
                 _editing = false;
             }
@@ -279,7 +283,8 @@ namespace PHFoodManagement
 
         private void ClearFields()
         {
-            throw new NotImplementedException();
+            ControlUtil.ClearTextBoxes(_txtOrderNum, _txtTotalCost);
+            ControlUtil.ClearComboBoxes(_cboOrderClient, _cboProductSelect);
         }
 
         private List<OrderItem> GetOrderItems()
@@ -375,6 +380,13 @@ namespace PHFoodManagement
             }
 
             AddNewOrderItem((Product)_cboProductSelect.SelectedItem, qty);
+            ClearOrderItems();
+        }
+
+        private void ClearOrderItems()
+        {
+            ControlUtil.ClearComboBoxes(_cboProductSelect);
+            ControlUtil.ClearNumUpDown(_nmbProductQty);
         }
 
         private void AddNewOrderItem(Product prod, double qty)
