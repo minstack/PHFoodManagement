@@ -337,6 +337,7 @@ namespace PHFoodManagement
                 return false;
             }
 
+            errCtrl = null;
             return true;
         }
 
