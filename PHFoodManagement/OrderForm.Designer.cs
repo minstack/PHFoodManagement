@@ -376,6 +376,7 @@
             this.Name = "OrderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Manage Orders";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OrderForm_FormClosing);
             this.Load += new System.EventHandler(this.OrderForm_Load);
             this._grpOrderInfo.ResumeLayout(false);
             this._grpOrderInfo.PerformLayout();

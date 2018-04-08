@@ -14,10 +14,13 @@ namespace PHFoodManagement
     public partial class OrderForm : Form
     {
         public List<Order> Orders { get; set; }
-        public List<Client> Clients { get; set; }
+        public List<Client> Clients { private get; set; }
+        public List<Product> Products { private get; set; }
         public int NextOrderNum { get; set; }
         private BindingSource _bndOrders = new BindingSource();
         private BindingSource _bndOrderItems = new BindingSource();
+        private BindingSource _bndProductCbo = new BindingSource();
+        private BindingSource _bndClientCbo = new BindingSource();
         private Dictionary<Control, Label> _requiredFieldLbls = new Dictionary<Control, Label>();
         private Dictionary<Control, string> _requiredErrors = new Dictionary<Control, string>();
         private Control[] _requiredControls;
@@ -110,9 +113,21 @@ namespace PHFoodManagement
         private void OrderForm_Load(object sender, EventArgs e)
         {            
             ResetOrderList();
+            ResetClientCombo();
+            ResetProductCombo();
             ResetDates();
             SetInitialState();
-            
+            _currNewOrder = null;
+        }
+
+        private void ResetProductCombo()
+        {
+            ResetList(Products, _bndProductCbo, _cboProductSelect);
+        }
+
+        private void ResetClientCombo()
+        {
+            ResetList(Clients, _bndClientCbo, _cboOrderClient);
         }
 
         private void ResetDates()
@@ -131,10 +146,18 @@ namespace PHFoodManagement
             ResetList(_currNewOrder.OrderItems, _bndOrderItems, _lstOrderProducts);
         }
 
-        private void ResetList<T>(List<T> lst, BindingSource bsrc, ListBox lbox)
+        private void ResetList<T>(List<T> lst, BindingSource bsrc, Control ctrl)
         {
             bsrc.DataSource = lst;
-            lbox.DataSource = bsrc;
+
+            if (ctrl is ListBox)
+            {
+                ((ListBox) ctrl).DataSource = bsrc;
+            }
+            else if (ctrl is ComboBox)
+            {
+                ((ComboBox)ctrl).DataSource = bsrc;
+            }
 
             bsrc.ResetBindings(false);
         }
@@ -237,6 +260,11 @@ namespace PHFoodManagement
             errCtrl = _lstOrderProducts;
             return false;
 
+        }
+
+        private void OrderForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Hide();
         }
     }
 }
