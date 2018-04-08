@@ -130,6 +130,11 @@
             // _nmbProductQty
             // 
             this._nmbProductQty.DecimalPlaces = 1;
+            this._nmbProductQty.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
             this._nmbProductQty.Location = new System.Drawing.Point(123, 273);
             this._nmbProductQty.Name = "_nmbProductQty";
             this._nmbProductQty.Size = new System.Drawing.Size(120, 32);
@@ -331,6 +336,7 @@
             this._btnEdit.TabIndex = 7;
             this._btnEdit.Text = "Edit";
             this._btnEdit.UseVisualStyleBackColor = true;
+            this._btnEdit.Click += new System.EventHandler(this._btnEdit_Click);
             // 
             // panel1
             // 

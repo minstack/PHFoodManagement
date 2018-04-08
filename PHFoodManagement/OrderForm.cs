@@ -79,7 +79,7 @@ namespace PHFoodManagement
 
         private void SetInitialState()
         {
-            ControlUtil.DisableButtons(_btnEdit, _btnDelete, _btnCancel, _btnSave);
+            ControlUtil.DisableButtons(_btnEdit, _btnDelete, _btnCancel, _btnSave, _btnAddProduct, _btnRemoveProduct);
             ControlUtil.EnableButtons(_btnNew);
             ControlUtil.DisableComboBoxes(_cboOrderClient, _cboProductSelect);
             ControlUtil.DisableDatePickers(_dpDeliveryDate, _dpOrderDate);
@@ -88,14 +88,14 @@ namespace PHFoodManagement
         private void SetEditState()
         {
             ControlUtil.DisableButtons(_btnNew, _btnDelete, _btnEdit);
-            ControlUtil.EnableButtons(_btnCancel, _btnSave);
+            ControlUtil.EnableButtons(_btnCancel, _btnSave, _btnAddProduct, _btnRemoveProduct);
             ControlUtil.EnableComboBoxes(_cboOrderClient, _cboProductSelect);
             ControlUtil.EnableDatePickers(_dpDeliveryDate, _dpOrderDate);
         }
 
         private void SetItemSelectedState()
         {
-            ControlUtil.DisableButtons(_btnSave, _btnCancel);
+            ControlUtil.DisableButtons(_btnSave, _btnCancel, _btnAddProduct, _btnRemoveProduct);
             ControlUtil.EnableButtons(_btnEdit, _btnDelete, _btnNew);
             ControlUtil.DisableComboBoxes(_cboOrderClient,_cboProductSelect);
             ControlUtil.DisableDatePickers(_dpDeliveryDate, _dpOrderDate);
@@ -183,6 +183,7 @@ namespace PHFoodManagement
             SetEditState();
             CreateNewOrder();
             _txtOrderNum.Text = NextOrderNum.ToString();
+            _editing = false;
         }
 
         private void CreateNewOrder()
@@ -210,7 +211,7 @@ namespace PHFoodManagement
             if (ValidInputs(out errorControl))
             {
                 Order currOrder = _editing ?
-                    (Order)_lstOrderProducts.SelectedItem : new Order();
+                    (Order)_lstOrders.SelectedItem : new Order();
 
                 currOrder.OrderDate = orderDate;
                 currOrder.DeliveryDate = deliveryDate;
@@ -415,6 +416,12 @@ namespace PHFoodManagement
                 SetInitialState();
             }
             
+        }
+
+        private void _btnEdit_Click(object sender, EventArgs e)
+        {
+            SetEditState();
+            _editing = true;
         }
     }
 }
