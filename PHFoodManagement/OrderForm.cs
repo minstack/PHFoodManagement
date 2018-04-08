@@ -24,10 +24,9 @@ namespace PHFoodManagement
         private Dictionary<Control, Label> _requiredFieldLbls = new Dictionary<Control, Label>();
         private Dictionary<Control, string> _requiredErrors = new Dictionary<Control, string>();
         private Control[] _requiredControls;
-        private Order _currNewOrder;
+        private Order _currOrder;
         private Label _prevErrLabel;
         private bool _editing = false;
-        
 
         public OrderForm()
         {
@@ -117,7 +116,8 @@ namespace PHFoodManagement
             ResetProductCombo();
             ResetDates();
             SetInitialState();
-            _currNewOrder = null;
+            _currOrder = null;
+            
         }
 
         private void ResetProductCombo()
@@ -143,7 +143,7 @@ namespace PHFoodManagement
 
         private void ResetOrderItemList()
         {
-            ResetList(_currNewOrder.OrderItems, _bndOrderItems, _lstOrderProducts);
+            ResetList(_currOrder.OrderItems, _bndOrderItems, _lstOrderProducts);
         }
 
         private void ResetList<T>(List<T> lst, BindingSource bsrc, Control ctrl)
@@ -171,7 +171,7 @@ namespace PHFoodManagement
 
         private void CreateNewOrder()
         {
-            _currNewOrder = new Order();
+            _currOrder = new Order();
             ResetOrderItemList();
         }
 
@@ -186,19 +186,96 @@ namespace PHFoodManagement
 
             RevertPreviousErrorLabel();
 
-            int orderNum = int.Parse(_txtOrderNum.Text);
             DateTime orderDate = _dpOrderDate.Value;
             DateTime deliveryDate = _dpDeliveryDate.Value;
             decimal total = decimal.Parse(_txtTotalCost.Text);
 
             if (ValidInputs(out errorControl))
             {
+                Order currOrder = _editing ?
+                    (Order)_lstOrderProducts.SelectedItem : new Order();
 
+                currOrder.OrderDate = orderDate;
+                currOrder.DeliveryDate = deliveryDate;
+                currOrder.OrderItems = GetOrderItems();
+
+                if (_editing)
+                {
+                    Orders.Add(currOrder);
+                }
+
+                ResetOrderList();
+                _lstOrders.SelectedItem = currOrder;
+
+                ResetErrors();
+                _editing = false;
             }
             else
             {
                 SetRequiredError(errorControl);
             }
+        }
+
+        // State of the form has been changed -> change to appropriate state
+        // for controls.
+        private void SetChangedState()
+        {
+            ClearFields();
+
+            ////for cases when user is searching and list is not just the
+            ////original _movies
+            //List<Order> currList = (_searching) ? _searchList : _movieList.Movies;
+
+            //prevents possible awkward bug of editing something that doesn't exist
+            //-> user clicks edit nothing selected
+            if (Orders.Count == 0)
+            {
+                SetInitialState();
+                //_btnNew.Focus();
+            }
+            else
+            {
+                _lstOrders.SelectedIndex = 0;
+                SetSelectedState();
+                PopulateOrder((Order)_lstOrders.SelectedItem);
+            }
+        }
+
+        private void PopulateOrder(Order order)
+        {
+            if (order != null)
+            {
+                _txtOrderNum.Text = order.OrderNumber.ToString();
+                _dpDeliveryDate.Value = order.DeliveryDate;
+                _dpOrderDate.Value = order.OrderDate;
+                _txtTotalCost.Text = order.CalculateTotal().ToString();
+                _currOrder = order;
+                ResetOrderItemList();
+            }
+        }
+
+        private void SetSelectedState()
+        {
+            ControlUtil.DisableButtons(_btnSave, _btnCancel);
+            ControlUtil.EnableButtons(_btnNew, _btnDelete, _btnEdit);
+        }
+
+        private void ClearFields()
+        {
+            throw new NotImplementedException();
+        }
+
+        private List<OrderItem> GetOrderItems()
+        {
+            var items = _lstOrderProducts.Items;
+            List<OrderItem> tempOI = new List<OrderItem>();
+
+            foreach (Object o in items)
+            {
+                tempOI.Add((OrderItem)o);
+            }
+
+            return tempOI;
         }
 
         private void SetRequiredError(Control ctrl)
@@ -242,8 +319,6 @@ namespace PHFoodManagement
 
         private bool ValidInputs(out Control errCtrl)
         {
-
-
             if (_dpDeliveryDate.Value.Date < DateTime.Today)
             {
                 errCtrl = _dpDeliveryDate;
@@ -255,11 +330,14 @@ namespace PHFoodManagement
                 errCtrl = _cboOrderClient;
                 return false;
             }
+            
+            if (_currOrder.OrderItems.Count == 0)
+            {
+                errCtrl = _lstOrderProducts;
+                return false;
+            }
 
-
-            errCtrl = _lstOrderProducts;
-            return false;
-
+            return true;
         }
 
         private void OrderForm_FormClosing(object sender, FormClosingEventArgs e)

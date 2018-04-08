@@ -95,7 +95,7 @@
             // _btnRemoveProduct
             // 
             this._btnRemoveProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._btnRemoveProduct.Location = new System.Drawing.Point(425, 391);
+            this._btnRemoveProduct.Location = new System.Drawing.Point(84, 410);
             this._btnRemoveProduct.Name = "_btnRemoveProduct";
             this._btnRemoveProduct.Size = new System.Drawing.Size(36, 31);
             this._btnRemoveProduct.TabIndex = 14;
@@ -104,7 +104,7 @@
             // 
             // _btnAddProduct
             // 
-            this._btnAddProduct.Location = new System.Drawing.Point(425, 307);
+            this._btnAddProduct.Location = new System.Drawing.Point(325, 273);
             this._btnAddProduct.Name = "_btnAddProduct";
             this._btnAddProduct.Size = new System.Drawing.Size(36, 31);
             this._btnAddProduct.TabIndex = 13;

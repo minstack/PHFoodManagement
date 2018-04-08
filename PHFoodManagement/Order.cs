@@ -54,5 +54,27 @@ namespace PHFoodManagement
 
             OrderItems.Add(newOrderItem);
         }
+
+        public void RemoveProduct(Product product)
+        {
+            foreach (OrderItem oi in OrderItems)
+            {
+                if (oi.Product == product)
+                {
+                    OrderItems.Remove(oi);
+                }
+            }
+        }
+
+        public void RemoveOrderItem(OrderItem oItem)
+        {
+            foreach (OrderItem oi in OrderItems)
+            {
+                if (oi == oItem)
+                {
+                    OrderItems.Remove(oi);
+                }
+            }
+        }
     }
 }
