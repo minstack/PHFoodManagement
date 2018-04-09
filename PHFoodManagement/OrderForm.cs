@@ -40,8 +40,6 @@ namespace PHFoodManagement
                  _nmbProductQty
             };
 
-            _toolStatErrorLabel.Text = "lsdkjflsdjfklsdjf";
-
             //temporary until DB implementation
             NextOrderNum = 1;
 
