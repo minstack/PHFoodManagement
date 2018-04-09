@@ -19,7 +19,7 @@ namespace PHFoodManagement
         private ProductForm _productForm;
         private ProductList _prodList = new ProductList();
         private ClientList _clientList = new ClientList();
-        private OrderList _orderList = new OrderList();
+        private OrderList _orderList;
         private BindingSource _bndRecOrders = new BindingSource();
         private BindingSource _bndClients = new BindingSource();
         private BindingSource _bndProducts = new BindingSource();
@@ -80,6 +80,8 @@ namespace PHFoodManagement
 
             _clientList.GetClientsFromDB(pfDB);
             _prodList.InitProductsFromDB(pfDB);
+
+            _orderList = new OrderList(_prodList.Products, _clientList.Clients);
 
             ResetProductList();
             ResetClientList();
