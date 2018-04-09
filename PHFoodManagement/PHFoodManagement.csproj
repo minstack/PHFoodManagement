@@ -80,6 +80,7 @@
     </Compile>
     <Compile Include="OrderItem.cs" />
     <Compile Include="OrderList.cs" />
+    <Compile Include="PHFoodDB.cs" />
     <Compile Include="PHFoodOrderMgmtForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace PHFoodManagement
         private BindingSource _bndRecOrders = new BindingSource();
         private BindingSource _bndClients = new BindingSource();
         private BindingSource _bndProducts = new BindingSource();
+        private PHFoodDB pfDB = new PHFoodDB();
 
 
         public PHFoodOrderMgmtForm()
@@ -75,6 +77,16 @@ namespace PHFoodManagement
             AddText(_txtClientSearch, "Client Search");
             AddText(_txtProdSearch, "Product Search");
             AddText(_txtQOProdQty, "Quantity");
+
+            _clientList.GetClientsFromDB(pfDB);
+
+            ResetClientList();
+
+        }
+
+        private void ResetClientList()
+        {
+            ControlUtil.ResetList(_clientList.Clients, _bndClients, _lstClients, "name");
         }
 
         private void RemoveText(params TextBox[] tboxes)
