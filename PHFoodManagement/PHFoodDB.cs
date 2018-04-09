@@ -134,35 +134,57 @@ namespace PHFoodManagement
             return orderFksDictionary;
         }
 
-        public Dictionary<int, int[]> GetOrderItemsWithFks()
+        //seems inefficient but this is the solution I came up with for now
+        public Dictionary<int, List<OrderItem>> 
+            GetOrderItemsWithFks(int maxOrderId, List<Product> prods)
         {
             OpenConnection();
 
-            Dictionary<Order, int[]> orderFksDictionary = new Dictionary<Order, int[]>();
+            Dictionary<int, List<OrderItem>> 
+                orderItemsFksDictionary = new Dictionary<int, List<OrderItem>>();
+            string query = allOrderItemsWithFks 
+                + " WHERE orderId <= " + maxOrderId;
 
             using (conn)
             {
-                using (SqlCommand command = new SqlCommand(allRecent20OrdersWithFks, conn))
+                using (SqlCommand command = new SqlCommand(query, conn))
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        Order currOrder = new Order
+                        int orderId = reader.GetInt32(0);
+                        int prodId = reader.GetInt32(1);
+                        double quantity = reader.GetDouble(2);
+                        Product prod = GetProduct(prodId, prods);
+
+                        List<OrderItem> tempList = orderItemsFksDictionary[orderId];
+
+                        if (tempList == null)
                         {
-                            OrderNumber = reader.GetInt32(0),
-                            OrderDate = reader.GetDateTime(1),
-                            DeliveryDate = reader.GetDateTime(2),
-                            Paid = bool.Parse(reader.GetString(3))
-                        };
+                            orderItemsFksDictionary[orderId] = new List<OrderItem>();
+                            tempList = orderItemsFksDictionary[orderId];
+                        }
 
-                        orderFksDictionary.Add(currOrder,
-                            new int[] { reader.GetInt32(4), reader.GetInt32(5) });
-
+                        tempList.Add(new OrderItem { Product = prod, Quantity = quantity });
                     }
                 }
             }
 
-            return orderFksDictionary;
+            return orderItemsFksDictionary;
+        }
+
+        private Product GetProduct(int prodId, List<Product> products)
+        {
+            foreach (Product p in products)
+            {
+                //need id in product class
+                //if (p.id == prodId)
+                //{
+                //    return p;
+                //}
+            }
+
+            return null;
         }
 
         private void OpenConnection()

@@ -29,17 +29,20 @@ namespace PHFoodManagement
             int lastOrderId;
             _orderWithFks = db.GetOrderToClientAndDelivery(out lastOrderId);
             _recentOrders = _orderWithFks.Keys.ToArray();
-            
+
+            Dictionary<int, List<OrderItem>> orderIdtoOrderItems
+                = db.GetOrderItemsWithFks(lastOrderId, _products);
+
             foreach (Order o  in _recentOrders)
             {
                 int clientId = _orderWithFks[o][1];
                 
                 o.Client = GetClient(clientId);
 
-                //NEED TO GET ORDER ITEMS FIRST
+                o.OrderItems = orderIdtoOrderItems[o.OrderNumber];
             }
         }
-
+        
         private Client GetClient(int clientId)
         {
             foreach (Client c in _clients)
