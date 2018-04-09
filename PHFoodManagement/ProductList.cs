@@ -14,5 +14,10 @@ namespace PHFoodManagement
         {
             Products = new List<Product>();
         }
+
+        public void InitProductsFromDB(PHFoodDB db)
+        {
+            Products = db.GetProducts();
+        }
     }
 }

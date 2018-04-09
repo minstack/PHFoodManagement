@@ -79,9 +79,16 @@ namespace PHFoodManagement
             AddText(_txtQOProdQty, "Quantity");
 
             _clientList.GetClientsFromDB(pfDB);
+            _prodList.InitProductsFromDB(pfDB);
 
+            ResetProductList();
             ResetClientList();
 
+        }
+
+        private void ResetProductList()
+        {
+            ControlUtil.ResetList(_prodList.Products, _bndProducts, _lstProducts, "ProductName");
         }
 
         private void ResetClientList()

@@ -13,6 +13,7 @@ namespace PHFoodManagement
         SqlConnection conn = new SqlConnection();
         string connString = PHFoodManagement.Properties.Settings.Default.ConnectionString;
         string allClientsQuery = "SELECT * FROM ClientWithNoFks";
+        string allProductsQuery = "SELECT * FROM Product";
 
         public PHFoodDB ()
         {
@@ -51,10 +52,42 @@ namespace PHFoodManagement
             
         }
 
+        public List<Product> GetProducts()
+        {
+            OpenConnection();
+
+            List<Product> products = new List<Product>();
+
+            using (conn)
+            {
+                using (SqlCommand command = new SqlCommand(allProductsQuery, conn))
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Product currProd = new Product
+                        {
+                            //ProductId = reader.GetInt32(0),
+                            ProductName = reader.GetString(1),
+                            Organic = bool.Parse(reader.GetString(2)),
+                            Price = (decimal)reader.GetSqlMoney(3),
+                            Description = reader.GetString(4)
+                        };
+
+                        products.Add(currProd);
+                    }
+                }
+            }
+
+            return products;
+
+        }
+
         private void OpenConnection()
         {
             if (conn != null && conn.State == ConnectionState.Closed)
             {
+                conn.ConnectionString = connString;
                 conn.Open();
             }
         }
