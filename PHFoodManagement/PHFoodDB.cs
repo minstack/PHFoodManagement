@@ -51,6 +51,28 @@ namespace PHFoodManagement
             return rowsAffected;
         }
 
+        public int AddNewProducts(List<Product> products)
+        {
+            OpenConnection();
+
+            int rowsAffected = 0;
+
+            using (_conn)
+            {
+                foreach (Product p in products)
+                {
+                    string insertQuery = string.Format(_insertNewProducts,
+                        p.ProductName, p.Organic.ToString(), p.Price, p.Description);
+
+                    using (SqlCommand command = new SqlCommand(insertQuery, _conn))
+                    {
+                        rowsAffected += command.ExecuteNonQuery();
+                    }
+                }
+            }
+
+            return rowsAffected;
+        }
         public List<Client> GetClients()
         {
             OpenConnection();
