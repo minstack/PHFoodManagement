@@ -34,27 +34,27 @@ namespace PHFoodManagement
             }
         }
 
-        public void InitOrders(PHFoodDB db)
-        {
-            int lastOrderId;
-            _orderWithFks = db.GetOrderToClientAndDelivery(out lastOrderId);
-            _recentOrders = _orderWithFks.Keys.ToArray();
+        //public void InitOrders(PHFoodDB db)
+        //{
+        //    int lastOrderId;
+        //    _orderWithFks = db.GetOrderToClientAndDelivery(out lastOrderId);
+        //    _recentOrders = _orderWithFks.Keys.ToArray();
 
-            Dictionary<int, List<OrderItem>> orderIdtoOrderItems
-                = db.GetOrderItemsWithFks(lastOrderId, _products);
+        //    Dictionary<int, List<OrderItem>> orderIdtoOrderItems
+        //        = db.GetOrderItemsWithFks(lastOrderId, _products);
 
-            foreach (Order o  in _recentOrders)
-            {
-                int clientId = _orderWithFks[o][1];
+        //    foreach (Order o  in _recentOrders)
+        //    {
+        //        int clientId = _orderWithFks[o][1];
 
-                //o.Client = GetClient(clientId);
-                o.Client = _clientIdToClient[clientId];
+        //        //o.Client = GetClient(clientId);
+        //        o.Client = _clientIdToClient[clientId];
 
-                o.OrderItems = orderIdtoOrderItems[o.OrderNumber];
+        //        o.OrderItems = orderIdtoOrderItems[o.OrderNumber];
 
-                Orders.Add(o);
-            }
-        }
+        //        Orders.Add(o);
+        //    }
+        //}
         
         private Client GetClient(int clientId)
         {

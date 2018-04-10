@@ -28,8 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PHFoodOrderMgmtForm));
             this._grpQuickOrder = new System.Windows.Forms.GroupBox();
+            this._pnlClients = new System.Windows.Forms.Panel();
+            this._lblClients = new System.Windows.Forms.Label();
+            this._lstClients = new System.Windows.Forms.ListBox();
+            this._txtClientSearch = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this._txtQOProdQty = new System.Windows.Forms.TextBox();
             this._txtProdSearch = new System.Windows.Forms.TextBox();
@@ -54,14 +59,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this._btnAddProdQuick = new System.Windows.Forms.Button();
-            this._pnlClients = new System.Windows.Forms.Panel();
-            this._lstClients = new System.Windows.Forms.ListBox();
-            this._txtClientSearch = new System.Windows.Forms.TextBox();
-            this._lblClients = new System.Windows.Forms.Label();
+            this._toolTip = new System.Windows.Forms.ToolTip(this.components);
             this._grpQuickOrder.SuspendLayout();
+            this._pnlClients.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this._grpQuickOrderDetails.SuspendLayout();
-            this._pnlClients.SuspendLayout();
             this.SuspendLayout();
             // 
             // _grpQuickOrder
@@ -79,6 +81,43 @@
             this._grpQuickOrder.TabIndex = 0;
             this._grpQuickOrder.TabStop = false;
             this._grpQuickOrder.Text = "Quick Order";
+            // 
+            // _pnlClients
+            // 
+            this._pnlClients.Controls.Add(this._lblClients);
+            this._pnlClients.Controls.Add(this._lstClients);
+            this._pnlClients.Controls.Add(this._txtClientSearch);
+            this._pnlClients.Location = new System.Drawing.Point(25, 34);
+            this._pnlClients.Name = "_pnlClients";
+            this._pnlClients.Size = new System.Drawing.Size(323, 552);
+            this._pnlClients.TabIndex = 8;
+            // 
+            // _lblClients
+            // 
+            this._lblClients.AutoSize = true;
+            this._lblClients.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._lblClients.Location = new System.Drawing.Point(-2, -5);
+            this._lblClients.Name = "_lblClients";
+            this._lblClients.Size = new System.Drawing.Size(87, 29);
+            this._lblClients.TabIndex = 9;
+            this._lblClients.Text = "Clients";
+            // 
+            // _lstClients
+            // 
+            this._lstClients.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._lstClients.FormattingEnabled = true;
+            this._lstClients.ItemHeight = 29;
+            this._lstClients.Location = new System.Drawing.Point(3, 27);
+            this._lstClients.Name = "_lstClients";
+            this._lstClients.Size = new System.Drawing.Size(317, 468);
+            this._lstClients.TabIndex = 6;
+            // 
+            // _txtClientSearch
+            // 
+            this._txtClientSearch.Location = new System.Drawing.Point(3, 501);
+            this._txtClientSearch.Name = "_txtClientSearch";
+            this._txtClientSearch.Size = new System.Drawing.Size(317, 35);
+            this._txtClientSearch.TabIndex = 5;
             // 
             // label4
             // 
@@ -302,43 +341,6 @@
             this._btnAddProdQuick.UseVisualStyleBackColor = true;
             this._btnAddProdQuick.Click += new System.EventHandler(this._btnAddProdQuick_Click);
             // 
-            // _pnlClients
-            // 
-            this._pnlClients.Controls.Add(this._lblClients);
-            this._pnlClients.Controls.Add(this._lstClients);
-            this._pnlClients.Controls.Add(this._txtClientSearch);
-            this._pnlClients.Location = new System.Drawing.Point(25, 34);
-            this._pnlClients.Name = "_pnlClients";
-            this._pnlClients.Size = new System.Drawing.Size(323, 552);
-            this._pnlClients.TabIndex = 8;
-            // 
-            // _lstClients
-            // 
-            this._lstClients.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._lstClients.FormattingEnabled = true;
-            this._lstClients.ItemHeight = 29;
-            this._lstClients.Location = new System.Drawing.Point(3, 27);
-            this._lstClients.Name = "_lstClients";
-            this._lstClients.Size = new System.Drawing.Size(317, 468);
-            this._lstClients.TabIndex = 6;
-            // 
-            // _txtClientSearch
-            // 
-            this._txtClientSearch.Location = new System.Drawing.Point(3, 501);
-            this._txtClientSearch.Name = "_txtClientSearch";
-            this._txtClientSearch.Size = new System.Drawing.Size(317, 35);
-            this._txtClientSearch.TabIndex = 5;
-            // 
-            // _lblClients
-            // 
-            this._lblClients.AutoSize = true;
-            this._lblClients.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._lblClients.Location = new System.Drawing.Point(-2, -5);
-            this._lblClients.Name = "_lblClients";
-            this._lblClients.Size = new System.Drawing.Size(87, 29);
-            this._lblClients.TabIndex = 9;
-            this._lblClients.Text = "Clients";
-            // 
             // PHFoodOrderMgmtForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -355,12 +357,12 @@
             this.Load += new System.EventHandler(this.PHFoodOrderMgmtForm_Load);
             this._grpQuickOrder.ResumeLayout(false);
             this._grpQuickOrder.PerformLayout();
+            this._pnlClients.ResumeLayout(false);
+            this._pnlClients.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this._grpQuickOrderDetails.ResumeLayout(false);
             this._grpQuickOrderDetails.PerformLayout();
-            this._pnlClients.ResumeLayout(false);
-            this._pnlClients.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -397,6 +399,7 @@
         private System.Windows.Forms.Label _lblClients;
         private System.Windows.Forms.ListBox _lstClients;
         private System.Windows.Forms.TextBox _txtClientSearch;
+        private System.Windows.Forms.ToolTip _toolTip;
     }
 }
 

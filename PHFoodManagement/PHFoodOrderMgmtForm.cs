@@ -17,14 +17,14 @@ namespace PHFoodManagement
         private OrderForm _orderForm;
         private ClientForm _clientForm;
         private ProductForm _productForm;
-        private ProductList _prodList = new ProductList();
-        private ClientList _clientList = new ClientList();
+        //private ProductList _prodList = new ProductList();
+        //private ClientList _clientList = new ClientList();
         private OrderList _orderList;
         private BindingSource _bndRecOrders = new BindingSource();
         private BindingSource _bndClients = new BindingSource();
         private BindingSource _bndProducts = new BindingSource();
         private BindingSource _bndQOorder = new BindingSource();
-        private PHFoodDB pfDB = new PHFoodDB();
+        //private PHFoodDB pfDB = new PHFoodDB();
         private Order _quickOrder;
         
 
@@ -70,25 +70,27 @@ namespace PHFoodManagement
             AddText(_txtProdSearch, "Product Search");
             //AddText(_txtQOProdQty, "Quantity");
 
-            _clientList.GetClientsFromDB(pfDB);
-            _prodList.InitProductsFromDB(pfDB);
+            //_clientList.GetClientsFromDB(pfDB);
+            //_prodList.InitProductsFromDB(pfDB);
 
-            _orderList = new OrderList(_prodList.Products, _clientList.Clients);
+            //_orderList = new OrderList(_prodList.Products, _clientList.Clients);
 
-            ResetProductList();
-            ResetClientList();
+            //ResetProductList();
+            //ResetClientList();
+
+            _toolTip.Show("Select a client and product.\nType the quantity with the product selected and press enter to add to the quick order.", _lstProducts, 15000);
 
         }
 
-        private void ResetProductList()
-        {
-            ControlUtil.ResetList(_prodList.Products, _bndProducts, _lstProducts, "ProductName");
-        }
+        //private void ResetProductList()
+        //{
+        //    ControlUtil.ResetList(_prodList.Products, _bndProducts, _lstProducts, "ProductName");
+        //}
 
-        private void ResetClientList()
-        {
-            ControlUtil.ResetList(_clientList.Clients, _bndClients, _lstClients, "name");
-        }
+        //private void ResetClientList()
+        //{
+        //    ControlUtil.ResetList(_clientList.Clients, _bndClients, _lstClients, "name");
+        //}
 
         private void RemoveText(params TextBox[] tboxes)
         {
@@ -107,7 +109,7 @@ namespace PHFoodManagement
         {
             if (_clientForm == null) { _clientForm = new ClientForm(); }
 
-            _clientForm.listClient = _clientList.Clients;
+            //_clientForm.listClient = _clientList.Clients;
             _clientForm.ShowDialog();
         }
 
@@ -234,8 +236,8 @@ namespace PHFoodManagement
         {
             _orderForm = new OrderForm();
             _orderForm.Orders = _orderList.Orders;
-            _orderForm.Clients = _clientList.Clients;
-            _orderForm.Products = _prodList.Products;
+            //_orderForm.Clients = _clientList.Clients;
+            //_orderForm.Products = _prodList.Products;
         }
 
         private void _lstProducts_KeyUp(object sender, KeyEventArgs e)
