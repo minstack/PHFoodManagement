@@ -9,6 +9,7 @@ namespace PHFoodManagement
     public class ClientList
     {
         public List<Client> Clients { get; set; }
+        private List<Client> _originalClients;
 
         public ClientList ()
         {
@@ -18,6 +19,7 @@ namespace PHFoodManagement
         public void GetClientsFromDB(PHFoodDB db)
         {
             Clients = db.GetClients();
+            _originalClients = Clients.ToList();
         }
 
         public void SaveNewClients(PHFoodDB db)

@@ -9,6 +9,7 @@ namespace PHFoodManagement
     public class ProductList
     {
         public List<Product> Products { get; set; }
+        private List<Product> _originalProducts;
 
         public ProductList()
         {
@@ -18,6 +19,7 @@ namespace PHFoodManagement
         public void InitProductsFromDB(PHFoodDB db)
         {
             Products = db.GetProducts();
+            _originalProducts = Products.ToList();
         }
 
         public void SaveNewProducts(PHFoodDB db)

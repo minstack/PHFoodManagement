@@ -250,7 +250,9 @@ namespace PHFoodManagement
 
         internal void InitQOOrder(Order quickOrder)
         {
+            ResetOrderList();
             _lstOrders.SelectedItem = quickOrder;
+            //_lstOrders.SelectedIndex = Orders.Count - 1;
             PopulateOrder(quickOrder);
             _comingFromQuickOrder = true;
             _editing = true;
