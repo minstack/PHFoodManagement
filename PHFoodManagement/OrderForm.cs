@@ -46,6 +46,8 @@ namespace PHFoodManagement
 
             InitRequiredDictionary(_requiredControls);
             InitRequiredErrors(_requiredControls);
+
+            Orders = new List<Order>();
         }
 
         private void InitRequiredErrors(Control[] ctrls)

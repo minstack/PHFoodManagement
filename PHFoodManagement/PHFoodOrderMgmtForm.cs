@@ -40,7 +40,7 @@ namespace PHFoodManagement
             InitOrderForm();
             _orderForm.ShowDialog();
 
-            _orderList.Orders = _orderForm.Orders;
+            //_orderList.Orders = _orderForm.Orders;
             
         }
 
@@ -235,7 +235,7 @@ namespace PHFoodManagement
         private void InitOrderForm()
         {
             _orderForm = new OrderForm();
-            _orderForm.Orders = _orderList.Orders;
+            //_orderForm.Orders = _orderList.Orders;
             //_orderForm.Clients = _clientList.Clients;
             //_orderForm.Products = _prodList.Products;
         }
