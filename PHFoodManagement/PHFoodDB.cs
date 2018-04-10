@@ -10,16 +10,45 @@ namespace PHFoodManagement
 {
     public class PHFoodDB
     {
-        SqlConnection conn = new SqlConnection();
-        string connString = PHFoodManagement.Properties.Settings.Default.ConnectionString;
-        string allClientsQuery = "SELECT * FROM ClientWithNoFks";
-        string allProductsQuery = "SELECT * FROM Product";
-        string allOrderItemsWithFks = "SELECT * FROM OrderItem";
-        string allRecent20OrdersWithFks = "Select * FROM Recent20Orders";
+        private SqlConnection _conn = new SqlConnection();
+        private string _connString = PHFoodManagement.Properties.Settings.Default.ConnectionString;
+        private string _allClientsQuery = "SELECT * FROM ClientWithNoFks";
+        private string _allProductsQuery = "SELECT * FROM Product";
+        private string _allOrderItemsWithFks = "SELECT * FROM OrderItem";
+        private string _allRecent20OrdersWithFks = "Select * FROM Recent20Orders";
+        private string _insertNewProducts = "INSERT INTO Product (productName, organic, price, description)" +
+                                    "VALUES ({0},{1},{2},{3})";
+        string _insertNewClients = "INSERT INTO Client (clientName, phone, address, additionalDiscount, clientTypeId, zoneId)" +
+                                    "VALUES ({0},{1},{2},{3},{4},{5})";
+
 
         public PHFoodDB ()
         {
-            conn.ConnectionString = connString;
+            _conn.ConnectionString = _connString;
+        }
+
+        public int AddNewClients(List<Client> clients)
+        {
+            OpenConnection();
+
+            int rowsAffected = 0;
+
+            using (_conn)
+            {
+                foreach (Client c in clients)
+                {
+                    string insertQuery = string.Format(_insertNewClients,
+                        c.name, c.phoneNumber, c.address, c.additionalDiscount
+                        , (int)c.type, (int)c.zone);
+
+                    using (SqlCommand command = new SqlCommand(insertQuery, _conn))
+                    {
+                        rowsAffected += command.ExecuteNonQuery();
+                    }
+                }
+            }
+
+            return rowsAffected;
         }
 
         public List<Client> GetClients()
@@ -28,9 +57,9 @@ namespace PHFoodManagement
 
             List<Client> clients = new List<Client>();
 
-            using (conn)
+            using (_conn)
             {
-                using (SqlCommand command = new SqlCommand(allClientsQuery, conn))
+                using (SqlCommand command = new SqlCommand(_allClientsQuery, _conn))
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -60,9 +89,9 @@ namespace PHFoodManagement
 
             List<Product> products = new List<Product>();
 
-            using (conn)
+            using (_conn)
             {
-                using (SqlCommand command = new SqlCommand(allProductsQuery, conn))
+                using (SqlCommand command = new SqlCommand(_allProductsQuery, _conn))
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -91,10 +120,10 @@ namespace PHFoodManagement
 
             Dictionary<Order, int[]> orderFksDictionary = new Dictionary<Order, int[]>();
             int tempLastOrderId = -1;
-            using (conn)
+            using (_conn)
             {
                 SqlCommand command = new SqlCommand(
-                    "SELECT Max(orderId) as LastId FROM Recent20Orders",conn);
+                    "SELECT Max(orderId) as LastId FROM Recent20Orders", _conn);
                 SqlDataReader reader;
 
                 //retreives the max order number of the recent 20
@@ -110,7 +139,7 @@ namespace PHFoodManagement
                 }
 
                 //retrieving all orders and the fks deliveryid and clientid
-                using (command = new SqlCommand(allRecent20OrdersWithFks, conn))
+                using (command = new SqlCommand(_allRecent20OrdersWithFks, _conn))
                 using (reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -142,12 +171,12 @@ namespace PHFoodManagement
 
             Dictionary<int, List<OrderItem>> 
                 orderItemsFksDictionary = new Dictionary<int, List<OrderItem>>();
-            string query = allOrderItemsWithFks 
+            string query = _allOrderItemsWithFks 
                 + " WHERE orderId <= " + maxOrderId;
 
-            using (conn)
+            using (_conn)
             {
-                using (SqlCommand command = new SqlCommand(query, conn))
+                using (SqlCommand command = new SqlCommand(query, _conn))
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -189,10 +218,10 @@ namespace PHFoodManagement
 
         private void OpenConnection()
         {
-            if (conn != null && conn.State == ConnectionState.Closed)
+            if (_conn != null && _conn.State == ConnectionState.Closed)
             {
-                conn.ConnectionString = connString;
-                conn.Open();
+                _conn.ConnectionString = _connString;
+                _conn.Open();
             }
         }
     }
