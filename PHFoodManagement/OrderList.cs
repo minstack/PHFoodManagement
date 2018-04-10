@@ -69,6 +69,9 @@ namespace PHFoodManagement
             return null;
         }
 
-
+        internal void AddOrder(Order quickOrder)
+        {
+            Orders.Add(quickOrder);
+        }
     }
 }

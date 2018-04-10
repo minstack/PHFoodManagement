@@ -37,9 +37,7 @@ namespace PHFoodManagement
         {
             if (_orderForm == null) { _orderForm = new OrderForm(); }
 
-            _orderForm.Orders = _orderList.Orders;
-            _orderForm.Products = _prodList.Products;
-            _orderForm.Clients = _clientList.Clients;
+            InitOrderForm();
             _orderForm.ShowDialog();
 
             _orderList.Orders = _orderForm.Orders;
@@ -184,14 +182,17 @@ namespace PHFoodManagement
                     DeliveryDate = DateTime.Today,
                     OrderDate = DateTime.Today
                 };
-            }
+
+                _orderList.AddOrder(_quickOrder);
+            }            
 
             _txtQOClient.Text = client.name;
+
             _quickOrder.AddProduct(prod, qty);
             ResetQuickOrderList(_quickOrder.OrderItems);
-            UpdateTotal(_quickOrder);
-
+            UpdateTotal(_quickOrder);            
             _pnlClients.Enabled = false;
+            _txtQOProdQty.Clear();
         }
 
         private void UpdateTotal(Order quickOrder)
@@ -204,5 +205,37 @@ namespace PHFoodManagement
             ControlUtil.ResetList(ois, _bndQOorder, _lstQOProducts, "ToString");
         }
 
+        private void _btnQOFinalize_Click(object sender, EventArgs e)
+        {
+            if (_quickOrder == null)
+            {
+                return;
+            }
+
+            if (_orderForm == null)
+            {
+                InitOrderForm();
+            }
+            _orderForm.InitQOOrder(_quickOrder);
+            _orderForm.ShowDialog();
+            ResetQuickOrder();
+        }
+
+        private void ResetQuickOrder()
+        {
+            _pnlClients.Enabled = true;
+            _quickOrder = null;
+            _lstQOProducts.DataSource = null;
+            _txtQOClient.Clear();
+            _txtQOTotal.Clear();
+        }
+
+        private void InitOrderForm()
+        {
+            _orderForm = new OrderForm();
+            _orderForm.Orders = _orderList.Orders;
+            _orderForm.Clients = _clientList.Clients;
+            _orderForm.Products = _prodList.Products;
+        }
     }
 }

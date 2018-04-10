@@ -48,7 +48,7 @@
             this._grpQuickOrderDetails = new System.Windows.Forms.GroupBox();
             this._txtQOTotal = new System.Windows.Forms.TextBox();
             this._lblTotal = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this._btnQOFinalize = new System.Windows.Forms.Button();
             this._lstQOProducts = new System.Windows.Forms.ListBox();
             this._txtQOClient = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -212,7 +212,7 @@
             this._grpQuickOrderDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this._grpQuickOrderDetails.Controls.Add(this._txtQOTotal);
             this._grpQuickOrderDetails.Controls.Add(this._lblTotal);
-            this._grpQuickOrderDetails.Controls.Add(this.button1);
+            this._grpQuickOrderDetails.Controls.Add(this._btnQOFinalize);
             this._grpQuickOrderDetails.Controls.Add(this._lstQOProducts);
             this._grpQuickOrderDetails.Controls.Add(this._txtQOClient);
             this._grpQuickOrderDetails.Controls.Add(this.label3);
@@ -242,14 +242,15 @@
             this._lblTotal.TabIndex = 9;
             this._lblTotal.Text = "Total";
             // 
-            // button1
+            // _btnQOFinalize
             // 
-            this.button1.Location = new System.Drawing.Point(58, 535);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(170, 44);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Open Order";
-            this.button1.UseVisualStyleBackColor = true;
+            this._btnQOFinalize.Location = new System.Drawing.Point(67, 526);
+            this._btnQOFinalize.Name = "_btnQOFinalize";
+            this._btnQOFinalize.Size = new System.Drawing.Size(206, 44);
+            this._btnQOFinalize.TabIndex = 7;
+            this._btnQOFinalize.Text = "Finalize Order";
+            this._btnQOFinalize.UseVisualStyleBackColor = true;
+            this._btnQOFinalize.Click += new System.EventHandler(this._btnQOFinalize_Click);
             // 
             // _lstQOProducts
             // 
@@ -376,7 +377,7 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.GroupBox _grpQuickOrderDetails;
         private System.Windows.Forms.Label _lblProductList;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button _btnQOFinalize;
         private System.Windows.Forms.ListBox _lstQOProducts;
         private System.Windows.Forms.TextBox _txtQOClient;
         private System.Windows.Forms.Label label3;
