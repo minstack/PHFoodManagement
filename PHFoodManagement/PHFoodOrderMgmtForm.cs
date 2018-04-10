@@ -23,27 +23,14 @@ namespace PHFoodManagement
         private BindingSource _bndRecOrders = new BindingSource();
         private BindingSource _bndClients = new BindingSource();
         private BindingSource _bndProducts = new BindingSource();
+        private BindingSource _bndQOorder = new BindingSource();
         private PHFoodDB pfDB = new PHFoodDB();
-        private Dictionary<Keys, string> _keysToDouble = new Dictionary<Keys, string>();
+        private Order _quickOrder;
+        
 
         public PHFoodOrderMgmtForm()
         {
             InitializeComponent();
-            InitKeysToDouble();
-        }
-
-        private void InitKeysToDouble()
-        {
-            Keys[] digitsAndDot = {Keys.D0, Keys.D1, Keys.D2, Keys.D3, Keys.D4, Keys.D5
-            ,Keys.D6, Keys.D7,Keys.D8, Keys.D9, Keys.Decimal};
-            
-            for (int i=0; i< digitsAndDot.Length - 1; i++)
-            {
-                _keysToDouble.Add(digitsAndDot[i], i.ToString());
-            }
-
-            _keysToDouble.Add(digitsAndDot[digitsAndDot.Length - 1], ".");
-
         }
 
         private void ordersToolStripMenuItem_Click(object sender, EventArgs e)
@@ -56,13 +43,7 @@ namespace PHFoodManagement
             _orderForm.ShowDialog();
 
             _orderList.Orders = _orderForm.Orders;
-            ResetRecentOrderList();
             
-        }
-
-        private void ResetRecentOrderList()
-        {
-            ControlUtil.ResetList(_orderList.Orders, _bndRecOrders, _lstRecentOrders, "ToString");
         }
 
         private void _txtClientSearch_Enter(object sender, EventArgs e)
@@ -150,6 +131,8 @@ namespace PHFoodManagement
             {
                 string key;
 
+                //check period or get last character of keycode since digits
+                //end with the actual digit (D9, NumPad9)
                 if(e.KeyCode == Keys.Decimal || e.KeyCode == Keys.OemPeriod)
                 {
                     key = ".";
@@ -159,6 +142,7 @@ namespace PHFoodManagement
                     GetLastChar(e.KeyCode.ToString(), out key);
                 }
                 
+                //only populate digits and periods
                 if (System.Text.RegularExpressions.Regex.IsMatch(key, @"^[\d\.]$"))
                 {
                     _txtQOProdQty.Text += key;
@@ -170,5 +154,55 @@ namespace PHFoodManagement
         {
             key = pressed.Substring(pressed.Length - 1);
         }
+
+        private void _btnAddProdQuick_Click(object sender, EventArgs e)
+        {
+            Client client = (Client) _lstClients.SelectedItem;
+            Product prod = (Product)_lstProducts.SelectedItem;
+
+            if (!double.TryParse(_txtQOProdQty.Text, out double qty))
+            {
+                //error
+                return;
+            }
+
+            if (client == null)
+            {
+                //error
+                return;
+            }
+            if (prod == null)
+            {
+                //error
+                return;
+            }
+
+            if (_quickOrder == null)
+            {
+                _quickOrder = new Order {
+                    Client = client,
+                    DeliveryDate = DateTime.Today,
+                    OrderDate = DateTime.Today
+                };
+            }
+
+            _txtQOClient.Text = client.name;
+            _quickOrder.AddProduct(prod, qty);
+            ResetQuickOrderList(_quickOrder.OrderItems);
+            UpdateTotal(_quickOrder);
+
+            _pnlClients.Enabled = false;
+        }
+
+        private void UpdateTotal(Order quickOrder)
+        {
+            _txtQOTotal.Text = quickOrder.CalculateTotal().ToString();
+        }
+
+        private void ResetQuickOrderList(List<OrderItem> ois)
+        {
+            ControlUtil.ResetList(ois, _bndQOorder, _lstQOProducts, "ToString");
+        }
+
     }
 }
