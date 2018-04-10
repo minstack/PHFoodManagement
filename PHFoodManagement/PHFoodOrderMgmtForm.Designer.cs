@@ -57,6 +57,7 @@
             this._lstRecentOrders = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
             this._btnAddProdQuick = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this._grpQuickOrder.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this._grpQuickOrderDetails.SuspendLayout();
@@ -65,6 +66,7 @@
             // 
             // _grpQuickOrder
             // 
+            this._grpQuickOrder.Controls.Add(this.label4);
             this._grpQuickOrder.Controls.Add(this._txtQOProdQty);
             this._grpQuickOrder.Controls.Add(this._txtProdSearch);
             this._grpQuickOrder.Controls.Add(this._txtClientSearch);
@@ -82,25 +84,23 @@
             // 
             // _txtQOProdQty
             // 
-            this._txtQOProdQty.Location = new System.Drawing.Point(591, 537);
+            this._txtQOProdQty.Location = new System.Drawing.Point(591, 24);
             this._txtQOProdQty.Name = "_txtQOProdQty";
             this._txtQOProdQty.Size = new System.Drawing.Size(100, 35);
             this._txtQOProdQty.TabIndex = 6;
-            this._txtQOProdQty.Enter += new System.EventHandler(this._txtQOProdQty_Enter);
-            this._txtQOProdQty.Leave += new System.EventHandler(this._txtQOProdQty_Leave);
             // 
             // _txtProdSearch
             // 
-            this._txtProdSearch.Location = new System.Drawing.Point(374, 537);
+            this._txtProdSearch.Location = new System.Drawing.Point(375, 535);
             this._txtProdSearch.Name = "_txtProdSearch";
-            this._txtProdSearch.Size = new System.Drawing.Size(211, 35);
+            this._txtProdSearch.Size = new System.Drawing.Size(316, 35);
             this._txtProdSearch.TabIndex = 5;
             this._txtProdSearch.Enter += new System.EventHandler(this._txtProdSearch_Enter);
             this._txtProdSearch.Leave += new System.EventHandler(this._txtProdSearch_Leave);
             // 
             // _txtClientSearch
             // 
-            this._txtClientSearch.Location = new System.Drawing.Point(34, 537);
+            this._txtClientSearch.Location = new System.Drawing.Point(35, 535);
             this._txtClientSearch.Name = "_txtClientSearch";
             this._txtClientSearch.Size = new System.Drawing.Size(317, 35);
             this._txtClientSearch.TabIndex = 4;
@@ -136,6 +136,7 @@
             this._lstProducts.Name = "_lstProducts";
             this._lstProducts.Size = new System.Drawing.Size(317, 468);
             this._lstProducts.TabIndex = 1;
+            this._lstProducts.KeyDown += new System.Windows.Forms.KeyEventHandler(this._lstProducts_KeyDown);
             // 
             // _lstClients
             // 
@@ -156,7 +157,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1132, 33);
+            this.menuStrip1.Size = new System.Drawing.Size(1130, 33);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -235,7 +236,7 @@
             this._grpQuickOrderDetails.Controls.Add(this.label3);
             this._grpQuickOrderDetails.Controls.Add(this.label2);
             this._grpQuickOrderDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._grpQuickOrderDetails.Location = new System.Drawing.Point(827, 55);
+            this._grpQuickOrderDetails.Location = new System.Drawing.Point(825, 55);
             this._grpQuickOrderDetails.Name = "_grpQuickOrderDetails";
             this._grpQuickOrderDetails.Size = new System.Drawing.Size(288, 341);
             this._grpQuickOrderDetails.TabIndex = 4;
@@ -294,7 +295,7 @@
             this._grpRecentOrders.Controls.Add(this._lstRecentOrders);
             this._grpRecentOrders.Controls.Add(this.button2);
             this._grpRecentOrders.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._grpRecentOrders.Location = new System.Drawing.Point(827, 402);
+            this._grpRecentOrders.Location = new System.Drawing.Point(825, 402);
             this._grpRecentOrders.Name = "_grpRecentOrders";
             this._grpRecentOrders.Size = new System.Drawing.Size(288, 260);
             this._grpRecentOrders.TabIndex = 5;
@@ -328,11 +329,21 @@
             this._btnAddProdQuick.Text = "Add >";
             this._btnAddProdQuick.UseVisualStyleBackColor = true;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(537, 27);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 29);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Qty";
+            // 
             // PHFoodOrderMgmtForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1132, 674);
+            this.ClientSize = new System.Drawing.Size(1130, 693);
             this.Controls.Add(this._btnAddProdQuick);
             this.Controls.Add(this._grpRecentOrders);
             this.Controls.Add(this._grpQuickOrderDetails);
@@ -385,6 +396,7 @@
         private System.Windows.Forms.TextBox _txtClientSearch;
         private System.Windows.Forms.Button _btnAddProdQuick;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
+        private System.Windows.Forms.Label label4;
     }
 }
 

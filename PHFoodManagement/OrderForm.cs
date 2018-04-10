@@ -129,7 +129,6 @@ namespace PHFoodManagement
             SetInitialState();
             _currOrder = null;
 
-           
         }
 
         private void ResetProductCombo()

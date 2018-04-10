@@ -24,13 +24,27 @@ namespace PHFoodManagement
         private BindingSource _bndClients = new BindingSource();
         private BindingSource _bndProducts = new BindingSource();
         private PHFoodDB pfDB = new PHFoodDB();
-
+        private Dictionary<Keys, string> _keysToDouble = new Dictionary<Keys, string>();
 
         public PHFoodOrderMgmtForm()
         {
             InitializeComponent();
+            InitKeysToDouble();
         }
 
+        private void InitKeysToDouble()
+        {
+            Keys[] digitsAndDot = {Keys.D0, Keys.D1, Keys.D2, Keys.D3, Keys.D4, Keys.D5
+            ,Keys.D6, Keys.D7,Keys.D8, Keys.D9, Keys.Decimal};
+            
+            for (int i=0; i< digitsAndDot.Length - 1; i++)
+            {
+                _keysToDouble.Add(digitsAndDot[i], i.ToString());
+            }
+
+            _keysToDouble.Add(digitsAndDot[digitsAndDot.Length - 1], ".");
+
+        }
 
         private void ordersToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -75,7 +89,7 @@ namespace PHFoodManagement
         {
             AddText(_txtClientSearch, "Client Search");
             AddText(_txtProdSearch, "Product Search");
-            AddText(_txtQOProdQty, "Quantity");
+            //AddText(_txtQOProdQty, "Quantity");
 
             _clientList.GetClientsFromDB(pfDB);
             _prodList.InitProductsFromDB(pfDB);
@@ -110,16 +124,6 @@ namespace PHFoodManagement
             }
         }
 
-        private void _txtQOProdQty_Enter(object sender, EventArgs e)
-        {
-            RemoveText(_txtQOProdQty);
-        }
-
-        private void _txtQOProdQty_Leave(object sender, EventArgs e)
-        {
-            AddText(_txtQOProdQty, "Quantity");
-        }
-
         private void clientsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (_clientForm == null) { _clientForm = new ClientForm(); }
@@ -138,6 +142,33 @@ namespace PHFoodManagement
             if(_productForm == null) { _productForm = new ProductForm(); }
             
             _productForm.ShowDialog();
+        }
+
+        private void _lstProducts_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (_lstProducts.SelectedItem != null)
+            {
+                string key;
+
+                if(e.KeyCode == Keys.Decimal || e.KeyCode == Keys.OemPeriod)
+                {
+                    key = ".";
+                }
+                else
+                {
+                    GetLastChar(e.KeyCode.ToString(), out key);
+                }
+                
+                if (System.Text.RegularExpressions.Regex.IsMatch(key, @"^[\d\.]$"))
+                {
+                    _txtQOProdQty.Text += key;
+                }
+            }
+        }
+
+        private void GetLastChar(string pressed, out string key)
+        {
+            key = pressed.Substring(pressed.Length - 1);
         }
     }
 }
