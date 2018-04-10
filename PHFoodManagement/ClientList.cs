@@ -19,5 +19,10 @@ namespace PHFoodManagement
         {
             Clients = db.GetClients();
         }
+
+        public void SaveNewClients(PHFoodDB db)
+        {
+            db.AddNewClients(Clients);
+        }
     }
 }

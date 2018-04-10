@@ -19,5 +19,10 @@ namespace PHFoodManagement
         {
             Products = db.GetProducts();
         }
+
+        public void SaveNewProducts(PHFoodDB db)
+        {
+            db.AddNewProducts(Products);
+        }
     }
 }

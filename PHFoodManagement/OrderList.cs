@@ -14,6 +14,7 @@ namespace PHFoodManagement
         private List<Product> _products;
         private Dictionary<Order, int[]> _orderWithFks;
         private Order[] _recentOrders;
+        private Dictionary<int, Client> _clientIdToClient = new Dictionary<int, Client>();
 
         public OrderList(List<Product> products, List<Client> clients)
         {
@@ -22,6 +23,15 @@ namespace PHFoodManagement
             _clients = clients;
             _products = products;
 
+            InitClientIdtoClient(clients);
+        }
+
+        private void InitClientIdtoClient(List<Client> clients)
+        {
+            foreach (Client c in clients)
+            {
+                _clientIdToClient.Add(c.id, c);
+            }
         }
 
         public void InitOrders(PHFoodDB db)
@@ -36,10 +46,13 @@ namespace PHFoodManagement
             foreach (Order o  in _recentOrders)
             {
                 int clientId = _orderWithFks[o][1];
-                
-                o.Client = GetClient(clientId);
+
+                //o.Client = GetClient(clientId);
+                o.Client = _clientIdToClient[clientId];
 
                 o.OrderItems = orderIdtoOrderItems[o.OrderNumber];
+
+                Orders.Add(o);
             }
         }
         
