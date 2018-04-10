@@ -237,5 +237,13 @@ namespace PHFoodManagement
             _orderForm.Clients = _clientList.Clients;
             _orderForm.Products = _prodList.Products;
         }
+
+        private void _lstProducts_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                _btnAddProdQuick_Click(sender, e);
+            }
+        }
     }
 }
