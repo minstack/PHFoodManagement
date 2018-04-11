@@ -21,6 +21,12 @@ namespace PHFoodManagement.PHFOrderService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPHFOrderRetrievalService/AddNewOrder", ReplyAction="http://tempuri.org/IPHFOrderRetrievalService/AddNewOrderResponse")]
         System.Threading.Tasks.Task<int> AddNewOrderAsync(string oDate, string dDate, decimal oTotal, bool paid, int cId);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPHFOrderRetrievalService/AddOrderItem", ReplyAction="http://tempuri.org/IPHFOrderRetrievalService/AddOrderItemResponse")]
+        int AddOrderItem(int orderId, int productId, double quantity);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPHFOrderRetrievalService/AddOrderItem", ReplyAction="http://tempuri.org/IPHFOrderRetrievalService/AddOrderItemResponse")]
+        System.Threading.Tasks.Task<int> AddOrderItemAsync(int orderId, int productId, double quantity);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPHFOrderRetrievalService/UpdateOrder", ReplyAction="http://tempuri.org/IPHFOrderRetrievalService/UpdateOrderResponse")]
         int UpdateOrder(string o);
         
@@ -79,6 +85,14 @@ namespace PHFoodManagement.PHFOrderService {
         
         public System.Threading.Tasks.Task<int> AddNewOrderAsync(string oDate, string dDate, decimal oTotal, bool paid, int cId) {
             return base.Channel.AddNewOrderAsync(oDate, dDate, oTotal, paid, cId);
+        }
+        
+        public int AddOrderItem(int orderId, int productId, double quantity) {
+            return base.Channel.AddOrderItem(orderId, productId, quantity);
+        }
+        
+        public System.Threading.Tasks.Task<int> AddOrderItemAsync(int orderId, int productId, double quantity) {
+            return base.Channel.AddOrderItemAsync(orderId, productId, quantity);
         }
         
         public int UpdateOrder(string o) {

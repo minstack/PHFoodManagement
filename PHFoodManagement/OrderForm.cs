@@ -238,10 +238,16 @@ namespace PHFoodManagement
 
                 if (!_editing)
                 {
-                    Orders.Add(currOrder);
-                    NextOrderNum++;
+                    int orderNum = AddToDB(currOrder);
 
-                    AddToDB(currOrder);
+                    if (orderNum > 0)
+                    {
+                        currOrder.OrderNumber = orderNum;
+                        AddOrderItemsToDB(currOrder);
+
+                        Orders.Add(currOrder);  
+                    }
+                              
                     
                 }
 
@@ -258,15 +264,26 @@ namespace PHFoodManagement
             }
         }
 
-        private void AddToDB(Order currOrder)
+        private int AddToDB(Order currOrder)
         {
-            _orderdb.AddNewOrder(
+            return _orderdb.AddNewOrder(
                         currOrder.OrderDate.Date.ToString(),
                         currOrder.DeliveryDate.Date.ToString(),
                         currOrder.CalculateTotal(),
                         currOrder.Paid,
                         currOrder.Client.id
-                        );
+                    );
+
+            
+        }
+
+        private void AddOrderItemsToDB(Order currOrder)
+        {
+            foreach (OrderItem oi in currOrder.OrderItems)
+            {
+                //_orderdb.AddOrderItem(currOrder.OrderNumber, )
+                _orderdb.AddOrderItem(currOrder.OrderNumber, 1, oi.Quantity);
+            }
         }
 
         internal void InitQOOrder(Order quickOrder)

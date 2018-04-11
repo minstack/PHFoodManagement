@@ -16,11 +16,11 @@ namespace PHFoodOrderWebService
     {
         private string _connString = Properties.Settings.Default.ConnectionString;
         private MySqlConnection _conn = new MySqlConnection();
-        private string _insertOrder = "INSERT INTO `Order` " +
+        private string _insertOrder = "INSERT INTO `order` " +
             "(orderDate, deliveryDate, orderTotal, paid, clientId) " +
             "VALUES (\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\")";
 
-        private string _insertOrderItem = "INSERT INTO `Order` " +
+        private string _insertOrderItem = "INSERT INTO `orderitem` " +
             "(orderId, productId, quantity) " +
             "VALUES (\"{0}\",\"{1}\",\"{2}\")";
 
@@ -34,13 +34,35 @@ namespace PHFoodOrderWebService
             string query = string.Format(_insertOrder,
                 oDate,dDate,oTotal,paid,cId);
 
-            return RunNonExecuteQuery(query);      
-            
+            if (RunNonExecuteQuery(query) > 0) {
+                return GetOrderID();
+            }
+
+            return -1;
+        }
+
+        private int GetOrderID()
+        {
+            OpenConnection();
+            string query = "SELECT orderId FROM `order` ORDER BY orderId DESC LIMIT 1";
+            using (_conn)
+            {
+                using (MySqlCommand command = new MySqlCommand(query, _conn))
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        return reader.GetInt32(0);
+                    }
+                }
+            }
+
+            return -1;
         }
 
         public int AddOrderItem(int orderId, int productId, double quantity)
         {
-            string query = string.Format(_insertOrderItem)
+            string query = string.Format(_insertOrderItem, orderId, productId, quantity);
 
             return RunNonExecuteQuery(query);
 

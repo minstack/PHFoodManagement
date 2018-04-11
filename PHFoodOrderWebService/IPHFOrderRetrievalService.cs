@@ -15,6 +15,9 @@ namespace PHFoodOrderWebService
         int AddNewOrder(string oDate, string dDate, decimal oTotal, bool paid, int cId);
 
         [OperationContract]
+        int AddOrderItem(int orderId, int productId, double quantity);
+
+        [OperationContract]
         int UpdateOrder(string o);
 
         [OperationContract]
