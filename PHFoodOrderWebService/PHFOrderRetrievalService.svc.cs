@@ -28,7 +28,7 @@ namespace PHFoodOrderWebService
         {
             string query = string.Format(_insertQuery, "(" + o.Replace('|', ',') + ")");
 
-            RunNonExecuteQuery(query);
+            return RunNonExecuteQuery(query);      
             
         }
 
@@ -90,7 +90,7 @@ namespace PHFoodOrderWebService
                 }
             }
 
-            return rows;
+            return "";
         }
 
         private void OpenConnection()
