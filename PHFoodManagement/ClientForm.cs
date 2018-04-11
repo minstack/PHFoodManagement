@@ -16,8 +16,10 @@ namespace PHFoodManagement
         public List<Client> listClient { get; set; }
         private BindingSource _bndClients = new BindingSource();
         private ClientDB db = new ClientDB();
-        bool newClient = false;
         private Client _tempClient;
+        bool _newClient = false;
+        string _sql;
+        bool _databaseExecuted;
 
         public ClientForm()
         {
@@ -46,12 +48,10 @@ namespace PHFoodManagement
 
         private void _btnSave_Click(object sender, EventArgs e)
         {
-            string sql;
-            bool insertUpdate;
 
-            if (newClient)
+            if (_newClient)
             {
-                sql =
+                _sql =
                    "INSERT INTO client (clientName, phone, address, zoneid, clientTypeId) VALUES (" + 
                    "'" + this._txtName.Text + "'" +
                    ", '" + this._txtPhone.Text + "'" +
@@ -61,7 +61,7 @@ namespace PHFoodManagement
             }
             else
             {
-                sql =
+                _sql =
                     "UPDATE client SET clientName = '" + this._txtName.Text +
                     "', phone = '" + this._txtPhone.Text +
                     "', address = '" + this._txtAddress.Text +
@@ -73,8 +73,8 @@ namespace PHFoodManagement
                 listClient.RemoveAt(_lstClient.SelectedIndex);
             }
 
-            insertUpdate = db.InsertUpdateClients(sql);
-            newClient = false;
+            _databaseExecuted = db.ExecuteDatabase(_sql);
+            _newClient = false;
 
             _tempClient = new Client();
             this._tempClient.name = this._txtName.Text;
@@ -85,7 +85,7 @@ namespace PHFoodManagement
 
             listClient.Add(_tempClient);
             
-            if (insertUpdate)
+            if (_databaseExecuted)
             {
                 ControlUtil.EnableButtons(this._btnNew, this._btnEdit, this._btnDelete);
                 ControlUtil.DisableButtons(this._btnSave, this._btnCancel);
@@ -97,7 +97,7 @@ namespace PHFoodManagement
 
         private void _btnNew_Click(object sender, EventArgs e)
         {
-            newClient = true;
+            _newClient = true;
 
             ControlUtil.DisableButtons(this._btnNew, this._btnEdit, this._btnDelete);
             ControlUtil.EnableButtons(this._btnSave);
@@ -230,12 +230,23 @@ namespace PHFoodManagement
 
         private void _btnDelete_Click(object sender, EventArgs e)
         {
-            listClient.RemoveAt(_lstClient.SelectedIndex);
-            ControlUtil.ResetList(this.listClient, this._bndClients, this._lstClient, "name");
-            LoadList();
-            RefreshFields();
-            DisableFields();
-            ControlUtil.DisableButtons(this._btnSave, this._btnDelete, this._btnCancel);
+            _sql =
+                    "DELETE FROM client" + 
+                    " WHERE clientId = " + this.listClient[this._lstClient.SelectedIndex].id;
+
+            _databaseExecuted = db.ExecuteDatabase(_sql);
+
+            if (_databaseExecuted)
+            {
+                listClient.RemoveAt(_lstClient.SelectedIndex);
+                //ControlUtil.ResetList(this.listClient, this._bndClients, this._lstClient, "name");
+                LoadList();
+                RefreshFields();
+                DisableFields();
+                ControlUtil.DisableButtons(this._btnSave, this._btnDelete, this._btnCancel);
+                ControlUtil.EnableButtons(this._btnNew, this._btnEdit);
+            }
+            
         }
 
         private void ClientForm_FormClosing(object sender, FormClosingEventArgs e)
