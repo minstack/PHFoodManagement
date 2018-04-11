@@ -28,6 +28,9 @@ namespace PHFoodManagement
         public PHFoodOrderMgmtForm()
         {
             InitializeComponent();
+            _clientForm = new ClientForm();
+            _clients = _clientForm.listClient;
+            ResetClientList();
         }
 
         private void ordersToolStripMenuItem_Click(object sender, EventArgs e)
@@ -103,10 +106,7 @@ namespace PHFoodManagement
         }
 
         private void clientsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (_clientForm == null) { _clientForm = new ClientForm(); }
-
-            //_clientForm.listClient = _clients ;
+        {            
             _clientForm.ShowDialog();
             ResetClientList();
         }
