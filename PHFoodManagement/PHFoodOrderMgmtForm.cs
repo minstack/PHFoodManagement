@@ -77,7 +77,11 @@ namespace PHFoodManagement
             AddText(_txtProdSearch, "Product Search");
             AddText(_txtQOProdQty, "Quantity");
 
-            _clientList.GetClientsFromDB(pfDB);
+            /* COMMENTED BY ROINA
+             * There's no need to pass the database anymore*/
+            //_clientList.GetClientsFromDB(pfDB);
+
+            _clientList.GetClientsFromDB();
             _prodList.InitProductsFromDB(pfDB);
 
             _orderList = new OrderList(_prodList.Products, _clientList.Clients);

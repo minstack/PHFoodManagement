@@ -9,15 +9,17 @@ namespace PHFoodManagement
     public class ClientList
     {
         public List<Client> Clients { get; set; }
+        private ClientDB db = new ClientDB();
 
         public ClientList ()
         {
             Clients = new List<Client>();
         }
 
-        public void GetClientsFromDB(PHFoodDB db)
+        public void GetClientsFromDB()
         {
             Clients = db.GetClients();
         }
+
     }
 }
