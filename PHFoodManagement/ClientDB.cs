@@ -56,7 +56,7 @@ namespace PHFoodManagement
             return clients;
         }
 
-        public bool InsertUpdateClients(string sql)
+        public bool ExecuteDatabase(string sql)
         {
             OpenConnection();
 
