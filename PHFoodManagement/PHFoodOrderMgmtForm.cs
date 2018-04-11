@@ -28,9 +28,7 @@ namespace PHFoodManagement
         public PHFoodOrderMgmtForm()
         {
             InitializeComponent();
-            _clientForm = new ClientForm();
-            _clients = _clientForm.listClient;
-            ResetClientList();
+
         }
 
         private void ordersToolStripMenuItem_Click(object sender, EventArgs e)
@@ -66,6 +64,8 @@ namespace PHFoodManagement
 
         private void PHFoodOrderMgmtForm_Load(object sender, EventArgs e)
         {
+            InitSubForms();
+            
             AddText(_txtClientSearch, "Client Search");
             AddText(_txtProdSearch, "Product Search");
             //AddText(_txtQOProdQty, "Quantity");
@@ -79,6 +79,22 @@ namespace PHFoodManagement
             //ResetClientList();
 
             _toolTip.Show("Select a client and product.\nType the quantity with the product selected and press enter to add to the quick order.", _lstProducts, 15000);
+
+        }
+
+        private void InitSubForms()
+        {
+            _stsLoadingMessage.Text = "Loading clients...";
+            _clientForm = new ClientForm();
+            _clients = _clientForm.listClient;
+            ResetClientList();
+
+            _stsLoadingMessage.Text = "Loading products...";
+            _productForm = new ProductForm();
+
+            _stsLoadingMessage.Text = "Loading orders...";
+            _orderForm = new OrderForm();
+            _orderForm.Clients = _clients;
 
         }
 
@@ -233,6 +249,7 @@ namespace PHFoodManagement
         private void InitOrderForm()
         {
             _orderForm = new OrderForm();
+            _orderForm.Clients = _clients;
             //_orderForm.Orders = _orderList.Orders;
             //_orderForm.Clients = _clientList.Clients;
             //_orderForm.Products = _prodList.Products;

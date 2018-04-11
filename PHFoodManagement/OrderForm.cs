@@ -16,7 +16,6 @@ namespace PHFoodManagement
         public List<Order> Orders { get; set; }
         public List<Client> Clients { private get; set; }
         public List<Product> Products { private get; set; }
-        public int NextOrderNum { get; set; }
         private BindingSource _bndOrders = new BindingSource();
         private BindingSource _bndOrderItems = new BindingSource();
         private BindingSource _bndProductCbo = new BindingSource();
@@ -43,13 +42,48 @@ namespace PHFoodManagement
                  _nmbProductQty
             };
 
-            //temporary until DB implementation
-            NextOrderNum = 1;
-
             InitRequiredDictionary(_requiredControls);
             InitRequiredErrors(_requiredControls);
 
             Orders = new List<Order>();
+        }
+
+        private void InitOrdersFromDB()
+        {
+            Dictionary<int, Client> clientIdToObject = GetIdToClient();
+
+            string[] tempStringOrders = _orderdb.GetAllOrders().Split('|');
+
+            foreach (string strOrder in tempStringOrders)
+            {
+                string[] order = strOrder.Split(',');
+
+                Order currOrder = new Order {
+                    OrderNumber = int.Parse(order[0]),
+                    OrderDate = Convert.ToDateTime(order[1]),
+                    DeliveryDate = Convert.ToDateTime(order[2]),
+                    Paid = Convert.ToBoolean(order[3]),
+                    Client = clientIdToObject[int.Parse(order[4])]
+                };
+
+                Orders.Add(currOrder);
+                //TEMP UNTIL DICTIONARY VIFGURE OUT
+                //currOrder.OrderItems = new List<OrderItem>();
+            }
+
+
+        }
+
+        private Dictionary<int, Client> GetIdToClient()
+        {
+            Dictionary<int, Client> idtoclient = new Dictionary<int, Client>();
+
+            foreach (Client c in Clients)
+            {
+                idtoclient.Add(c.id, c);
+            }
+
+            return idtoclient;
         }
 
         private void InitRequiredErrors(Control[] ctrls)
@@ -121,15 +155,17 @@ namespace PHFoodManagement
         private void OrderForm_Load(object sender, EventArgs e)
         {
             Products = new List<Product>();
-            Clients = new List<Client>();
+            //Clients = new List<Client>();
             Products.Add(new Product("prod1", 3.3M, "product 1", false));
             Products.Add(new Product("prod2", 2.3M, "product 2", false));
             Products.Add(new Product("prod2", 1.3M, "product 3", false));
 
-            Clients.Add(new Client { name = "client 1", id=1, additionalDiscount = 0,
-            address = "32 fakestreet ave", phoneNumber = "44444444", type = ClientType.Restaurant, zone = Zone.East});
+            // Clients.Add(new Client { name = "client 1", id=1, additionalDiscount = 0,
+            //address = "32 fakestreet ave", phoneNumber = "44444444", type = ClientType.Restaurant, zone = Zone.East});
             //Clients.Add(new Client { name = "client 2" });
             //Clients.Add(new Client { name = "client 3" });
+            InitOrdersFromDB();
+
             ResetOrderList();
             ResetClientCombo();
             ResetProductCombo();
@@ -144,8 +180,8 @@ namespace PHFoodManagement
                 SetInitialState();
                 _currOrder = null;
             }
-            
 
+            
         }
 
         private void ResetProductCombo()
@@ -247,8 +283,10 @@ namespace PHFoodManagement
 
                         Orders.Add(currOrder);  
                     }
-                              
-                    
+                }
+                else
+                {
+                    UpdateDB(currOrder);
                 }
 
                 ResetOrderList();
@@ -262,6 +300,25 @@ namespace PHFoodManagement
             {
                 SetRequiredError(errorControl);
             }
+        }
+
+        private void UpdateDB(Order currOrder)
+        {
+            string orderString = string.Format("{0}|{1}|{2}|{3}|{4}|{5}",
+                    currOrder.OrderNumber,
+                    currOrder.OrderDate,
+                    currOrder.DeliveryDate,
+                    currOrder.CalculateTotal(),
+                    currOrder.Paid,
+                    currOrder.Client.id
+                );
+            _orderdb.UpdateOrder(orderString);
+
+            //update orderitems
+            _orderdb.DeleteOrderItems(currOrder.OrderNumber);
+            AddOrderItemsToDB(currOrder);
+
+            
         }
 
         private int AddToDB(Order currOrder)

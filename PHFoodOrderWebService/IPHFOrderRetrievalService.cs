@@ -27,7 +27,13 @@ namespace PHFoodOrderWebService
         int DeleteOrder(int id);
 
         [OperationContract]
+        int DeleteOrderItems(int id);
+
+        [OperationContract]
         string GetAllOrders();
+
+        [OperationContract]
+        string GetAllOrderItems(int orderId);
 
     }
 

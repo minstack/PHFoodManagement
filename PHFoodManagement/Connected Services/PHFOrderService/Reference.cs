@@ -45,11 +45,23 @@ namespace PHFoodManagement.PHFOrderService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPHFOrderRetrievalService/DeleteOrder", ReplyAction="http://tempuri.org/IPHFOrderRetrievalService/DeleteOrderResponse")]
         System.Threading.Tasks.Task<int> DeleteOrderAsync(int id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPHFOrderRetrievalService/DeleteOrderItems", ReplyAction="http://tempuri.org/IPHFOrderRetrievalService/DeleteOrderItemsResponse")]
+        int DeleteOrderItems(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPHFOrderRetrievalService/DeleteOrderItems", ReplyAction="http://tempuri.org/IPHFOrderRetrievalService/DeleteOrderItemsResponse")]
+        System.Threading.Tasks.Task<int> DeleteOrderItemsAsync(int id);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPHFOrderRetrievalService/GetAllOrders", ReplyAction="http://tempuri.org/IPHFOrderRetrievalService/GetAllOrdersResponse")]
         string GetAllOrders();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPHFOrderRetrievalService/GetAllOrders", ReplyAction="http://tempuri.org/IPHFOrderRetrievalService/GetAllOrdersResponse")]
         System.Threading.Tasks.Task<string> GetAllOrdersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPHFOrderRetrievalService/GetAllOrderItems", ReplyAction="http://tempuri.org/IPHFOrderRetrievalService/GetAllOrderItemsResponse")]
+        string GetAllOrderItems(int orderId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPHFOrderRetrievalService/GetAllOrderItems", ReplyAction="http://tempuri.org/IPHFOrderRetrievalService/GetAllOrderItemsResponse")]
+        System.Threading.Tasks.Task<string> GetAllOrderItemsAsync(int orderId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -119,12 +131,28 @@ namespace PHFoodManagement.PHFOrderService {
             return base.Channel.DeleteOrderAsync(id);
         }
         
+        public int DeleteOrderItems(int id) {
+            return base.Channel.DeleteOrderItems(id);
+        }
+        
+        public System.Threading.Tasks.Task<int> DeleteOrderItemsAsync(int id) {
+            return base.Channel.DeleteOrderItemsAsync(id);
+        }
+        
         public string GetAllOrders() {
             return base.Channel.GetAllOrders();
         }
         
         public System.Threading.Tasks.Task<string> GetAllOrdersAsync() {
             return base.Channel.GetAllOrdersAsync();
+        }
+        
+        public string GetAllOrderItems(int orderId) {
+            return base.Channel.GetAllOrderItems(orderId);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetAllOrderItemsAsync(int orderId) {
+            return base.Channel.GetAllOrderItemsAsync(orderId);
         }
     }
 }

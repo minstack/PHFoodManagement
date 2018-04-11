@@ -60,10 +60,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this._btnAddProdQuick = new System.Windows.Forms.Button();
             this._toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this._stsLoadingMessage = new System.Windows.Forms.ToolStripStatusLabel();
             this._grpQuickOrder.SuspendLayout();
             this._pnlClients.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this._grpQuickOrderDetails.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // _grpQuickOrder
@@ -341,11 +344,29 @@
             this._btnAddProdQuick.UseVisualStyleBackColor = true;
             this._btnAddProdQuick.Click += new System.EventHandler(this._btnAddProdQuick_Click);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this._stsLoadingMessage});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 663);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1190, 30);
+            this.statusStrip1.TabIndex = 6;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // _stsLoadingMessage
+            // 
+            this._stsLoadingMessage.Name = "_stsLoadingMessage";
+            this._stsLoadingMessage.Size = new System.Drawing.Size(179, 25);
+            this._stsLoadingMessage.Text = "toolStripStatusLabel1";
+            // 
             // PHFoodOrderMgmtForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1190, 693);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this._btnAddProdQuick);
             this.Controls.Add(this._grpQuickOrderDetails);
             this.Controls.Add(this._grpQuickOrder);
@@ -363,6 +384,8 @@
             this.menuStrip1.PerformLayout();
             this._grpQuickOrderDetails.ResumeLayout(false);
             this._grpQuickOrderDetails.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -400,6 +423,8 @@
         private System.Windows.Forms.ListBox _lstClients;
         private System.Windows.Forms.TextBox _txtClientSearch;
         private System.Windows.Forms.ToolTip _toolTip;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel _stsLoadingMessage;
     }
 }
 

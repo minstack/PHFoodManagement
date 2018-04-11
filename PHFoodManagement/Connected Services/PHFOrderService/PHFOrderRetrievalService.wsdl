@@ -78,6 +78,20 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="DeleteOrderItems">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="id" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DeleteOrderItemsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="DeleteOrderItemsResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="GetAllOrders">
         <xs:complexType>
           <xs:sequence />
@@ -87,6 +101,20 @@
         <xs:complexType>
           <xs:sequence>
             <xs:element minOccurs="0" name="GetAllOrdersResult" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetAllOrderItems">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="orderId" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetAllOrderItemsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="GetAllOrderItemsResult" nillable="true" type="xs:string" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -163,11 +191,23 @@
   <wsdl:message name="IPHFOrderRetrievalService_DeleteOrder_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteOrderResponse" />
   </wsdl:message>
+  <wsdl:message name="IPHFOrderRetrievalService_DeleteOrderItems_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteOrderItems" />
+  </wsdl:message>
+  <wsdl:message name="IPHFOrderRetrievalService_DeleteOrderItems_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteOrderItemsResponse" />
+  </wsdl:message>
   <wsdl:message name="IPHFOrderRetrievalService_GetAllOrders_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllOrders" />
   </wsdl:message>
   <wsdl:message name="IPHFOrderRetrievalService_GetAllOrders_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllOrdersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPHFOrderRetrievalService_GetAllOrderItems_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllOrderItems" />
+  </wsdl:message>
+  <wsdl:message name="IPHFOrderRetrievalService_GetAllOrderItems_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllOrderItemsResponse" />
   </wsdl:message>
   <wsdl:portType name="IPHFOrderRetrievalService">
     <wsdl:operation name="AddNewOrder">
@@ -190,9 +230,17 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IPHFOrderRetrievalService/DeleteOrder" message="tns:IPHFOrderRetrievalService_DeleteOrder_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPHFOrderRetrievalService/DeleteOrderResponse" message="tns:IPHFOrderRetrievalService_DeleteOrder_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="DeleteOrderItems">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPHFOrderRetrievalService/DeleteOrderItems" message="tns:IPHFOrderRetrievalService_DeleteOrderItems_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPHFOrderRetrievalService/DeleteOrderItemsResponse" message="tns:IPHFOrderRetrievalService_DeleteOrderItems_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetAllOrders">
       <wsdl:input wsaw:Action="http://tempuri.org/IPHFOrderRetrievalService/GetAllOrders" message="tns:IPHFOrderRetrievalService_GetAllOrders_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPHFOrderRetrievalService/GetAllOrdersResponse" message="tns:IPHFOrderRetrievalService_GetAllOrders_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOrderItems">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPHFOrderRetrievalService/GetAllOrderItems" message="tns:IPHFOrderRetrievalService_GetAllOrderItems_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPHFOrderRetrievalService/GetAllOrderItemsResponse" message="tns:IPHFOrderRetrievalService_GetAllOrderItems_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IPHFOrderRetrievalService" type="tns:IPHFOrderRetrievalService">
@@ -242,8 +290,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="DeleteOrderItems">
+      <soap:operation soapAction="http://tempuri.org/IPHFOrderRetrievalService/DeleteOrderItems" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetAllOrders">
       <soap:operation soapAction="http://tempuri.org/IPHFOrderRetrievalService/GetAllOrders" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOrderItems">
+      <soap:operation soapAction="http://tempuri.org/IPHFOrderRetrievalService/GetAllOrderItems" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
