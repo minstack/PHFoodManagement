@@ -5,19 +5,24 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 
 namespace PHFoodManagement
 {
     class ClientDB
     {
-        SqlConnection conn = new SqlConnection();
+        MySqlConnection conn = new MySqlConnection();
+
         string connString = PHFoodManagement.Properties.Settings.Default.ConnectionString;
-        string allClientsQuery = "SELECT * FROM ClientWithNoFks";
-        //string allClientsQuery = "SELECT * FROM Client";
+        //string allClientsQuery = "SELECT * FROM ClientWithNoFks";
+
+        //string connString = "Server =yoosungm.dev.fast.sheridanc.on.ca;Database=yoosungm_phfooddb;UID=yoosungm_group;Password=csharpgroup!1";
+  
+        string allClientsQuery = "SELECT * FROM client";
 
         public ClientDB()
         {
-            conn.ConnectionString = connString;
+            //conn.ConnectionString = connString;
         }
 
         public List<Client> GetClients()
@@ -28,8 +33,8 @@ namespace PHFoodManagement
 
             using (conn)
             {
-                using (SqlCommand command = new SqlCommand(allClientsQuery, conn))
-                using (SqlDataReader reader = command.ExecuteReader())
+                using (MySqlCommand command = new MySqlCommand(allClientsQuery, conn))
+                using (MySqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
@@ -39,7 +44,7 @@ namespace PHFoodManagement
                             name = reader.GetString(1),
                             phoneNumber = reader.GetString(2),
                             address = reader.GetString(3),
-                            additionalDiscount = (decimal)reader.GetSqlMoney(4),
+                            additionalDiscount = (decimal)reader.GetDecimal(4),
                             type = (ClientType)Enum.Parse(typeof(ClientType), reader.GetString(5)),
                             zone = (Zone)Enum.Parse(typeof(Zone), reader.GetString(6))
                         };
@@ -53,14 +58,14 @@ namespace PHFoodManagement
 
         public bool InsertUpdateClients(string sql)
         {
+            OpenConnection();
+
             using (conn)
             {
-                using (SqlCommand command = new SqlCommand(sql, conn))
+                using (MySqlCommand command = new MySqlCommand(sql, conn))
                 {
                     try
                     {
-                        OpenConnection();
-
                         int rowCount = command.ExecuteNonQuery();
 
                         if (rowCount == 1)

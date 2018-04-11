@@ -39,6 +39,7 @@ namespace PHFoodManagement
 
             // Load the fields with the content of the selected item on the list
             RefreshFields();
+
             DisableFields();
             ControlUtil.DisableButtons(this._btnSave, this._btnDelete, this._btnCancel);
         }
@@ -149,20 +150,31 @@ namespace PHFoodManagement
 
         private void DisableFields()
         {
-            ControlUtil.DisableTextBoxes(this._txtName, this._txtPhone, this._txtAddress);
+            ControlUtil.DisableTextBoxes(this._txtName, this._txtAddress);
+            this._txtPhone.ReadOnly = true;
             ControlUtil.DisableComboBoxes(this._cmbZone, this._cmbType);
         }
 
         private void EnableFields()
         {
-            ControlUtil.EnableTextBoxes(this._txtName, this._txtPhone, this._txtAddress);
+            ControlUtil.EnableTextBoxes(this._txtName,this._txtAddress);
+            this._txtPhone.ReadOnly = false;
             ControlUtil.EnableComboBoxes(this._cmbZone, this._cmbType);
         }
 
         private void ClearFields()
         {
-            ControlUtil.ClearTextBoxes(this._txtName, this._txtPhone, this._txtAddress);
-            ControlUtil.ClearComboBoxes(this._cmbZone, this._cmbType);
+            ControlUtil.ClearTextBoxes(this._txtName, this._txtAddress);
+            this._txtPhone.Text = "";
+            ResetComboBox(this._cmbZone, this._cmbType);
+        }
+
+        private void ResetComboBox(params ComboBox[] cboxes)
+        {
+            for (int i=0; i < cboxes.Length; i++)
+            {
+                cboxes[i].SelectedIndex = 0;
+            }
         }
 
         private void LoadList()
@@ -189,7 +201,7 @@ namespace PHFoodManagement
             this._cmbZone.ValueMember = "Value";
             this._cmbZone.DataSource = dict.ToList();
 
-            if (this._cmbZone.Items.Count > 0)
+            if (dict.Count > 0)
             {
                 this._cmbZone.SelectedIndex = 0;
             }
@@ -210,7 +222,7 @@ namespace PHFoodManagement
             this._cmbType.ValueMember = "Value";
             this._cmbType.DataSource = dict.ToList();
 
-            if (this._cmbType.Items.Count > 0)
+            if (dict.Count > 0)
             {
                 this._cmbType.SelectedIndex = 0;
             }

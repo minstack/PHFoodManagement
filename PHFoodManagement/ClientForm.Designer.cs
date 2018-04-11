@@ -43,9 +43,9 @@
             this._lblPhone = new System.Windows.Forms.Label();
             this._lblName = new System.Windows.Forms.Label();
             this._txtAddress = new System.Windows.Forms.TextBox();
-            this._txtPhone = new System.Windows.Forms.TextBox();
             this._txtName = new System.Windows.Forms.TextBox();
             this._lstClient = new System.Windows.Forms.ListBox();
+            this._txtPhone = new System.Windows.Forms.MaskedTextBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -114,6 +114,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this._txtPhone);
             this.groupBox1.Controls.Add(this._cmbType);
             this.groupBox1.Controls.Add(this._lblType);
             this.groupBox1.Controls.Add(this._cmbZone);
@@ -122,7 +123,6 @@
             this.groupBox1.Controls.Add(this._lblPhone);
             this.groupBox1.Controls.Add(this._lblName);
             this.groupBox1.Controls.Add(this._txtAddress);
-            this.groupBox1.Controls.Add(this._txtPhone);
             this.groupBox1.Controls.Add(this._txtName);
             this.groupBox1.Location = new System.Drawing.Point(23, 24);
             this.groupBox1.Name = "groupBox1";
@@ -195,21 +195,16 @@
             // _txtAddress
             // 
             this._txtAddress.Location = new System.Drawing.Point(125, 103);
+            this._txtAddress.MaxLength = 50;
             this._txtAddress.Multiline = true;
             this._txtAddress.Name = "_txtAddress";
             this._txtAddress.Size = new System.Drawing.Size(314, 105);
             this._txtAddress.TabIndex = 2;
             // 
-            // _txtPhone
-            // 
-            this._txtPhone.Location = new System.Drawing.Point(126, 67);
-            this._txtPhone.Name = "_txtPhone";
-            this._txtPhone.Size = new System.Drawing.Size(236, 37);
-            this._txtPhone.TabIndex = 1;
-            // 
             // _txtName
             // 
             this._txtName.Location = new System.Drawing.Point(125, 34);
+            this._txtName.MaxLength = 50;
             this._txtName.Name = "_txtName";
             this._txtName.Size = new System.Drawing.Size(314, 37);
             this._txtName.TabIndex = 0;
@@ -223,6 +218,14 @@
             this._lstClient.Size = new System.Drawing.Size(297, 274);
             this._lstClient.TabIndex = 13;
             this._lstClient.Click += new System.EventHandler(this._lstClient_Click);
+            // 
+            // _txtPhone
+            // 
+            this._txtPhone.Location = new System.Drawing.Point(126, 67);
+            this._txtPhone.Mask = "(999) 000-0000";
+            this._txtPhone.Name = "_txtPhone";
+            this._txtPhone.Size = new System.Drawing.Size(313, 37);
+            this._txtPhone.TabIndex = 1;
             // 
             // ClientForm
             // 
@@ -258,12 +261,12 @@
         private System.Windows.Forms.Label _lblPhone;
         private System.Windows.Forms.Label _lblName;
         private System.Windows.Forms.TextBox _txtAddress;
-        private System.Windows.Forms.TextBox _txtPhone;
         private System.Windows.Forms.TextBox _txtName;
         private System.Windows.Forms.ComboBox _cmbType;
         private System.Windows.Forms.Label _lblType;
         private System.Windows.Forms.ComboBox _cmbZone;
         private System.Windows.Forms.Label _lblZone;
         private System.Windows.Forms.ListBox _lstClient;
+        private System.Windows.Forms.MaskedTextBox _txtPhone;
     }
 }
