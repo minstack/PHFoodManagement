@@ -147,14 +147,5 @@
   <ItemGroup>
     <None Include="Resources\phfoodlogo.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="PHFoodOrderManagement.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="PHFoodOrderManagement_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>PHFoodOrderManagement.mdf</DependentUpon>
-    </Content>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
