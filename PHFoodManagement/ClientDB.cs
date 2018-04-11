@@ -13,6 +13,7 @@ namespace PHFoodManagement
         SqlConnection conn = new SqlConnection();
         string connString = PHFoodManagement.Properties.Settings.Default.ConnectionString;
         string allClientsQuery = "SELECT * FROM ClientWithNoFks";
+        //string allClientsQuery = "SELECT * FROM Client";
 
         public ClientDB()
         {
@@ -47,9 +48,7 @@ namespace PHFoodManagement
                     }
                 }
             }
-
             return clients;
-
         }
 
         public bool InsertUpdateClients(string sql)
