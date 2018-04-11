@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="ConnectionString" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='|DataDirectory|\..\..\PHFoodManagement\bin\Debug\PHFoodOrderManagement.mdf';Integrated Security=True</Value>
+      <Value Profile="(Default)">Server=yoosungm.dev.fast.sheridanc.on.ca;Database=yoosungm_phfooddb;UID=yoosungm_group;Password=csharpgroup!1</Value>
     </Setting>
   </Settings>
 </SettingsFile>

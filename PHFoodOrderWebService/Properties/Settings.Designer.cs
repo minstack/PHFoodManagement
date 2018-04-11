@@ -25,8 +25,8 @@ namespace PHFoodOrderWebService.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\'|DataDirectory|\\..\\..\\PHFood" +
-            "Management\\bin\\Debug\\PHFoodOrderManagement.mdf\';Integrated Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=yoosungm.dev.fast.sheridanc.on.ca;Database=yoosungm_phfooddb;UID=yoosungm_" +
+            "group;Password=csharpgroup!1")]
         public string ConnectionString {
             get {
                 return ((string)(this["ConnectionString"]));
