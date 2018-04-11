@@ -113,7 +113,7 @@ namespace PHFoodManagement
         private void EnableInputForm()
         {
             _grpOrderInfo.Enabled = true;
-            ControlUtil.DisableTextBoxes(_txtTotalCost, _txtOrderNum);
+            ControlUtil.DisableTextBoxes(_txtTotalCost);
         }
 
         private void OrderForm_Load(object sender, EventArgs e)
@@ -194,7 +194,7 @@ namespace PHFoodManagement
         {
             SetEditState();
             CreateNewOrder();
-            _txtOrderNum.Text = NextOrderNum.ToString();
+            //_txtOrderNum.Text = NextOrderNum.ToString();
             _editing = false;
         }
 
@@ -229,7 +229,7 @@ namespace PHFoodManagement
                 currOrder.DeliveryDate = deliveryDate;
                 currOrder.OrderItems = GetOrderItems();
                 currOrder.Client = client;
-                currOrder.OrderNumber = int.Parse(_txtOrderNum.Text);
+               // currOrder.OrderNumber = int.Parse(_txtOrderNum.Text);
 
                 if (!_editing)
                 {
@@ -289,7 +289,7 @@ namespace PHFoodManagement
         {
             if (order != null)
             {
-                _txtOrderNum.Text = order.OrderNumber.ToString();
+                //_txtOrderNum.Text = order.OrderNumber.ToString();
                 _dpDeliveryDate.Value = order.DeliveryDate;
                 _dpOrderDate.Value = order.OrderDate;
                 _txtTotalCost.Text = order.CalculateTotal().ToString();
@@ -307,7 +307,7 @@ namespace PHFoodManagement
 
         private void ClearFields()
         {
-            ControlUtil.ClearTextBoxes(_txtOrderNum, _txtTotalCost);
+            ControlUtil.ClearTextBoxes(_txtTotalCost);
             ControlUtil.ClearComboBoxes(_cboOrderClient, _cboProductSelect);
         }
 

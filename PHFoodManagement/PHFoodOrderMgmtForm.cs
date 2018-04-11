@@ -17,15 +17,12 @@ namespace PHFoodManagement
         private OrderForm _orderForm;
         private ClientForm _clientForm;
         private ProductForm _productForm;
-        //private ProductList _prodList = new ProductList();
-        //private ClientList _clientList = new ClientList();
         private OrderList _orderList;
-        private BindingSource _bndRecOrders = new BindingSource();
         private BindingSource _bndClients = new BindingSource();
         private BindingSource _bndProducts = new BindingSource();
         private BindingSource _bndQOorder = new BindingSource();
-        //private PHFoodDB pfDB = new PHFoodDB();
         private Order _quickOrder;
+        private List<Client> _clients = new List<Client>();
         
 
         public PHFoodOrderMgmtForm()
@@ -87,10 +84,10 @@ namespace PHFoodManagement
         //    ControlUtil.ResetList(_prodList.Products, _bndProducts, _lstProducts, "ProductName");
         //}
 
-        //private void ResetClientList()
-        //{
-        //    ControlUtil.ResetList(_clientList.Clients, _bndClients, _lstClients, "name");
-        //}
+        private void ResetClientList()
+        {
+            ControlUtil.ResetList(_clients, _bndClients, _lstClients, "name");
+        }
 
         private void RemoveText(params TextBox[] tboxes)
         {
@@ -109,8 +106,9 @@ namespace PHFoodManagement
         {
             if (_clientForm == null) { _clientForm = new ClientForm(); }
 
-            //_clientForm.listClient = _clientList.Clients;
+            _clientForm.listClient = _clients ;
             _clientForm.ShowDialog();
+            ResetClientList();
         }
 
         private void OpenForm(Form frm)
