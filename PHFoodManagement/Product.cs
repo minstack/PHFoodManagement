@@ -8,11 +8,13 @@ namespace PHFoodManagement
 {
     public class Product
     {
+        private int _id;
         private string _productName;
         private decimal _price;
         private string _description;
         private bool _organic;
 
+        public int Id { get; set; }
         public string ProductName { get; set; }
         public decimal Price { get; set; }
         public string Description { get; set; }

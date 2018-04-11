@@ -13,26 +13,59 @@ namespace PHFoodManagement
 {
     public partial class ProductForm : Form
     {
+        ProductDB db = new ProductDB();
         List<Product> products = new List<Product>();
-        
         Product product = new Product();
+        Product proEdit = new Product();
+        Product proNew = new Product();
+        Boolean editing = false;
+        Boolean adding = false;
+        //int index;
+
         public ProductForm()
         {
             InitializeComponent();
-
-            products.Add(new Product("Product one", 33.4M, "Product descrition one", true));
-            products.Add(new Product("Product two", 23.4M, "Product descrition one", false));
-            products.Add(new Product("Product three", 63.4M, "Product descrition one", true));
+            products = db.GetProducts();
+            //products.Add(new Product("Product one", 33.4M, "Product descrition one", true));
+            //products.Add(new Product("Product two", 23.4M, "Product descrition one", false));
+            //products.Add(new Product("Product three", 63.4M, "Product descrition one", true));
 
             ListProducts();
+        }
+
+        private void ProductForm_Load(object sender, EventArgs e)
+        {
+            ControlUtil.DisableButtons(_btnSave, _btnEdit, _btnDelete);
+            ControlUtil.EnableButtons(_btnNew);
+            ControlUtil.ClearTextBoxes(_txtName, _txtPrice, _txtDescription);
+            ControlUtil.DisableTextBoxes(_txtName, _txtPrice, _txtDescription);
+            _cbOrganic.Checked = false;
+            _cbOrganic.Enabled = false;
+        }
+        
+        private void _btnNew_Click(object sender, EventArgs e)
+        {
+            ControlUtil.DisableButtons(_btnNew);
+            ControlUtil.EnableButtons(_btnSave);
+            ControlUtil.EnableTextBoxes(_txtName, _txtPrice, _txtDescription);
+            ControlUtil.ClearTextBoxes(_txtName, _txtPrice, _txtDescription);
+            _cbOrganic.Checked = false;
+            _cbOrganic.Enabled = true;
+            product = proNew;
+            //adding = true;
         }
 
         private void ListProducts()
         {
             foreach (Product product in products)
             {
-                ListViewItem item = new ListViewItem(new String[] { product.ProductName,
-                        product.Price.ToString()  });
+                ListViewItem item = new ListViewItem(
+                    new String[] 
+                    {
+                        product.ProductName,
+                        product.Price.ToString()
+                    });
+
                 item.Tag = product;
                 _lvProducts.Items.Add(item);
             }
@@ -40,55 +73,106 @@ namespace PHFoodManagement
 
         private void _btnSave_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(_txtName.Text) || String.IsNullOrWhiteSpace(_txtPrice.Text) || String.IsNullOrWhiteSpace(_txtDescription.Text))
+            
+            if (_lvProducts.SelectedItems.Count > 0 && product == proEdit)
             {
-                MessageBox.Show("Product was not added! Some information was missing, please make sure to fill all the required fields.", "Product no added.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                Product newProduct = new Product();
-                //set properties
-                newProduct.ProductName = _txtName.Text;
-                decimal d;
-                if (decimal.TryParse(_txtPrice.Text, out d))
-                {
-                    newProduct.Price = d; ;
-                }
-                else
-                {
-                    MessageBox.Show("The product price you is no valid.", "Price not valid", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                
-                newProduct.Description = _txtDescription.Text;
+                ListViewItem item = _lvProducts.SelectedItems[0]; 
+                product = (Product)item.Tag;
 
+                product.ProductName = _txtName.Text;
+                product.Price = Convert.ToDecimal(_txtPrice.Text);
+                product.Description = _txtDescription.Text;
+                
                 //check if organic
                 if (_cbOrganic.Checked)
-                    newProduct.Organic = true;
+                    product.Organic = true;
                 else
-                    newProduct.Organic = false;
-
-                //check if item is already in the list, if not add it and print in the listview
-                if (products.Any(item => item.ProductName == newProduct.ProductName))
-                {
-                    MessageBox.Show("The product you are trying to add already exists.", "Product exists", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    products.Add(newProduct);
-                    //ListViewItem lvItem = new ListViewItem(new string[] { newProduct.ProductName, newProduct.Price.ToString() });
-                    //_lvProducts.Items.Add(lvItem);
-                    //lvItem.Tag = Product;
-
-                    //clear and list
-                    ClearAndList();
-                }
+                    product.Organic = false;
+                
+                //list and clear
+                _lvProducts.Items.Clear();
+                ListProducts();
+                //_lvProducts.Items[product.Id].Focused = true;
+                //int index = _lvProducts.SelectedItems[products.IndexOf(this.product)].Index;
+                //editing = false;
+                //adding = false;
+                //_lvProducts.Items[0].Selected = true;
             }
+            else if(product == proNew)
+            {
+                if (String.IsNullOrWhiteSpace(_txtName.Text) || 
+                    String.IsNullOrWhiteSpace(_txtPrice.Text) || 
+                    String.IsNullOrWhiteSpace(_txtDescription.Text))
+                {
+                    MessageBox.Show("Could not add the product! Some information is missing. " +
+                        "Please make sure to fill all the required fields.", "Product no added.", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    Product newProduct = new Product();
+                    //set properties
+                    newProduct.ProductName = _txtName.Text;
+                    decimal d;
+                    if (decimal.TryParse(_txtPrice.Text, out d))
+                    {
+                        newProduct.Price = d;
+                    }
+                    else
+                    {
+                        MessageBox.Show("The product price is not valid.", "Price not valid", 
+                                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        
+                    }
+
+                    newProduct.Description = _txtDescription.Text;
+
+                    //check if organic
+                    if (_cbOrganic.Checked)
+                        newProduct.Organic = true;
+                    else
+                        newProduct.Organic = false;
+
+                    //check if item is already in the list, if not add it and print in the listview
+                    if (products.Any(item => item.ProductName == newProduct.ProductName))
+                    {
+                        MessageBox.Show("The product you are trying to add already exists.", "Product exists", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        bool added = db.AddProduct(newProduct.ProductName, newProduct.Organic, newProduct.Price, newProduct.Description);
+                        if (added)
+                        {
+                            MessageBox.Show("added");
+                        }
+                        else
+                        {
+                            MessageBox.Show("not added");
+                        }
+                        //products.Add(newProduct);
+
+                        _lvProducts.Items.Clear();
+                        ListProducts();
+                    }
+                    
+                }
+                adding = false;
+                editing = false;
+            }
+
+            _lvProducts.Items[0].Selected = true;
+            //_lvProducts.Items[_lvProducts.SelectedItems.Count].Selected = true;
+            ControlUtil.DisableButtons(_btnSave);
+            ControlUtil.EnableButtons(_btnEdit, _btnDelete, _btnNew);
+            ControlUtil.DisableTextBoxes(_txtName, _txtPrice, _txtDescription);
+            _cbOrganic.Enabled = false;
         }
 
+
+        //Selected Index
         private void _lvProducts_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(_lvProducts.SelectedItems.Count > 0)
+            if (_lvProducts.SelectedItems.Count > 0)
             {
                 ListViewItem item = _lvProducts.SelectedItems[0];
                 product = (Product)item.Tag;
@@ -100,37 +184,25 @@ namespace PHFoodManagement
                     _cbOrganic.Checked = true;
                 else
                     _cbOrganic.Checked = false;
+
+                //index = _lvProducts.SelectedItems.Count;
             }
 
             ControlUtil.DisableButtons(_btnSave);
+            ControlUtil.EnableButtons(_btnEdit, _btnDelete, _btnNew);
+            ControlUtil.DisableTextBoxes(_txtName, _txtPrice, _txtDescription);
+            _cbOrganic.Enabled = false;
         }
 
         private void _btnEdit_Click(object sender, EventArgs e)
         {
-            if (_lvProducts.SelectedItems.Count > 0)
-            {
-                Product product = new Product();
-                ListViewItem item = _lvProducts.SelectedItems[0];
-                product = (Product)item.Tag;
 
-                product.ProductName = _txtName.Text;
-                product.Price = Convert.ToDecimal(_txtPrice.Text);
-                product.Description = _txtDescription.Text;
-                //check if organic
-                if (_cbOrganic.Checked)
-                    product.Organic = true;
-                else
-                    product.Organic = false;
-
-                //list and clear
-                ClearAndList();
-            }
-            else
-            {
-                MessageBox.Show("Select a product from the list to edit.", "Product not selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
+            product = proEdit;
+            //editing = true;
+            ControlUtil.EnableTextBoxes(_txtName, _txtPrice, _txtDescription);
+            _cbOrganic.Enabled = true;
             ControlUtil.EnableButtons(_btnSave);
+            ControlUtil.DisableButtons(_btnEdit, _btnDelete, _btnNew);
         }
 
         private void _btnDelete_Click(object sender, EventArgs e)
@@ -145,31 +217,26 @@ namespace PHFoodManagement
                     product = (Product)item.Tag;
                     products.Remove(product);
                 }
-
-                //list and clear
-                ClearAndList();
             }
             else
             {
                 MessageBox.Show("Select a product from the list to delete.", "Product not selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            ControlUtil.EnableButtons(_btnSave);
+            ControlUtil.DisableButtons(_btnSave, _btnEdit, _btnDelete);
+            ControlUtil.EnableButtons(_btnNew);
+            ControlUtil.ClearTextBoxes(_txtName, _txtPrice, _txtDescription);
+            ControlUtil.DisableTextBoxes(_txtName, _txtPrice, _txtDescription);
+            _cbOrganic.Checked = false;
+            _cbOrganic.Enabled = false;
         }
 
         private void _btnCancel_Click(object sender, EventArgs e)
         {
-            ClearAndList();
             ControlUtil.EnableButtons(_btnSave);
             this.Close();
         }
 
-        private void ClearAndList()
-        {
-            _lvProducts.Items.Clear();
-            ListProducts();
-            ControlUtil.ClearTextBoxes(_txtName, _txtPrice, _txtDescription);
-            _cbOrganic.Checked = false;
-        }
+        
     }
 }

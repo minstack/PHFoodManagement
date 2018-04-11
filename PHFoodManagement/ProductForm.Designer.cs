@@ -58,9 +58,9 @@
             this.groupBox1.Controls.Add(this._txtDescription);
             this.groupBox1.Controls.Add(this._txtPrice);
             this.groupBox1.Controls.Add(this._txtName);
-            this.groupBox1.Location = new System.Drawing.Point(21, 25);
+            this.groupBox1.Location = new System.Drawing.Point(19, 25);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(465, 321);
+            this.groupBox1.Size = new System.Drawing.Size(360, 321);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Product Information";
@@ -68,7 +68,7 @@
             // _cbOrganic
             // 
             this._cbOrganic.AutoSize = true;
-            this._cbOrganic.Location = new System.Drawing.Point(132, 262);
+            this._cbOrganic.Location = new System.Drawing.Point(19, 285);
             this._cbOrganic.Name = "_cbOrganic";
             this._cbOrganic.Size = new System.Drawing.Size(99, 28);
             this._cbOrganic.TabIndex = 7;
@@ -78,7 +78,7 @@
             // _lblDescription
             // 
             this._lblDescription.AutoSize = true;
-            this._lblDescription.Location = new System.Drawing.Point(18, 149);
+            this._lblDescription.Location = new System.Drawing.Point(15, 150);
             this._lblDescription.Name = "_lblDescription";
             this._lblDescription.Size = new System.Drawing.Size(109, 24);
             this._lblDescription.TabIndex = 5;
@@ -87,7 +87,7 @@
             // _lblPrice
             // 
             this._lblPrice.AutoSize = true;
-            this._lblPrice.Location = new System.Drawing.Point(68, 104);
+            this._lblPrice.Location = new System.Drawing.Point(15, 88);
             this._lblPrice.Name = "_lblPrice";
             this._lblPrice.Size = new System.Drawing.Size(58, 24);
             this._lblPrice.TabIndex = 4;
@@ -96,7 +96,7 @@
             // _lblName
             // 
             this._lblName.AutoSize = true;
-            this._lblName.Location = new System.Drawing.Point(60, 56);
+            this._lblName.Location = new System.Drawing.Point(15, 32);
             this._lblName.Name = "_lblName";
             this._lblName.Size = new System.Drawing.Size(66, 24);
             this._lblName.TabIndex = 3;
@@ -104,22 +104,22 @@
             // 
             // _txtDescription
             // 
-            this._txtDescription.Location = new System.Drawing.Point(132, 146);
+            this._txtDescription.Location = new System.Drawing.Point(19, 172);
             this._txtDescription.Multiline = true;
             this._txtDescription.Name = "_txtDescription";
-            this._txtDescription.Size = new System.Drawing.Size(314, 105);
+            this._txtDescription.Size = new System.Drawing.Size(329, 105);
             this._txtDescription.TabIndex = 2;
             // 
             // _txtPrice
             // 
-            this._txtPrice.Location = new System.Drawing.Point(132, 100);
+            this._txtPrice.Location = new System.Drawing.Point(19, 110);
             this._txtPrice.Name = "_txtPrice";
             this._txtPrice.Size = new System.Drawing.Size(184, 28);
             this._txtPrice.TabIndex = 1;
             // 
             // _txtName
             // 
-            this._txtName.Location = new System.Drawing.Point(132, 56);
+            this._txtName.Location = new System.Drawing.Point(19, 53);
             this._txtName.Name = "_txtName";
             this._txtName.Size = new System.Drawing.Size(184, 28);
             this._txtName.TabIndex = 0;
@@ -132,6 +132,7 @@
             this._btnNew.TabIndex = 5;
             this._btnNew.Text = "New";
             this._btnNew.UseVisualStyleBackColor = true;
+            this._btnNew.Click += new System.EventHandler(this._btnNew_Click);
             // 
             // panel1
             // 
@@ -140,14 +141,14 @@
             this.panel1.Controls.Add(this._btnDelete);
             this.panel1.Controls.Add(this._btnNew);
             this.panel1.Controls.Add(this._btnSave);
-            this.panel1.Location = new System.Drawing.Point(21, 364);
+            this.panel1.Location = new System.Drawing.Point(19, 364);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(782, 62);
+            this.panel1.Size = new System.Drawing.Size(716, 62);
             this.panel1.TabIndex = 9;
             // 
             // _btnCancel
             // 
-            this._btnCancel.Location = new System.Drawing.Point(627, 13);
+            this._btnCancel.Location = new System.Drawing.Point(580, 13);
             this._btnCancel.Name = "_btnCancel";
             this._btnCancel.Size = new System.Drawing.Size(125, 36);
             this._btnCancel.TabIndex = 6;
@@ -157,7 +158,7 @@
             // 
             // _btnEdit
             // 
-            this._btnEdit.Location = new System.Drawing.Point(331, 13);
+            this._btnEdit.Location = new System.Drawing.Point(301, 13);
             this._btnEdit.Name = "_btnEdit";
             this._btnEdit.Size = new System.Drawing.Size(125, 36);
             this._btnEdit.TabIndex = 7;
@@ -167,7 +168,7 @@
             // 
             // _btnDelete
             // 
-            this._btnDelete.Location = new System.Drawing.Point(482, 13);
+            this._btnDelete.Location = new System.Drawing.Point(440, 13);
             this._btnDelete.Name = "_btnDelete";
             this._btnDelete.Size = new System.Drawing.Size(125, 36);
             this._btnDelete.TabIndex = 3;
@@ -177,7 +178,7 @@
             // 
             // _btnSave
             // 
-            this._btnSave.Location = new System.Drawing.Point(175, 13);
+            this._btnSave.Location = new System.Drawing.Point(163, 13);
             this._btnSave.Name = "_btnSave";
             this._btnSave.Size = new System.Drawing.Size(125, 36);
             this._btnSave.TabIndex = 4;
@@ -191,9 +192,9 @@
             this.ProductName,
             this.Price});
             this._lvProducts.GridLines = true;
-            this._lvProducts.Location = new System.Drawing.Point(503, 22);
+            this._lvProducts.Location = new System.Drawing.Point(396, 22);
             this._lvProducts.Name = "_lvProducts";
-            this._lvProducts.Size = new System.Drawing.Size(300, 331);
+            this._lvProducts.Size = new System.Drawing.Size(328, 331);
             this._lvProducts.TabIndex = 10;
             this._lvProducts.UseCompatibleStateImageBehavior = false;
             this._lvProducts.View = System.Windows.Forms.View.Details;
@@ -213,7 +214,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(821, 440);
+            this.ClientSize = new System.Drawing.Size(755, 440);
             this.Controls.Add(this._lvProducts);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
@@ -223,6 +224,7 @@
             this.Name = "ProductForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Manage Products";
+            this.Load += new System.EventHandler(this.ProductForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);
