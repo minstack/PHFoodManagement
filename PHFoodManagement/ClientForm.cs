@@ -22,11 +22,15 @@ namespace PHFoodManagement
         public ClientForm()
         {
             InitializeComponent();
+
+            // load the client list, so that other classes can use
+            listClient = db.GetClients();
         }
 
         private void ClientForm_Load(object sender, EventArgs e)
         {
             // load the client list
+            //listClient = db.GetClients();
             LoadList();
 
             // load the combo with the values of enum class
@@ -184,6 +188,11 @@ namespace PHFoodManagement
             this._cmbZone.DisplayMember = "Key";
             this._cmbZone.ValueMember = "Value";
             this._cmbZone.DataSource = dict.ToList();
+
+            if (this._cmbZone.Items.Count > 0)
+            {
+                this._cmbZone.SelectedIndex = 0;
+            }
         }
 
         private void LoadClientType()
@@ -200,6 +209,11 @@ namespace PHFoodManagement
             this._cmbType.DisplayMember = "Key";
             this._cmbType.ValueMember = "Value";
             this._cmbType.DataSource = dict.ToList();
+
+            if (this._cmbType.Items.Count > 0)
+            {
+                this._cmbType.SelectedIndex = 0;
+            }
         }
 
         private void _btnDelete_Click(object sender, EventArgs e)
@@ -210,6 +224,11 @@ namespace PHFoodManagement
             RefreshFields();
             DisableFields();
             ControlUtil.DisableButtons(this._btnSave, this._btnDelete, this._btnCancel);
+        }
+
+        private void ClientForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Hide();
         }
     }
 }
