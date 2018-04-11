@@ -14,6 +14,7 @@ namespace PHFoodManagement
         private List<Product> _products;
         private Dictionary<Order, int[]> _orderWithFks;
         private Order[] _recentOrders;
+        private Dictionary<int, Client> _clientIdToClient = new Dictionary<int, Client>();
 
         public OrderList(List<Product> products, List<Client> clients)
         {
@@ -22,26 +23,38 @@ namespace PHFoodManagement
             _clients = clients;
             _products = products;
 
+            InitClientIdtoClient(clients);
         }
 
-        public void InitOrders(PHFoodDB db)
+        private void InitClientIdtoClient(List<Client> clients)
         {
-            int lastOrderId;
-            _orderWithFks = db.GetOrderToClientAndDelivery(out lastOrderId);
-            _recentOrders = _orderWithFks.Keys.ToArray();
-
-            Dictionary<int, List<OrderItem>> orderIdtoOrderItems
-                = db.GetOrderItemsWithFks(lastOrderId, _products);
-
-            foreach (Order o  in _recentOrders)
+            foreach (Client c in clients)
             {
-                int clientId = _orderWithFks[o][1];
-                
-                o.Client = GetClient(clientId);
-
-                o.OrderItems = orderIdtoOrderItems[o.OrderNumber];
+                _clientIdToClient.Add(c.id, c);
             }
         }
+
+        //public void InitOrders(PHFoodDB db)
+        //{
+        //    int lastOrderId;
+        //    _orderWithFks = db.GetOrderToClientAndDelivery(out lastOrderId);
+        //    _recentOrders = _orderWithFks.Keys.ToArray();
+
+        //    Dictionary<int, List<OrderItem>> orderIdtoOrderItems
+        //        = db.GetOrderItemsWithFks(lastOrderId, _products);
+
+        //    foreach (Order o  in _recentOrders)
+        //    {
+        //        int clientId = _orderWithFks[o][1];
+
+        //        //o.Client = GetClient(clientId);
+        //        o.Client = _clientIdToClient[clientId];
+
+        //        o.OrderItems = orderIdtoOrderItems[o.OrderNumber];
+
+        //        Orders.Add(o);
+        //    }
+        //}
         
         private Client GetClient(int clientId)
         {
@@ -54,6 +67,11 @@ namespace PHFoodManagement
             }
 
             return null;
+        }
+
+        internal void AddOrder(Order quickOrder)
+        {
+            Orders.Add(quickOrder);
         }
     }
 }

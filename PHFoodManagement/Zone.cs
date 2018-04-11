@@ -8,9 +8,9 @@ namespace PHFoodManagement
 {
     public enum Zone
     {
-        East,
-        South,
-        North,
-        West
+        East = 1,
+        South = 2,
+        North = 3,
+        West = 4
     }
 }

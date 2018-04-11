@@ -39,10 +39,8 @@
             this._btnAddProduct = new System.Windows.Forms.Button();
             this._txtTotalCost = new System.Windows.Forms.TextBox();
             this._lstOrderProducts = new System.Windows.Forms.ListBox();
-            this._txtOrderNum = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this._lblOrderProducts = new System.Windows.Forms.Label();
-            this._lblOrderNum = new System.Windows.Forms.Label();
             this._grpDates = new System.Windows.Forms.GroupBox();
             this._dpOrderDate = new System.Windows.Forms.DateTimePicker();
             this._lblOrderDate = new System.Windows.Forms.Label();
@@ -77,17 +75,15 @@
             this._grpOrderInfo.Controls.Add(this._btnAddProduct);
             this._grpOrderInfo.Controls.Add(this._txtTotalCost);
             this._grpOrderInfo.Controls.Add(this._lstOrderProducts);
-            this._grpOrderInfo.Controls.Add(this._txtOrderNum);
             this._grpOrderInfo.Controls.Add(this.label5);
             this._grpOrderInfo.Controls.Add(this._lblOrderProducts);
-            this._grpOrderInfo.Controls.Add(this._lblOrderNum);
             this._grpOrderInfo.Controls.Add(this._grpDates);
             this._grpOrderInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._grpOrderInfo.Location = new System.Drawing.Point(18, 14);
             this._grpOrderInfo.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this._grpOrderInfo.Name = "_grpOrderInfo";
             this._grpOrderInfo.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this._grpOrderInfo.Size = new System.Drawing.Size(488, 486);
+            this._grpOrderInfo.Size = new System.Drawing.Size(456, 446);
             this._grpOrderInfo.TabIndex = 0;
             this._grpOrderInfo.TabStop = false;
             this._grpOrderInfo.Text = "Order Information";
@@ -96,7 +92,7 @@
             // 
             this._cboOrderClient.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this._cboOrderClient.FormattingEnabled = true;
-            this._cboOrderClient.Location = new System.Drawing.Point(123, 74);
+            this._cboOrderClient.Location = new System.Drawing.Point(126, 26);
             this._cboOrderClient.Name = "_cboOrderClient";
             this._cboOrderClient.Size = new System.Drawing.Size(296, 34);
             this._cboOrderClient.TabIndex = 22;
@@ -104,7 +100,7 @@
             // _lblClient
             // 
             this._lblClient.AutoSize = true;
-            this._lblClient.Location = new System.Drawing.Point(43, 77);
+            this._lblClient.Location = new System.Drawing.Point(46, 29);
             this._lblClient.Name = "_lblClient";
             this._lblClient.Size = new System.Drawing.Size(74, 26);
             this._lblClient.TabIndex = 21;
@@ -113,7 +109,7 @@
             // _lblProductQty
             // 
             this._lblProductQty.AutoSize = true;
-            this._lblProductQty.Location = new System.Drawing.Point(65, 275);
+            this._lblProductQty.Location = new System.Drawing.Point(65, 230);
             this._lblProductQty.Name = "_lblProductQty";
             this._lblProductQty.Size = new System.Drawing.Size(52, 26);
             this._lblProductQty.TabIndex = 20;
@@ -122,7 +118,7 @@
             // _lblBoxes
             // 
             this._lblBoxes.AutoSize = true;
-            this._lblBoxes.Location = new System.Drawing.Point(249, 275);
+            this._lblBoxes.Location = new System.Drawing.Point(249, 230);
             this._lblBoxes.Name = "_lblBoxes";
             this._lblBoxes.Size = new System.Drawing.Size(70, 26);
             this._lblBoxes.TabIndex = 19;
@@ -136,7 +132,7 @@
             0,
             0,
             65536});
-            this._nmbProductQty.Location = new System.Drawing.Point(123, 273);
+            this._nmbProductQty.Location = new System.Drawing.Point(123, 228);
             this._nmbProductQty.Name = "_nmbProductQty";
             this._nmbProductQty.Size = new System.Drawing.Size(120, 32);
             this._nmbProductQty.TabIndex = 18;
@@ -145,7 +141,7 @@
             // 
             this._cboProductSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this._cboProductSelect.FormattingEnabled = true;
-            this._cboProductSelect.Location = new System.Drawing.Point(123, 233);
+            this._cboProductSelect.Location = new System.Drawing.Point(123, 188);
             this._cboProductSelect.Name = "_cboProductSelect";
             this._cboProductSelect.Size = new System.Drawing.Size(296, 34);
             this._cboProductSelect.TabIndex = 17;
@@ -153,7 +149,7 @@
             // _btnRemoveProduct
             // 
             this._btnRemoveProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._btnRemoveProduct.Location = new System.Drawing.Point(84, 410);
+            this._btnRemoveProduct.Location = new System.Drawing.Point(84, 365);
             this._btnRemoveProduct.Name = "_btnRemoveProduct";
             this._btnRemoveProduct.Size = new System.Drawing.Size(36, 31);
             this._btnRemoveProduct.TabIndex = 14;
@@ -163,7 +159,7 @@
             // 
             // _btnAddProduct
             // 
-            this._btnAddProduct.Location = new System.Drawing.Point(325, 273);
+            this._btnAddProduct.Location = new System.Drawing.Point(325, 228);
             this._btnAddProduct.Name = "_btnAddProduct";
             this._btnAddProduct.Size = new System.Drawing.Size(36, 31);
             this._btnAddProduct.TabIndex = 13;
@@ -174,7 +170,7 @@
             // _txtTotalCost
             // 
             this._txtTotalCost.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._txtTotalCost.Location = new System.Drawing.Point(225, 447);
+            this._txtTotalCost.Location = new System.Drawing.Point(227, 411);
             this._txtTotalCost.Name = "_txtTotalCost";
             this._txtTotalCost.ReadOnly = true;
             this._txtTotalCost.Size = new System.Drawing.Size(195, 32);
@@ -184,23 +180,15 @@
             // 
             this._lstOrderProducts.FormattingEnabled = true;
             this._lstOrderProducts.ItemHeight = 26;
-            this._lstOrderProducts.Location = new System.Drawing.Point(123, 307);
+            this._lstOrderProducts.Location = new System.Drawing.Point(123, 262);
             this._lstOrderProducts.Name = "_lstOrderProducts";
             this._lstOrderProducts.Size = new System.Drawing.Size(296, 134);
             this._lstOrderProducts.TabIndex = 10;
             // 
-            // _txtOrderNum
-            // 
-            this._txtOrderNum.Location = new System.Drawing.Point(123, 27);
-            this._txtOrderNum.Name = "_txtOrderNum";
-            this._txtOrderNum.ReadOnly = true;
-            this._txtOrderNum.Size = new System.Drawing.Size(133, 32);
-            this._txtOrderNum.TabIndex = 8;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(159, 449);
+            this.label5.Location = new System.Drawing.Point(147, 417);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 26);
             this.label5.TabIndex = 4;
@@ -209,20 +197,11 @@
             // _lblOrderProducts
             // 
             this._lblOrderProducts.AutoSize = true;
-            this._lblOrderProducts.Location = new System.Drawing.Point(16, 236);
+            this._lblOrderProducts.Location = new System.Drawing.Point(16, 191);
             this._lblOrderProducts.Name = "_lblOrderProducts";
             this._lblOrderProducts.Size = new System.Drawing.Size(104, 26);
             this._lblOrderProducts.TabIndex = 3;
             this._lblOrderProducts.Text = "Products:";
-            // 
-            // _lblOrderNum
-            // 
-            this._lblOrderNum.AutoSize = true;
-            this._lblOrderNum.Location = new System.Drawing.Point(16, 30);
-            this._lblOrderNum.Name = "_lblOrderNum";
-            this._lblOrderNum.Size = new System.Drawing.Size(101, 26);
-            this._lblOrderNum.TabIndex = 0;
-            this._lblOrderNum.Text = "OrderNo.";
             // 
             // _grpDates
             // 
@@ -230,9 +209,9 @@
             this._grpDates.Controls.Add(this._lblOrderDate);
             this._grpDates.Controls.Add(this._lblDelDate);
             this._grpDates.Controls.Add(this._dpDeliveryDate);
-            this._grpDates.Location = new System.Drawing.Point(19, 111);
+            this._grpDates.Location = new System.Drawing.Point(19, 66);
             this._grpDates.Name = "_grpDates";
-            this._grpDates.Size = new System.Drawing.Size(437, 116);
+            this._grpDates.Size = new System.Drawing.Size(416, 116);
             this._grpDates.TabIndex = 15;
             this._grpDates.TabStop = false;
             this._grpDates.Text = "Dates";
@@ -275,10 +254,10 @@
             this._lstOrders.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._lstOrders.FormattingEnabled = true;
             this._lstOrders.ItemHeight = 26;
-            this._lstOrders.Location = new System.Drawing.Point(525, 42);
+            this._lstOrders.Location = new System.Drawing.Point(507, 40);
             this._lstOrders.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this._lstOrders.Name = "_lstOrders";
-            this._lstOrders.Size = new System.Drawing.Size(275, 394);
+            this._lstOrders.Size = new System.Drawing.Size(275, 420);
             this._lstOrders.TabIndex = 1;
             this._lstOrders.SelectedIndexChanged += new System.EventHandler(this._lstOrders_SelectedIndexChanged);
             // 
@@ -286,7 +265,7 @@
             // 
             this._lblOrder.AutoSize = true;
             this._lblOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._lblOrder.Location = new System.Drawing.Point(520, 12);
+            this._lblOrder.Location = new System.Drawing.Point(507, 10);
             this._lblOrder.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this._lblOrder.Name = "_lblOrder";
             this._lblOrder.Size = new System.Drawing.Size(78, 26);
@@ -350,7 +329,7 @@
             this.panel1.Controls.Add(this._btnDelete);
             this.panel1.Controls.Add(this._btnNew);
             this.panel1.Controls.Add(this._btnSave);
-            this.panel1.Location = new System.Drawing.Point(18, 507);
+            this.panel1.Location = new System.Drawing.Point(18, 467);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(782, 62);
             this.panel1.TabIndex = 8;
@@ -361,9 +340,9 @@
             this._stsOrderStatus.ImageScalingSize = new System.Drawing.Size(24, 24);
             this._stsOrderStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._toolStatErrorLabel});
-            this._stsOrderStatus.Location = new System.Drawing.Point(0, 566);
+            this._stsOrderStatus.Location = new System.Drawing.Point(0, 542);
             this._stsOrderStatus.Name = "_stsOrderStatus";
-            this._stsOrderStatus.Size = new System.Drawing.Size(812, 28);
+            this._stsOrderStatus.Size = new System.Drawing.Size(812, 22);
             this._stsOrderStatus.TabIndex = 9;
             this._stsOrderStatus.Text = "statusStrip1";
             // 
@@ -377,7 +356,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 26F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(812, 594);
+            this.ClientSize = new System.Drawing.Size(812, 564);
             this.Controls.Add(this._stsOrderStatus);
             this.Controls.Add(this._lblOrder);
             this.Controls.Add(this._lstOrders);
@@ -416,8 +395,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label _lblOrderProducts;
         private System.Windows.Forms.Label _lblOrderDate;
-        private System.Windows.Forms.Label _lblOrderNum;
-        private System.Windows.Forms.TextBox _txtOrderNum;
         private System.Windows.Forms.TextBox _txtTotalCost;
         private System.Windows.Forms.ListBox _lstOrderProducts;
         private System.Windows.Forms.Button _btnDelete;

@@ -22,14 +22,20 @@ namespace PHFoodManagement
             return null;
         }
 
-        public void SetAdditionalDiscount(decimal price)
-        {
-
-        }
-
         public override string ToString()
         {
-            return null;
+            return name;
+        }
+
+        public bool Equals(string oldValue, string newValue)
+        {
+            if (oldValue.Equals(newValue))
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
         }
     }
 
