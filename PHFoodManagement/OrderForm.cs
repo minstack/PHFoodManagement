@@ -27,6 +27,7 @@ namespace PHFoodManagement
         private Order _currOrder;
         private Label _prevErrLabel;
         private bool _editing = false;
+        private bool _comingFromQuickOrder = false;
 
         public OrderForm()
         {
@@ -45,6 +46,8 @@ namespace PHFoodManagement
 
             InitRequiredDictionary(_requiredControls);
             InitRequiredErrors(_requiredControls);
+
+            Orders = new List<Order>();
         }
 
         private void InitRequiredErrors(Control[] ctrls)
@@ -115,21 +118,29 @@ namespace PHFoodManagement
 
         private void OrderForm_Load(object sender, EventArgs e)
         {
-            Products.Add(new Product("prod1", 3.3M, "product 1", false));
-            Products.Add(new Product("prod2", 2.3M, "product 2", false));
-            Products.Add(new Product("prod2", 1.3M, "product 3", false));
+            //Products.Add(new Product("prod1", 3.3M, "product 1", false));
+            //Products.Add(new Product("prod2", 2.3M, "product 2", false));
+            //Products.Add(new Product("prod2", 1.3M, "product 3", false));
 
-            Clients.Add(new Client { name = "client 1" });
-            Clients.Add(new Client { name = "client 2" });
-            Clients.Add(new Client { name = "client 3" });
+            //Clients.Add(new Client { name = "client 1" });
+            //Clients.Add(new Client { name = "client 2" });
+            //Clients.Add(new Client { name = "client 3" });
             ResetOrderList();
             ResetClientCombo();
             ResetProductCombo();
             ResetDates();
-            SetInitialState();
-            _currOrder = null;
+            if (_comingFromQuickOrder)
+            {
+                _currOrder = (Order)_lstOrders.SelectedItem;
+                SetEditState();
+            }
+            else
+            {
+                SetInitialState();
+                _currOrder = null;
+            }
+            
 
-           
         }
 
         private void ResetProductCombo()
@@ -237,6 +248,16 @@ namespace PHFoodManagement
             {
                 SetRequiredError(errorControl);
             }
+        }
+
+        internal void InitQOOrder(Order quickOrder)
+        {
+            ResetOrderList();
+            _lstOrders.SelectedItem = quickOrder;
+            //_lstOrders.SelectedIndex = Orders.Count - 1;
+            PopulateOrder(quickOrder);
+            _comingFromQuickOrder = true;
+            _editing = true;
         }
 
         // State of the form has been changed -> change to appropriate state
@@ -443,7 +464,6 @@ namespace PHFoodManagement
             {
                 Orders.Remove(selected);
                 ResetOrderList();
-                
             }
         }
 
