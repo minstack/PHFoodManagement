@@ -28,6 +28,8 @@ namespace PHFoodManagement
         private Label _prevErrLabel;
         private bool _editing = false;
         private bool _comingFromQuickOrder = false;
+        private PHFOrderService.PHFOrderRetrievalServiceClient _orderdb =
+            new PHFOrderService.PHFOrderRetrievalServiceClient();
 
         public OrderForm()
         {
@@ -118,11 +120,14 @@ namespace PHFoodManagement
 
         private void OrderForm_Load(object sender, EventArgs e)
         {
-            //Products.Add(new Product("prod1", 3.3M, "product 1", false));
-            //Products.Add(new Product("prod2", 2.3M, "product 2", false));
-            //Products.Add(new Product("prod2", 1.3M, "product 3", false));
+            Products = new List<Product>();
+            Clients = new List<Client>();
+            Products.Add(new Product("prod1", 3.3M, "product 1", false));
+            Products.Add(new Product("prod2", 2.3M, "product 2", false));
+            Products.Add(new Product("prod2", 1.3M, "product 3", false));
 
-            //Clients.Add(new Client { name = "client 1" });
+            Clients.Add(new Client { name = "client 1", id=1, additionalDiscount = 0,
+            address = "32 fakestreet ave", phoneNumber = "44444444", type = ClientType.Restaurant, zone = Zone.East});
             //Clients.Add(new Client { name = "client 2" });
             //Clients.Add(new Client { name = "client 3" });
             ResetOrderList();
@@ -233,8 +238,17 @@ namespace PHFoodManagement
 
                 if (!_editing)
                 {
-                    Orders.Add(currOrder);
-                    NextOrderNum++;
+                    int orderNum = AddToDB(currOrder);
+
+                    if (orderNum > 0)
+                    {
+                        currOrder.OrderNumber = orderNum;
+                        AddOrderItemsToDB(currOrder);
+
+                        Orders.Add(currOrder);  
+                    }
+                              
+                    
                 }
 
                 ResetOrderList();
@@ -247,6 +261,28 @@ namespace PHFoodManagement
             else
             {
                 SetRequiredError(errorControl);
+            }
+        }
+
+        private int AddToDB(Order currOrder)
+        {
+            return _orderdb.AddNewOrder(
+                        currOrder.OrderDate.Date.ToString(),
+                        currOrder.DeliveryDate.Date.ToString(),
+                        currOrder.CalculateTotal(),
+                        currOrder.Paid,
+                        currOrder.Client.id
+                    );
+
+            
+        }
+
+        private void AddOrderItemsToDB(Order currOrder)
+        {
+            foreach (OrderItem oi in currOrder.OrderItems)
+            {
+                //_orderdb.AddOrderItem(currOrder.OrderNumber, )
+                _orderdb.AddOrderItem(currOrder.OrderNumber, 1, oi.Quantity);
             }
         }
 

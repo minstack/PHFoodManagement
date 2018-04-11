@@ -4,7 +4,6 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
-using PHFoodManagement;
 
 namespace PHFoodOrderWebService
 {
@@ -13,7 +12,10 @@ namespace PHFoodOrderWebService
     public interface IPHFOrderRetrievalService
     {
         [OperationContract]
-        int AddNewOrder(string o);
+        int AddNewOrder(string oDate, string dDate, decimal oTotal, bool paid, int cId);
+
+        [OperationContract]
+        int AddOrderItem(int orderId, int productId, double quantity);
 
         [OperationContract]
         int UpdateOrder(string o);

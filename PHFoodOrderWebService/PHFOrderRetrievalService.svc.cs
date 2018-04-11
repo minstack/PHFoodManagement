@@ -7,7 +7,6 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using MySql.Data.MySqlClient;
-using PHFoodManagement;
 
 namespace PHFoodOrderWebService
 {
@@ -17,20 +16,56 @@ namespace PHFoodOrderWebService
     {
         private string _connString = Properties.Settings.Default.ConnectionString;
         private MySqlConnection _conn = new MySqlConnection();
-        private string _insertQuery = "INSERT INTO Order " +
-            "(orderDate, deliveryDate, orderTotal, paid, deliveryId, clientId) VALUES {0}";
+        private string _insertOrder = "INSERT INTO `order` " +
+            "(orderDate, deliveryDate, orderTotal, paid, clientId) " +
+            "VALUES (\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\")";
+
+        private string _insertOrderItem = "INSERT INTO `orderitem` " +
+            "(orderId, productId, quantity) " +
+            "VALUES (\"{0}\",\"{1}\",\"{2}\")";
 
         public PHFOrderRetrievalService ()
         {
             _conn.ConnectionString = _connString;
         }
 
-        public int AddNewOrder(string o)
+        public int AddNewOrder(string oDate, string dDate, decimal oTotal, bool paid, int cId)
         {
-            string query = string.Format(_insertQuery, "(" + o.Replace('|', ',') + ")");
+            string query = string.Format(_insertOrder,
+                oDate,dDate,oTotal,paid,cId);
 
-            return RunNonExecuteQuery(query);      
-            
+            if (RunNonExecuteQuery(query) > 0) {
+                return GetOrderID();
+            }
+
+            return -1;
+        }
+
+        private int GetOrderID()
+        {
+            OpenConnection();
+            string query = "SELECT orderId FROM `order` ORDER BY orderId DESC LIMIT 1";
+            using (_conn)
+            {
+                using (MySqlCommand command = new MySqlCommand(query, _conn))
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        return reader.GetInt32(0);
+                    }
+                }
+            }
+
+            return -1;
+        }
+
+        public int AddOrderItem(int orderId, int productId, double quantity)
+        {
+            string query = string.Format(_insertOrderItem, orderId, productId, quantity);
+
+            return RunNonExecuteQuery(query);
+
         }
 
         private int RunNonExecuteQuery(string query)
@@ -81,8 +116,8 @@ namespace PHFoodOrderWebService
 
             using (_conn)
             {
-                using (SqlCommand command = new SqlCommand(query, _conn))
-                using (SqlDataReader reader = command.ExecuteReader())
+                using (MySqlCommand command = new MySqlCommand(query, _conn))
+                using (MySqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
