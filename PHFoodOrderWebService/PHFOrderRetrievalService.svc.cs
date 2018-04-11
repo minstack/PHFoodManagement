@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using MySql.Data.MySqlClient;
 using PHFoodManagement;
 
 namespace PHFoodOrderWebService
@@ -15,7 +16,7 @@ namespace PHFoodOrderWebService
     public class PHFOrderRetrievalService : IPHFOrderRetrievalService
     {
         private string _connString = Properties.Settings.Default.ConnectionString;
-        private SqlConnection _conn = new SqlConnection();
+        private MySqlConnection _conn = new MySqlConnection();
         private string _insertQuery = "INSERT INTO Order " +
             "(orderDate, deliveryDate, orderTotal, paid, deliveryId, clientId) VALUES {0}";
 
@@ -38,7 +39,7 @@ namespace PHFoodOrderWebService
             int rows = 0;
             using (_conn)
             {
-                using (SqlCommand command = new SqlCommand(query, _conn))
+                using (MySqlCommand command = new MySqlCommand(query, _conn))
                 {
                     rows = command.ExecuteNonQuery();
                 }

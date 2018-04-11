@@ -42,6 +42,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data">
+      <HintPath>..\PHFoodManagement\bin\Debug\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -65,23 +68,17 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client.cs" />
-    <Compile Include="ClientType.cs" />
     <Compile Include="IOrderRetrievalService.cs" />
     <Compile Include="IPHFOrderRetrievalService.cs" />
-    <Compile Include="Order.cs" />
-    <Compile Include="OrderItem.cs" />
     <Compile Include="PHFOrderRetrievalService.svc.cs">
       <DependentUpon>PHFOrderRetrievalService.svc</DependentUpon>
     </Compile>
-    <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Zone.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
