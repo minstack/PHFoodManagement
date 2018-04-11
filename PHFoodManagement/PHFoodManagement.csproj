@@ -81,7 +81,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="ControlUtil.cs" />
-    <Compile Include="DB.cs" />
     <Compile Include="Delivery.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderForm.cs">
