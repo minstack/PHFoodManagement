@@ -71,7 +71,7 @@
             this._cbOrganic.Location = new System.Drawing.Point(19, 285);
             this._cbOrganic.Name = "_cbOrganic";
             this._cbOrganic.Size = new System.Drawing.Size(99, 28);
-            this._cbOrganic.TabIndex = 7;
+            this._cbOrganic.TabIndex = 3;
             this._cbOrganic.Text = "Organic";
             this._cbOrganic.UseVisualStyleBackColor = true;
             // 
@@ -81,7 +81,7 @@
             this._lblDescription.Location = new System.Drawing.Point(15, 150);
             this._lblDescription.Name = "_lblDescription";
             this._lblDescription.Size = new System.Drawing.Size(109, 24);
-            this._lblDescription.TabIndex = 5;
+            this._lblDescription.TabIndex = 6;
             this._lblDescription.Text = "Description:";
             // 
             // _lblPrice
@@ -90,7 +90,7 @@
             this._lblPrice.Location = new System.Drawing.Point(15, 88);
             this._lblPrice.Name = "_lblPrice";
             this._lblPrice.Size = new System.Drawing.Size(58, 24);
-            this._lblPrice.TabIndex = 4;
+            this._lblPrice.TabIndex = 5;
             this._lblPrice.Text = "Price:";
             // 
             // _lblName
@@ -99,7 +99,7 @@
             this._lblName.Location = new System.Drawing.Point(15, 32);
             this._lblName.Name = "_lblName";
             this._lblName.Size = new System.Drawing.Size(66, 24);
-            this._lblName.TabIndex = 3;
+            this._lblName.TabIndex = 4;
             this._lblName.Text = "Name:";
             // 
             // _txtDescription
@@ -129,7 +129,7 @@
             this._btnNew.Location = new System.Drawing.Point(19, 13);
             this._btnNew.Name = "_btnNew";
             this._btnNew.Size = new System.Drawing.Size(125, 36);
-            this._btnNew.TabIndex = 5;
+            this._btnNew.TabIndex = 0;
             this._btnNew.Text = "New";
             this._btnNew.UseVisualStyleBackColor = true;
             this._btnNew.Click += new System.EventHandler(this._btnNew_Click);
@@ -144,14 +144,14 @@
             this.panel1.Location = new System.Drawing.Point(19, 364);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(716, 62);
-            this.panel1.TabIndex = 9;
+            this.panel1.TabIndex = 2;
             // 
             // _btnCancel
             // 
             this._btnCancel.Location = new System.Drawing.Point(580, 13);
             this._btnCancel.Name = "_btnCancel";
             this._btnCancel.Size = new System.Drawing.Size(125, 36);
-            this._btnCancel.TabIndex = 6;
+            this._btnCancel.TabIndex = 4;
             this._btnCancel.Text = "Cancel";
             this._btnCancel.UseVisualStyleBackColor = true;
             this._btnCancel.Click += new System.EventHandler(this._btnCancel_Click);
@@ -161,7 +161,7 @@
             this._btnEdit.Location = new System.Drawing.Point(301, 13);
             this._btnEdit.Name = "_btnEdit";
             this._btnEdit.Size = new System.Drawing.Size(125, 36);
-            this._btnEdit.TabIndex = 7;
+            this._btnEdit.TabIndex = 2;
             this._btnEdit.Text = "Edit";
             this._btnEdit.UseVisualStyleBackColor = true;
             this._btnEdit.Click += new System.EventHandler(this._btnEdit_Click);
@@ -181,7 +181,7 @@
             this._btnSave.Location = new System.Drawing.Point(163, 13);
             this._btnSave.Name = "_btnSave";
             this._btnSave.Size = new System.Drawing.Size(125, 36);
-            this._btnSave.TabIndex = 4;
+            this._btnSave.TabIndex = 1;
             this._btnSave.Text = "Save";
             this._btnSave.UseVisualStyleBackColor = true;
             this._btnSave.Click += new System.EventHandler(this._btnSave_Click);
@@ -195,7 +195,7 @@
             this._lvProducts.Location = new System.Drawing.Point(396, 22);
             this._lvProducts.Name = "_lvProducts";
             this._lvProducts.Size = new System.Drawing.Size(328, 331);
-            this._lvProducts.TabIndex = 10;
+            this._lvProducts.TabIndex = 1;
             this._lvProducts.UseCompatibleStateImageBehavior = false;
             this._lvProducts.View = System.Windows.Forms.View.Details;
             this._lvProducts.SelectedIndexChanged += new System.EventHandler(this._lvProducts_SelectedIndexChanged);
@@ -214,7 +214,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(755, 440);
+            this.ClientSize = new System.Drawing.Size(746, 440);
             this.Controls.Add(this._lvProducts);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);

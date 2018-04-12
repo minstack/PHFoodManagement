@@ -14,8 +14,6 @@ namespace PHFoodManagement
     {
         MySqlConnection conn = new MySqlConnection();
         string connString = PHFoodManagement.Properties.Settings.Default.ConnectionString;
-        string getProducts = "SELECT * FROM product";
-        //string addProducts = "INSERT INTO Product(productName, organic, price, description) VALUES(;
 
         public List<Product> GetProducts()
         {
@@ -23,7 +21,7 @@ namespace PHFoodManagement
             List<Product> products = new List<Product>();
             using (conn)
             {
-                using (MySqlCommand command = new MySqlCommand(getProducts, conn))
+                using (MySqlCommand command = new MySqlCommand("SELECT * FROM product", conn))
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -66,7 +64,6 @@ namespace PHFoodManagement
                     catch(Exception ex)
                     {
                         throw ex.InnerException;
-                        
                     }
                 }
             conn.Close();
@@ -79,7 +76,6 @@ namespace PHFoodManagement
 
             using (conn)
             {
-
                 try
                 {
                     using (MySqlCommand command = new MySqlCommand(
@@ -96,7 +92,30 @@ namespace PHFoodManagement
                 catch (Exception ex)
                 {
                     throw ex.InnerException;
+                }
+            }
+            conn.Close();
+            return true;
+        }
 
+        public bool deleteProduct(int id)
+        {
+            OpenConnection();
+
+            using (conn)
+            {
+                try
+                {
+                    using (MySqlCommand command = new MySqlCommand(
+                        "DELETE FROM product WHERE productId = @id", conn))
+                    {
+                        command.Parameters.Add(new MySqlParameter("id", id));
+                        command.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex.InnerException;
                 }
             }
             conn.Close();
