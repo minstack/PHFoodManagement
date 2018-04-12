@@ -168,6 +168,8 @@
             this._lstProducts.Name = "_lstProducts";
             this._lstProducts.Size = new System.Drawing.Size(317, 468);
             this._lstProducts.TabIndex = 2;
+            this._toolTip.SetToolTip(this._lstProducts, "Select a product and start entering a quantity. Then press enter to add to order." +
+        "");
             this._lstProducts.KeyDown += new System.Windows.Forms.KeyEventHandler(this._lstProducts_KeyDown);
             this._lstProducts.KeyUp += new System.Windows.Forms.KeyEventHandler(this._lstProducts_KeyUp);
             // 

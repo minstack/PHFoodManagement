@@ -17,13 +17,12 @@ namespace PHFoodManagement
         private OrderForm _orderForm;
         private ClientForm _clientForm;
         private ProductForm _productForm;
-        private OrderList _orderList;
         private BindingSource _bndClients = new BindingSource();
         private BindingSource _bndProducts = new BindingSource();
         private BindingSource _bndQOorder = new BindingSource();
         private Order _quickOrder;
         private List<Client> _clients = new List<Client>();
-        
+        private List<Product> _products = new List<Product>();
 
         public PHFoodOrderMgmtForm()
         {
@@ -68,17 +67,7 @@ namespace PHFoodManagement
             
             AddText(_txtClientSearch, "Client Search");
             AddText(_txtProdSearch, "Product Search");
-            //AddText(_txtQOProdQty, "Quantity");
-
-            //_clientList.GetClientsFromDB(pfDB);
-            //_prodList.InitProductsFromDB(pfDB);
-
-            //_orderList = new OrderList(_prodList.Products, _clientList.Clients);
-
-            //ResetProductList();
-            //ResetClientList();
-
-            _toolTip.Show("Select a client and product.\nType the quantity with the product selected and press enter to add to the quick order.", _lstProducts, 15000);
+            
 
         }
 
@@ -91,11 +80,17 @@ namespace PHFoodManagement
 
             _stsLoadingMessage.Text = "Loading products...";
             _productForm = new ProductForm();
+            _products = _productForm.products;
 
             _stsLoadingMessage.Text = "Loading orders...";
             _orderForm = new OrderForm();
             _orderForm.Clients = _clients;
+            //load products in orderform constructor;
+            _orderForm.LoadOrders();
+            //_orders = _orderForm.Orders;
+            
 
+            _stsLoadingMessage.Text = "";
         }
 
         //private void ResetProductList()
@@ -137,6 +132,12 @@ namespace PHFoodManagement
             if(_productForm == null) { _productForm = new ProductForm(); }
             
             _productForm.ShowDialog();
+            ResetProductList();
+        }
+
+        private void ResetProductList()
+        {
+            ControlUtil.ResetList(_products, _bndProducts, _lstProducts, "ToString");
         }
 
         private void _lstProducts_KeyDown(object sender, KeyEventArgs e)
@@ -199,7 +200,8 @@ namespace PHFoodManagement
                     OrderDate = DateTime.Today
                 };
 
-                _orderList.AddOrder(_quickOrder);
+                //_orderList.AddOrder(_quickOrder);
+                _orderForm.Orders.Add(_quickOrder);
             }            
 
             _txtQOClient.Text = client.name;
@@ -250,6 +252,7 @@ namespace PHFoodManagement
         {
             _orderForm = new OrderForm();
             _orderForm.Clients = _clients;
+            
             //_orderForm.Orders = _orderList.Orders;
             //_orderForm.Clients = _clientList.Clients;
             //_orderForm.Products = _prodList.Products;

@@ -14,7 +14,7 @@ namespace PHFoodManagement
     public partial class ProductForm : Form
     {
         ProductDB db = new ProductDB();
-        List<Product> products = new List<Product>();
+        public List<Product> products = new List<Product>();
         Product product = new Product();
         Product proEdit = new Product();
         Product proNew = new Product();

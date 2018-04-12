@@ -116,6 +116,11 @@ namespace PHFoodManagement
             }
         }
 
+        public void LoadOrders()
+        {
+            InitOrdersFromDB();
+        }
+
         private void SetInitialState()
         {
             ControlUtil.DisableButtons(_btnEdit, _btnDelete, _btnCancel, _btnSave, _btnAddProduct, _btnRemoveProduct);
@@ -174,6 +179,7 @@ namespace PHFoodManagement
             {
                 _currOrder = (Order)_lstOrders.SelectedItem;
                 SetEditState();
+                _comingFromQuickOrder = false;
             }
             else
             {
