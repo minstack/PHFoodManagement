@@ -83,7 +83,7 @@ namespace PHFoodManagement
                 try
                 {
                     using (MySqlCommand command = new MySqlCommand(
-                        "UPDATE product SET productName = @nm, price = @pr, description = @ds, organic = @or WHERE productId = @id)", conn))
+                        "UPDATE product SET productName = @nm, price = @pr, description = @ds, organic = @or WHERE productId = @id", conn))
                     {
                         command.Parameters.Add(new MySqlParameter("nm", name));
                         command.Parameters.Add(new MySqlParameter("or", org));
