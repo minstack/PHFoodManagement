@@ -5,15 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
-
+using MySql.Data;
+using MySql.Data.MySqlClient;
 
 namespace PHFoodManagement
 {
     public class ProductDB
     {
-        SqlConnection conn = new SqlConnection();
+        MySqlConnection conn = new MySqlConnection();
         string connString = PHFoodManagement.Properties.Settings.Default.ConnectionString;
-        string getProducts = "SELECT * FROM Product";
+        string getProducts = "SELECT * FROM product";
         //string addProducts = "INSERT INTO Product(productName, organic, price, description) VALUES(;
 
         public List<Product> GetProducts()
@@ -22,18 +23,18 @@ namespace PHFoodManagement
             List<Product> products = new List<Product>();
             using (conn)
             {
-                using (SqlCommand command = new SqlCommand(getProducts, conn))
-                using (SqlDataReader reader = command.ExecuteReader())
+                using (MySqlCommand command = new MySqlCommand(getProducts, conn))
+                using (MySqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
                         Product currProd = new Product
                         {
-                            //ProductId = reader.GetInt32(0),
+                            Id = reader.GetInt32(0),
                             ProductName = reader.GetString(1),
-                            Organic = bool.Parse(reader.GetString(2)),
-                            Price = (decimal)reader.GetSqlMoney(3),
-                            Description = reader.GetString(4)
+                            Price = (decimal)reader.GetDecimal(2),
+                            Description = reader.GetString(3),
+                            Organic = bool.Parse(reader.GetString(4))
                         };
                         products.Add(currProd);
                     }
@@ -52,13 +53,13 @@ namespace PHFoodManagement
                     
                     try
                     {
-                        using (SqlCommand command = new SqlCommand(
-                            "INSERT INTO Product VALUES(@productName, @organic, @price, @description)", conn))
+                        using (MySqlCommand command = new MySqlCommand(
+                            "INSERT INTO product (productName, price, description, organic) VALUES(@productName, @price, @description, @organic)", conn))
                         {
-                            command.Parameters.Add(new SqlParameter("productName", name));
-                            command.Parameters.Add(new SqlParameter("organic", org));
-                            command.Parameters.Add(new SqlParameter("price", price));
-                            command.Parameters.Add(new SqlParameter("description", dec));
+                            command.Parameters.Add(new MySqlParameter("productName", name));
+                            command.Parameters.Add(new MySqlParameter("organic", org));
+                            command.Parameters.Add(new MySqlParameter("price", price));
+                            command.Parameters.Add(new MySqlParameter("description", dec));
                             command.ExecuteNonQuery();
                         }
                     }
@@ -68,6 +69,36 @@ namespace PHFoodManagement
                         
                     }
                 }
+            conn.Close();
+            return true;
+        }
+
+        public bool updateProduct(int id, string name, bool org, decimal price, string dec)
+        {
+            OpenConnection();
+
+            using (conn)
+            {
+
+                try
+                {
+                    using (MySqlCommand command = new MySqlCommand(
+                        "UPDATE product SET productName = @nm, price = @pr, description = @ds, organic = @or WHERE productId = @id)", conn))
+                    {
+                        command.Parameters.Add(new MySqlParameter("nm", name));
+                        command.Parameters.Add(new MySqlParameter("or", org));
+                        command.Parameters.Add(new MySqlParameter("pr", price));
+                        command.Parameters.Add(new MySqlParameter("ds", dec));
+                        command.Parameters.Add(new MySqlParameter("id", id));
+                        command.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex.InnerException;
+
+                }
+            }
             conn.Close();
             return true;
         }
