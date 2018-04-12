@@ -36,11 +36,11 @@
             this._lstClients = new System.Windows.Forms.ListBox();
             this._txtClientSearch = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this._btnAddProdQuick = new System.Windows.Forms.Button();
-            this._txtQOProdQty = new System.Windows.Forms.TextBox();
             this._txtProdSearch = new System.Windows.Forms.TextBox();
             this._lblProductList = new System.Windows.Forms.Label();
+            this._txtQOProdQty = new System.Windows.Forms.TextBox();
             this._lstProducts = new System.Windows.Forms.ListBox();
+            this._btnAddProdQuick = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -140,26 +140,6 @@
             this.label4.TabIndex = 7;
             this.label4.Text = "Qty";
             // 
-            // _btnAddProdQuick
-            // 
-            this._btnAddProdQuick.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._btnAddProdQuick.Location = new System.Drawing.Point(765, 163);
-            this._btnAddProdQuick.Name = "_btnAddProdQuick";
-            this._btnAddProdQuick.Size = new System.Drawing.Size(43, 42);
-            this._btnAddProdQuick.TabIndex = 5;
-            this._btnAddProdQuick.Text = ">";
-            this._btnAddProdQuick.UseVisualStyleBackColor = true;
-            this._btnAddProdQuick.Click += new System.EventHandler(this._btnAddProdQuick_Click);
-            // 
-            // _txtQOProdQty
-            // 
-            this._txtQOProdQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._txtQOProdQty.Location = new System.Drawing.Point(621, 23);
-            this._txtQOProdQty.Multiline = true;
-            this._txtQOProdQty.Name = "_txtQOProdQty";
-            this._txtQOProdQty.Size = new System.Drawing.Size(70, 32);
-            this._txtQOProdQty.TabIndex = 4;
-            // 
             // _txtProdSearch
             // 
             this._txtProdSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -182,6 +162,16 @@
             this._lblProductList.TabIndex = 3;
             this._lblProductList.Text = "Products";
             // 
+            // _txtQOProdQty
+            // 
+            this._txtQOProdQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._txtQOProdQty.Location = new System.Drawing.Point(621, 23);
+            this._txtQOProdQty.Multiline = true;
+            this._txtQOProdQty.Name = "_txtQOProdQty";
+            this._txtQOProdQty.Size = new System.Drawing.Size(70, 32);
+            this._txtQOProdQty.TabIndex = 4;
+            this._txtQOProdQty.TextChanged += new System.EventHandler(this._txtQOProdQty_TextChanged);
+            // 
             // _lstProducts
             // 
             this._lstProducts.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -195,6 +185,17 @@
         "");
             this._lstProducts.KeyDown += new System.Windows.Forms.KeyEventHandler(this._lstProducts_KeyDown);
             this._lstProducts.KeyUp += new System.Windows.Forms.KeyEventHandler(this._lstProducts_KeyUp);
+            // 
+            // _btnAddProdQuick
+            // 
+            this._btnAddProdQuick.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._btnAddProdQuick.Location = new System.Drawing.Point(765, 163);
+            this._btnAddProdQuick.Name = "_btnAddProdQuick";
+            this._btnAddProdQuick.Size = new System.Drawing.Size(43, 42);
+            this._btnAddProdQuick.TabIndex = 5;
+            this._btnAddProdQuick.Text = ">";
+            this._btnAddProdQuick.UseVisualStyleBackColor = true;
+            this._btnAddProdQuick.Click += new System.EventHandler(this._btnAddProdQuick_Click);
             // 
             // menuStrip1
             // 

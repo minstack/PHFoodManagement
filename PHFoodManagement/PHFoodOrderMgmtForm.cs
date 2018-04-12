@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SMUtil;
@@ -41,35 +42,11 @@ namespace PHFoodManagement
             //_orderList.Orders = _orderForm.Orders;
             
         }
-
-        private void _txtClientSearch_Enter(object sender, EventArgs e)
-        {
-            RemoveText(_txtClientSearch);
-        }
-
-        private void _txtClientSearch_Leave(object sender, EventArgs e)
-        {
-            AddText(_txtClientSearch, "Client Search");
-        }
-
-        private void _txtProdSearch_Enter(object sender, EventArgs e)
-        {
-            RemoveText(_txtProdSearch);
-        }
-
-        private void _txtProdSearch_Leave(object sender, EventArgs e)
-        {
-            AddText(_txtProdSearch, "Product Search");
-        }
-
+        
         private void PHFoodOrderMgmtForm_Load(object sender, EventArgs e)
         {
             InitSubForms();
             
-            //AddText(_txtClientSearch, "Client Search");
-            //AddText(_txtProdSearch, "Product Search");
-            
-
         }
 
         private void InitSubForms()
@@ -102,29 +79,11 @@ namespace PHFoodManagement
         {
             ControlUtil.ResetList(_clients, _bndClients, _lstClients, "name");
         }
-
-        private void RemoveText(params TextBox[] tboxes)
-        {
-            ControlUtil.ClearTextBoxes(tboxes);
-        }
-
-        private void AddText(TextBox txtbox, string placeholder)
-        {
-            if (string.IsNullOrWhiteSpace(txtbox.Text))
-            {
-                txtbox.Text = placeholder;
-            }
-        }
-
+        
         private void clientsToolStripMenuItem_Click(object sender, EventArgs e)
         {            
             _clientForm.ShowDialog();
             ResetClientList();
-        }
-
-        private void OpenForm(Form frm)
-        {
-            
         }
 
         private void productsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -142,6 +101,19 @@ namespace PHFoodManagement
 
         private void _lstProducts_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Back)
+            {
+                string tempQty = _txtQOProdQty.Text;
+
+                if (tempQty.Length > 0)
+                {
+                    tempQty = tempQty.Substring(0, tempQty.Length-1);
+                    _txtQOProdQty.Text = tempQty;
+                }
+
+                return;
+            }
+
             if (_lstProducts.SelectedItem != null)
             {
                 string key;
@@ -254,9 +226,6 @@ namespace PHFoodManagement
             _orderForm.Clients = _clients;
             _orderForm.Products = _products;
             _orderForm.LoadOrders();
-            //_orderForm.Orders = _orderList.Orders;
-            //_orderForm.Clients = _clientList.Clients;
-            //_orderForm.Products = _prodList.Products;
         }
 
         private void _lstProducts_KeyUp(object sender, KeyEventArgs e)
@@ -363,6 +332,18 @@ namespace PHFoodManagement
         private void _txtClientSearch_MouseLeave(object sender, EventArgs e)
         {
             ClearStatusMessage();
+        }
+
+        private void _txtQOProdQty_TextChanged(object sender, EventArgs e)
+        {
+            _txtQOProdQty.Text = RemoveNonDigits(_txtQOProdQty.Text);
+        }
+
+        // revised from https://stackoverflow.com/a/262466
+        private string RemoveNonDigits(string text)
+        {
+            Regex digitsOnly = new Regex(@"[^\d^\.]");
+            return digitsOnly.Replace(text, "");
         }
     }
 }
