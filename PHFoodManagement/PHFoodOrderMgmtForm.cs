@@ -173,6 +173,8 @@ namespace PHFoodManagement
                 ShowError("Invalid Values", error);
                 return;
             }
+
+            //this point -> valid values
             if (_quickOrder == null)
             {
                 _quickOrder = new Order {
@@ -180,16 +182,14 @@ namespace PHFoodManagement
                     DeliveryDate = DateTime.Today,
                     OrderDate = DateTime.Today
                 };
-
-                //_orderList.AddOrder(_quickOrder);
-                //_orderForm.Orders.Add(_quickOrder);
             }            
 
             _txtQOClient.Text = client.name;
-
             _quickOrder.AddProduct(prod, qty);
+
             ResetQuickOrderList(_quickOrder.OrderItems);
-            UpdateTotal(_quickOrder);            
+            UpdateTotal(_quickOrder);  
+            
             _pnlClients.Enabled = false;
             _txtQOProdQty.Clear();
         }
@@ -213,6 +213,9 @@ namespace PHFoodManagement
         {
             if (_quickOrder == null)
             {
+                ShowError("No Order", 
+                    "Please add a client and products " +
+                    "with quantity to create an order.");
                 return;
             }
 
@@ -220,11 +223,13 @@ namespace PHFoodManagement
             {
                 InitOrderForm();
             }
+
             _orderForm.InitQOOrder(_quickOrder);
             _orderForm.ShowDialog();
             ResetQuickOrder();
         }
 
+        //resets the quick order 
         private void ResetQuickOrder()
         {
             _pnlClients.Enabled = true;
