@@ -50,26 +50,34 @@ namespace PHFoodManagement
 
         private void InitOrdersFromDB()
         {
+            Orders.Clear();
             Dictionary<int, Client> clientIdToObject = GetIdToClient();
 
-            string[] tempStringOrders = _orderdb.GetAllOrders().Split('|');
+            string tempString = _orderdb.GetAllOrders();
 
-            foreach (string strOrder in tempStringOrders)
+            if (tempString.Length > 0)
             {
-                string[] order = strOrder.Split(',');
+                string[] tempStringOrders = tempString.Split('|');
 
-                Order currOrder = new Order {
-                    OrderNumber = int.Parse(order[0]),
-                    OrderDate = Convert.ToDateTime(order[1]),
-                    DeliveryDate = Convert.ToDateTime(order[2]),
-                    Paid = Convert.ToBoolean(order[3]),
-                    Client = clientIdToObject[int.Parse(order[4])]
-                };
+                foreach (string strOrder in tempStringOrders)
+                {
+                    string[] order = strOrder.Split(',');
 
-                Orders.Add(currOrder);
-                //TEMP UNTIL DICTIONARY VIFGURE OUT
-                //currOrder.OrderItems = new List<OrderItem>();
+                    Order currOrder = new Order
+                    {
+                        OrderNumber = int.Parse(order[0]),
+                        OrderDate = Convert.ToDateTime(order[1]),
+                        DeliveryDate = Convert.ToDateTime(order[2]),
+                        Paid = Convert.ToBoolean(order[3]),
+                        Client = clientIdToObject[int.Parse(order[4])]
+                    };
+
+                    Orders.Add(currOrder);
+                    //TEMP UNTIL DICTIONARY VIFGURE OUT
+                    //currOrder.OrderItems = new List<OrderItem>();
+                }
             }
+            
 
 
         }
@@ -159,16 +167,6 @@ namespace PHFoodManagement
 
         private void OrderForm_Load(object sender, EventArgs e)
         {
-            Products = new List<Product>();
-            //Clients = new List<Client>();
-            Products.Add(new Product("prod1", 3.3M, "product 1", false));
-            Products.Add(new Product("prod2", 2.3M, "product 2", false));
-            Products.Add(new Product("prod2", 1.3M, "product 3", false));
-
-            // Clients.Add(new Client { name = "client 1", id=1, additionalDiscount = 0,
-            //address = "32 fakestreet ave", phoneNumber = "44444444", type = ClientType.Restaurant, zone = Zone.East});
-            //Clients.Add(new Client { name = "client 2" });
-            //Clients.Add(new Client { name = "client 3" });
             InitOrdersFromDB();
 
             ResetOrderList();
@@ -177,9 +175,10 @@ namespace PHFoodManagement
             ResetDates();
             if (_comingFromQuickOrder)
             {
-                _currOrder = (Order)_lstOrders.SelectedItem;
+                //_currOrder = (Order)_lstOrders.SelectedItem;
                 SetEditState();
                 _comingFromQuickOrder = false;
+                _editing = false; //triggers new order
             }
             else
             {
@@ -216,26 +215,6 @@ namespace PHFoodManagement
         {
             ControlUtil.ResetList(_currOrder.OrderItems, _bndOrderItems, _lstOrderProducts, "ToString");
         }
-
-        //private void ResetList<T>(List<T> lst, BindingSource bsrc, Control ctrl, string dispMem)
-        //{
-        //    bsrc.DataSource = lst;
-
-        //    if (ctrl is ListBox)
-        //    {
-        //        ListBox tempLst = (ListBox)ctrl;
-        //        tempLst.DataSource = bsrc;
-        //        tempLst.DisplayMember = dispMem;
-        //    }
-        //    else if (ctrl is ComboBox)
-        //    {
-        //        ComboBox tempCbo = (ComboBox)ctrl;
-        //        tempCbo.DataSource = bsrc;
-        //        tempCbo.DisplayMember = dispMem;
-        //    }
-            
-        //    bsrc.ResetBindings(false);
-        //}
 
         private void _btnNew_Click(object sender, EventArgs e)
         {
@@ -345,18 +324,17 @@ namespace PHFoodManagement
             foreach (OrderItem oi in currOrder.OrderItems)
             {
                 //_orderdb.AddOrderItem(currOrder.OrderNumber, )
-                _orderdb.AddOrderItem(currOrder.OrderNumber, 1, oi.Quantity);
+                _orderdb.AddOrderItem(currOrder.OrderNumber, oi.Product.Id, oi.Quantity);
             }
         }
 
         internal void InitQOOrder(Order quickOrder)
         {
             ResetOrderList();
-            _lstOrders.SelectedItem = quickOrder;
+            _currOrder = quickOrder;
             //_lstOrders.SelectedIndex = Orders.Count - 1;
             PopulateOrder(quickOrder);
             _comingFromQuickOrder = true;
-            _editing = true;
         }
 
         // State of the form has been changed -> change to appropriate state
@@ -561,9 +539,20 @@ namespace PHFoodManagement
 
             if (selected != null)
             {
+                DeleteOrderFromDB(selected);
                 Orders.Remove(selected);
                 ResetOrderList();
             }
+        }
+
+        private void DeleteOrderFromDB(Order selected)
+        {
+            foreach (OrderItem oi in selected.OrderItems)
+            {
+                _orderdb.DeleteOrderItems(selected.OrderNumber);
+            }
+
+            _orderdb.DeleteOrder(selected.OrderNumber);
         }
 
         private void _btnCancel_Click(object sender, EventArgs e)

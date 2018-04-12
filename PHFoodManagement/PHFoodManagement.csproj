@@ -177,5 +177,11 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\phfoodlogobanner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pyunghwalogo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

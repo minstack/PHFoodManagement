@@ -23,6 +23,7 @@ namespace PHFoodManagement
         private Order _quickOrder;
         private List<Client> _clients = new List<Client>();
         private List<Product> _products = new List<Product>();
+        private bool _searching = false;
 
         public PHFoodOrderMgmtForm()
         {
@@ -65,8 +66,8 @@ namespace PHFoodManagement
         {
             InitSubForms();
             
-            AddText(_txtClientSearch, "Client Search");
-            AddText(_txtProdSearch, "Product Search");
+            //AddText(_txtClientSearch, "Client Search");
+            //AddText(_txtProdSearch, "Product Search");
             
 
         }
@@ -81,12 +82,11 @@ namespace PHFoodManagement
             _stsLoadingMessage.Text = "Loading products...";
             _productForm = new ProductForm();
             _products = _productForm.products;
+            ResetProductList();
 
             _stsLoadingMessage.Text = "Loading orders...";
-            _orderForm = new OrderForm();
-            _orderForm.Clients = _clients;
-            //load products in orderform constructor;
-            _orderForm.LoadOrders();
+            InitOrderForm();
+            
             //_orders = _orderForm.Orders;
             
 
@@ -201,7 +201,7 @@ namespace PHFoodManagement
                 };
 
                 //_orderList.AddOrder(_quickOrder);
-                _orderForm.Orders.Add(_quickOrder);
+                //_orderForm.Orders.Add(_quickOrder);
             }            
 
             _txtQOClient.Text = client.name;
@@ -252,7 +252,8 @@ namespace PHFoodManagement
         {
             _orderForm = new OrderForm();
             _orderForm.Clients = _clients;
-            
+            _orderForm.Products = _products;
+            _orderForm.LoadOrders();
             //_orderForm.Orders = _orderList.Orders;
             //_orderForm.Clients = _clientList.Clients;
             //_orderForm.Products = _prodList.Products;
@@ -264,6 +265,104 @@ namespace PHFoodManagement
             {
                 _btnAddProdQuick_Click(sender, e);
             }
+        }
+
+        private void FilterList<T>(List<T> original, List<T> searchList, 
+            ListBox lbox, string searchTerm, BindingSource bndsrc, string dispMemb)
+        {
+            if (original.Count > 0)
+            {
+                List<T> currList = original;
+                searchList.Clear();
+
+                if (string.IsNullOrWhiteSpace(searchTerm))
+                {
+                    ControlUtil.ResetList(original, bndsrc, lbox, dispMemb);
+                }
+                else
+                {
+                    foreach (T obj in original)
+                    {
+                        if (obj.ToString().ToLower().Contains(searchTerm.ToLower()))
+                        {
+                            searchList.Add(obj);
+                        }                        
+                    }
+
+                    currList = searchList;
+                    ControlUtil.ResetList(searchList, bndsrc, lbox, dispMemb);
+                    
+                    
+                }
+
+                SetSearchingState(currList, lbox);
+            }
+        }
+
+        // State of the form has been changed -> change to appropriate state
+        // for controls.
+        private void SetSearchingState<T>(List<T> list, ListBox lbox)
+        {
+            
+            if (list.Count == 0)
+            {
+                _btnAddProdQuick.Enabled = false;
+            }
+            else
+            {
+                lbox.SelectedIndex = 0;
+                _btnAddProdQuick.Enabled = true;
+            }
+        }
+
+        private void _txtClientSearch_TextChanged(object sender, EventArgs e)
+        {
+            FilterList(_clients, _clientSearchList, 
+                _lstClients, _txtClientSearch.Text, _bndClients, "name");
+        }
+
+        private List<Client> _clientSearchList = new List<Client>();
+        private List<Product> _prodSearchList = new List<Product>();
+
+        private void _txtProdSearch_TextChanged(object sender, EventArgs e)
+        {
+            FilterList(_products, _prodSearchList,
+                _lstProducts, _txtProdSearch.Text, _bndProducts, "name");
+        }
+
+        private void SetSearchMessage()
+        {
+            _stsLoadingMessage.Text = "Start typing to search the list.";
+        }
+
+        private void ClearStatusMessage()
+        {
+            _stsLoadingMessage.Text = "";
+        }
+
+        private void _txtProdSearch_MouseHover(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void _txtProdSearch_MouseEnter(object sender, EventArgs e)
+        {
+            SetSearchMessage();
+        }
+
+        private void _txtProdSearch_MouseLeave(object sender, EventArgs e)
+        {
+            ClearStatusMessage();
+        }
+
+        private void _txtClientSearch_MouseEnter(object sender, EventArgs e)
+        {
+            SetSearchMessage();
+        }
+
+        private void _txtClientSearch_MouseLeave(object sender, EventArgs e)
+        {
+            ClearStatusMessage();
         }
     }
 }

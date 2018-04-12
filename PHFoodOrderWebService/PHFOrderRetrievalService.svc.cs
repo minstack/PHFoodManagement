@@ -158,7 +158,8 @@ namespace PHFoodOrderWebService
                 }
             }
 
-            return resultString.Substring(0, resultString.Length - 1);
+            return resultString.Length == 0 ? "" 
+                : resultString.Substring(0, resultString.Length - 1);
         }
 
         private void OpenConnection()
