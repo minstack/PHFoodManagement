@@ -14,12 +14,12 @@ namespace PHFoodManagement
     public partial class ProductForm : Form
     {
         ProductDB db = new ProductDB();
-        List<Product> products = new List<Product>();
+        List<Product> products;
         Product product = new Product();
         Product proEdit = new Product();
         Product proNew = new Product();
-        Boolean editing = false;
-        Boolean adding = false;
+        //Boolean editing = false;
+        //Boolean adding = false;
         //int index;
 
         public ProductForm()
@@ -88,7 +88,10 @@ namespace PHFoodManagement
                     product.Organic = true;
                 else
                     product.Organic = false;
-                
+
+                bool edited = db.updateProduct(product.Id, product.ProductName, product.Organic, product.Price, product.Description);
+                if (edited)
+                    MessageBox.Show("updated");
                 //list and clear
                 _lvProducts.Items.Clear();
                 ListProducts();
@@ -96,7 +99,8 @@ namespace PHFoodManagement
                 //int index = _lvProducts.SelectedItems[products.IndexOf(this.product)].Index;
                 //editing = false;
                 //adding = false;
-                //_lvProducts.Items[0].Selected = true;
+                _lvProducts.Items[0].Selected = true;
+                Product thispro = (Product)_lvProducts.SelectedItems[0].Tag;
             }
             else if(product == proNew)
             {
@@ -149,15 +153,15 @@ namespace PHFoodManagement
                         {
                             MessageBox.Show("not added");
                         }
-                        //products.Add(newProduct);
+                        products.Add(newProduct);
 
                         _lvProducts.Items.Clear();
                         ListProducts();
                     }
                     
                 }
-                adding = false;
-                editing = false;
+                //adding = false;
+                //editing = false;
             }
 
             _lvProducts.Items[0].Selected = true;
