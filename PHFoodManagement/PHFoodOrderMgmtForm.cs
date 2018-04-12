@@ -101,6 +101,8 @@ namespace PHFoodManagement
 
         private void _lstProducts_KeyDown(object sender, KeyEventArgs e)
         {
+            //to have full functionality as typing in the
+            //textbox
             if (e.KeyCode == Keys.Back)
             {
                 string tempQty = _txtQOProdQty.Text;
@@ -114,6 +116,8 @@ namespace PHFoodManagement
                 return;
             }
 
+            //make sure that an item is selected
+            //prevents useless processing if there isnt'
             if (_lstProducts.SelectedItem != null)
             {
                 string key;
@@ -146,24 +150,29 @@ namespace PHFoodManagement
         {
             Client client = (Client) _lstClients.SelectedItem;
             Product prod = (Product)_lstProducts.SelectedItem;
-
+            string error = "";
             if (!double.TryParse(_txtQOProdQty.Text, out double qty))
             {
                 //error
-                return;
+                error += "Quantity must be a number.\n";
             }
 
             if (client == null)
             {
                 //error
-                return;
+                error += "Client must be selected.\n";
             }
             if (prod == null)
             {
                 //error
-                return;
+                error += "Product must be selected.\n";
             }
 
+            if (error.Length > 0)
+            {
+                ShowError("Invalid Values", error);
+                return;
+            }
             if (_quickOrder == null)
             {
                 _quickOrder = new Order {
@@ -183,6 +192,11 @@ namespace PHFoodManagement
             UpdateTotal(_quickOrder);            
             _pnlClients.Enabled = false;
             _txtQOProdQty.Clear();
+        }
+
+        private void ShowError(string v, string error)
+        {
+            MessageBox.Show(error, v, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void UpdateTotal(Order quickOrder)
