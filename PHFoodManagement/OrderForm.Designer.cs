@@ -35,7 +35,6 @@
             this._lblBoxes = new System.Windows.Forms.Label();
             this._nmbProductQty = new System.Windows.Forms.NumericUpDown();
             this._cboProductSelect = new System.Windows.Forms.ComboBox();
-            this._btnRemoveProduct = new System.Windows.Forms.Button();
             this._btnAddProduct = new System.Windows.Forms.Button();
             this._txtTotalCost = new System.Windows.Forms.TextBox();
             this._lstOrderProducts = new System.Windows.Forms.ListBox();
@@ -57,6 +56,7 @@
             this._stsOrderStatus = new System.Windows.Forms.StatusStrip();
             this._toolStatErrorLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this._chkPaid = new System.Windows.Forms.CheckBox();
+            this._btnRemoveProduct = new System.Windows.Forms.Button();
             this._grpOrderInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._nmbProductQty)).BeginInit();
             this._grpDates.SuspendLayout();
@@ -147,17 +147,6 @@
             this._cboProductSelect.Name = "_cboProductSelect";
             this._cboProductSelect.Size = new System.Drawing.Size(296, 34);
             this._cboProductSelect.TabIndex = 17;
-            // 
-            // _btnRemoveProduct
-            // 
-            this._btnRemoveProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._btnRemoveProduct.Location = new System.Drawing.Point(84, 365);
-            this._btnRemoveProduct.Name = "_btnRemoveProduct";
-            this._btnRemoveProduct.Size = new System.Drawing.Size(36, 31);
-            this._btnRemoveProduct.TabIndex = 14;
-            this._btnRemoveProduct.Text = "X";
-            this._btnRemoveProduct.UseVisualStyleBackColor = true;
-            this._btnRemoveProduct.Click += new System.EventHandler(this._btnRemoveProduct_Click);
             // 
             // _btnAddProduct
             // 
@@ -280,7 +269,7 @@
             this._btnDelete.Name = "_btnDelete";
             this._btnDelete.Size = new System.Drawing.Size(125, 36);
             this._btnDelete.TabIndex = 3;
-            this._btnDelete.Text = "Delete";
+            this._btnDelete.Text = "&Delete";
             this._btnDelete.UseVisualStyleBackColor = true;
             this._btnDelete.Click += new System.EventHandler(this._btnDelete_Click);
             // 
@@ -290,7 +279,7 @@
             this._btnSave.Name = "_btnSave";
             this._btnSave.Size = new System.Drawing.Size(125, 36);
             this._btnSave.TabIndex = 4;
-            this._btnSave.Text = "Save";
+            this._btnSave.Text = "&Save";
             this._btnSave.UseVisualStyleBackColor = true;
             this._btnSave.Click += new System.EventHandler(this._btnSave_Click);
             // 
@@ -300,7 +289,7 @@
             this._btnNew.Name = "_btnNew";
             this._btnNew.Size = new System.Drawing.Size(125, 36);
             this._btnNew.TabIndex = 5;
-            this._btnNew.Text = "New";
+            this._btnNew.Text = "&New";
             this._btnNew.UseVisualStyleBackColor = true;
             this._btnNew.Click += new System.EventHandler(this._btnNew_Click);
             // 
@@ -310,7 +299,7 @@
             this._btnCancel.Name = "_btnCancel";
             this._btnCancel.Size = new System.Drawing.Size(125, 36);
             this._btnCancel.TabIndex = 6;
-            this._btnCancel.Text = "Cancel";
+            this._btnCancel.Text = "&Cancel";
             this._btnCancel.UseVisualStyleBackColor = true;
             this._btnCancel.Click += new System.EventHandler(this._btnCancel_Click);
             // 
@@ -320,7 +309,7 @@
             this._btnEdit.Name = "_btnEdit";
             this._btnEdit.Size = new System.Drawing.Size(125, 36);
             this._btnEdit.TabIndex = 7;
-            this._btnEdit.Text = "Edit";
+            this._btnEdit.Text = "&Edit";
             this._btnEdit.UseVisualStyleBackColor = true;
             this._btnEdit.Click += new System.EventHandler(this._btnEdit_Click);
             // 
@@ -363,6 +352,18 @@
             this._chkPaid.TabIndex = 23;
             this._chkPaid.Text = "Paid";
             this._chkPaid.UseVisualStyleBackColor = true;
+            // 
+            // _btnRemoveProduct
+            // 
+            this._btnRemoveProduct.BackgroundImage = global::PHFoodManagement.Properties.Resources.trash;
+            this._btnRemoveProduct.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this._btnRemoveProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._btnRemoveProduct.Location = new System.Drawing.Point(84, 365);
+            this._btnRemoveProduct.Name = "_btnRemoveProduct";
+            this._btnRemoveProduct.Size = new System.Drawing.Size(33, 31);
+            this._btnRemoveProduct.TabIndex = 14;
+            this._btnRemoveProduct.UseVisualStyleBackColor = true;
+            this._btnRemoveProduct.Click += new System.EventHandler(this._btnRemoveProduct_Click);
             // 
             // OrderForm
             // 

@@ -403,5 +403,38 @@ namespace PHFoodManagement
         {
             this.Close();
         }
+
+        //same functionality as enter in lst products
+        private void _txtQOProdQty_KeyUp(object sender, KeyEventArgs e)
+        {
+            _lstProducts_KeyUp(sender, e);
+        }
+
+        //remove order item from quick order
+        private void _btnRemoveProduct_Click(object sender, EventArgs e)
+        {
+            OrderItem selected = (OrderItem)_lstQOProducts.SelectedItem;
+
+            if (selected == null)
+            {
+                return;
+            }
+
+            if (_quickOrder == null)
+            {
+                return;
+            }
+
+            _quickOrder.OrderItems.Remove(selected);
+            UpdateTotal(_quickOrder);
+            ResetQuickOrderList(_quickOrder.OrderItems);
+            _lstQOProducts_SelectedIndexChanged(sender, e);
+        }
+
+        //enabled/disabled delete button based on list
+        private void _lstQOProducts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _btnRemoveProduct.Enabled = _lstQOProducts.Items.Count > 0;
+        }
     }
 }

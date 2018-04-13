@@ -49,6 +49,7 @@
             this.clientsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._grpQuickOrderDetails = new System.Windows.Forms.GroupBox();
+            this._btnQoCancel = new System.Windows.Forms.Button();
             this._txtQOTotal = new System.Windows.Forms.TextBox();
             this._lblTotal = new System.Windows.Forms.Label();
             this._btnQOFinalize = new System.Windows.Forms.Button();
@@ -60,9 +61,9 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this._stsLoadingMessage = new System.Windows.Forms.ToolStripStatusLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this._btnRemoveProduct = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this._btnQoCancel = new System.Windows.Forms.Button();
             this._grpQuickOrder.SuspendLayout();
             this._pnlClients.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -114,6 +115,8 @@
             // 
             // _lstClients
             // 
+            this._lstClients.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this._lstClients.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._lstClients.FormattingEnabled = true;
             this._lstClients.ItemHeight = 29;
@@ -124,6 +127,8 @@
             // 
             // _txtClientSearch
             // 
+            this._txtClientSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this._txtClientSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._txtClientSearch.Location = new System.Drawing.Point(3, 501);
             this._txtClientSearch.Name = "_txtClientSearch";
@@ -146,6 +151,8 @@
             // 
             // _txtProdSearch
             // 
+            this._txtProdSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this._txtProdSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._txtProdSearch.Location = new System.Drawing.Point(374, 535);
             this._txtProdSearch.Name = "_txtProdSearch";
@@ -175,9 +182,12 @@
             this._txtQOProdQty.Size = new System.Drawing.Size(70, 32);
             this._txtQOProdQty.TabIndex = 4;
             this._txtQOProdQty.TextChanged += new System.EventHandler(this._txtQOProdQty_TextChanged);
+            this._txtQOProdQty.KeyUp += new System.Windows.Forms.KeyEventHandler(this._txtQOProdQty_KeyUp);
             // 
             // _lstProducts
             // 
+            this._lstProducts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this._lstProducts.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._lstProducts.FormattingEnabled = true;
             this._lstProducts.ItemHeight = 29;
@@ -227,7 +237,7 @@
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(139, 30);
             this.closeToolStripMenuItem.Text = "&Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
@@ -264,6 +274,7 @@
             // 
             // _grpQuickOrderDetails
             // 
+            this._grpQuickOrderDetails.Controls.Add(this._btnRemoveProduct);
             this._grpQuickOrderDetails.Controls.Add(this._btnQoCancel);
             this._grpQuickOrderDetails.Controls.Add(this._txtQOTotal);
             this._grpQuickOrderDetails.Controls.Add(this._lblTotal);
@@ -280,20 +291,31 @@
             this._grpQuickOrderDetails.TabStop = false;
             this._grpQuickOrderDetails.Text = "Quick Order Details";
             // 
+            // _btnQoCancel
+            // 
+            this._btnQoCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._btnQoCancel.Location = new System.Drawing.Point(269, 526);
+            this._btnQoCancel.Name = "_btnQoCancel";
+            this._btnQoCancel.Size = new System.Drawing.Size(119, 44);
+            this._btnQoCancel.TabIndex = 11;
+            this._btnQoCancel.Text = "&Cancel";
+            this._btnQoCancel.UseVisualStyleBackColor = true;
+            this._btnQoCancel.Click += new System.EventHandler(this._btnQoCancel_Click);
+            // 
             // _txtQOTotal
             // 
             this._txtQOTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._txtQOTotal.Location = new System.Drawing.Point(258, 477);
+            this._txtQOTotal.Location = new System.Drawing.Point(203, 477);
             this._txtQOTotal.Name = "_txtQOTotal";
             this._txtQOTotal.ReadOnly = true;
-            this._txtQOTotal.Size = new System.Drawing.Size(130, 35);
+            this._txtQOTotal.Size = new System.Drawing.Size(185, 35);
             this._txtQOTotal.TabIndex = 10;
             // 
             // _lblTotal
             // 
             this._lblTotal.AutoSize = true;
             this._lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._lblTotal.Location = new System.Drawing.Point(184, 480);
+            this._lblTotal.Location = new System.Drawing.Point(129, 483);
             this._lblTotal.Name = "_lblTotal";
             this._lblTotal.Size = new System.Drawing.Size(68, 29);
             this._lblTotal.TabIndex = 9;
@@ -302,7 +324,7 @@
             // _btnQOFinalize
             // 
             this._btnQOFinalize.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._btnQOFinalize.Location = new System.Drawing.Point(62, 526);
+            this._btnQOFinalize.Location = new System.Drawing.Point(134, 526);
             this._btnQOFinalize.Name = "_btnQOFinalize";
             this._btnQOFinalize.Size = new System.Drawing.Size(119, 44);
             this._btnQOFinalize.TabIndex = 7;
@@ -320,6 +342,7 @@
             this._lstQOProducts.Size = new System.Drawing.Size(362, 352);
             this._lstQOProducts.TabIndex = 7;
             this._lstQOProducts.TabStop = false;
+            this._lstQOProducts.SelectedIndexChanged += new System.EventHandler(this._lstQOProducts_SelectedIndexChanged);
             // 
             // _txtQOClient
             // 
@@ -380,8 +403,23 @@
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             // 
+            // _btnRemoveProduct
+            // 
+            this._btnRemoveProduct.BackgroundImage = global::PHFoodManagement.Properties.Resources.trash;
+            this._btnRemoveProduct.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this._btnRemoveProduct.Enabled = false;
+            this._btnRemoveProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._btnRemoveProduct.Location = new System.Drawing.Point(26, 465);
+            this._btnRemoveProduct.Name = "_btnRemoveProduct";
+            this._btnRemoveProduct.Size = new System.Drawing.Size(33, 31);
+            this._btnRemoveProduct.TabIndex = 15;
+            this._btnRemoveProduct.UseVisualStyleBackColor = true;
+            this._btnRemoveProduct.Click += new System.EventHandler(this._btnRemoveProduct_Click);
+            // 
             // pictureBox2
             // 
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.pictureBox2.BackColor = System.Drawing.SystemColors.Window;
             this.pictureBox2.Image = global::PHFoodManagement.Properties.Resources.search_small;
             this.pictureBox2.Location = new System.Drawing.Point(662, 539);
@@ -393,6 +431,8 @@
             // 
             // pictureBox3
             // 
+            this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.pictureBox3.BackColor = System.Drawing.SystemColors.Window;
             this.pictureBox3.Image = global::PHFoodManagement.Properties.Resources.search_small;
             this.pictureBox3.Location = new System.Drawing.Point(291, 505);
@@ -401,17 +441,6 @@
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 10;
             this.pictureBox3.TabStop = false;
-            // 
-            // _btnQoCancel
-            // 
-            this._btnQoCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._btnQoCancel.Location = new System.Drawing.Point(227, 526);
-            this._btnQoCancel.Name = "_btnQoCancel";
-            this._btnQoCancel.Size = new System.Drawing.Size(119, 44);
-            this._btnQoCancel.TabIndex = 11;
-            this._btnQoCancel.Text = "&Cancel";
-            this._btnQoCancel.UseVisualStyleBackColor = true;
-            this._btnQoCancel.Click += new System.EventHandler(this._btnQoCancel_Click);
             // 
             // PHFoodOrderMgmtForm
             // 
@@ -484,6 +513,7 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button _btnQoCancel;
+        private System.Windows.Forms.Button _btnRemoveProduct;
     }
 }
 
