@@ -47,7 +47,7 @@ namespace PHFoodManagement
                 totalCost += oi.GetTotalCost();
             }
 
-            return totalCost;
+            return Math.Round(totalCost, 2);
         }
 
         public void AddProduct(Product product, double quantity)

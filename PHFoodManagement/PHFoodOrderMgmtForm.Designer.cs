@@ -101,7 +101,7 @@
             this._pnlClients.Location = new System.Drawing.Point(25, 34);
             this._pnlClients.Name = "_pnlClients";
             this._pnlClients.Size = new System.Drawing.Size(323, 552);
-            this._pnlClients.TabIndex = 8;
+            this._pnlClients.TabIndex = 1;
             // 
             // _lblClients
             // 
@@ -110,7 +110,7 @@
             this._lblClients.Location = new System.Drawing.Point(-2, -5);
             this._lblClients.Name = "_lblClients";
             this._lblClients.Size = new System.Drawing.Size(87, 29);
-            this._lblClients.TabIndex = 9;
+            this._lblClients.TabIndex = 0;
             this._lblClients.Text = "Clients";
             // 
             // _lstClients
@@ -123,7 +123,7 @@
             this._lstClients.Location = new System.Drawing.Point(3, 27);
             this._lstClients.Name = "_lstClients";
             this._lstClients.Size = new System.Drawing.Size(317, 468);
-            this._lstClients.TabIndex = 6;
+            this._lstClients.TabIndex = 0;
             // 
             // _txtClientSearch
             // 
@@ -133,7 +133,7 @@
             this._txtClientSearch.Location = new System.Drawing.Point(3, 501);
             this._txtClientSearch.Name = "_txtClientSearch";
             this._txtClientSearch.Size = new System.Drawing.Size(317, 35);
-            this._txtClientSearch.TabIndex = 5;
+            this._txtClientSearch.TabIndex = 1;
             this._toolTip.SetToolTip(this._txtClientSearch, "Start typing to search for a client.");
             this._txtClientSearch.TextChanged += new System.EventHandler(this._txtClientSearch_TextChanged);
             this._txtClientSearch.MouseEnter += new System.EventHandler(this._txtClientSearch_MouseEnter);
@@ -208,7 +208,7 @@
             this._btnAddProdQuick.Location = new System.Drawing.Point(765, 163);
             this._btnAddProdQuick.Name = "_btnAddProdQuick";
             this._btnAddProdQuick.Size = new System.Drawing.Size(43, 42);
-            this._btnAddProdQuick.TabIndex = 5;
+            this._btnAddProdQuick.TabIndex = 4;
             this._btnAddProdQuick.Text = ">";
             this._btnAddProdQuick.UseVisualStyleBackColor = true;
             this._btnAddProdQuick.Click += new System.EventHandler(this._btnAddProdQuick_Click);
@@ -254,21 +254,21 @@
             // ordersToolStripMenuItem
             // 
             this.ordersToolStripMenuItem.Name = "ordersToolStripMenuItem";
-            this.ordersToolStripMenuItem.Size = new System.Drawing.Size(166, 30);
+            this.ordersToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
             this.ordersToolStripMenuItem.Text = "&Orders";
             this.ordersToolStripMenuItem.Click += new System.EventHandler(this.ordersToolStripMenuItem_Click);
             // 
             // clientsToolStripMenuItem
             // 
             this.clientsToolStripMenuItem.Name = "clientsToolStripMenuItem";
-            this.clientsToolStripMenuItem.Size = new System.Drawing.Size(166, 30);
+            this.clientsToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
             this.clientsToolStripMenuItem.Text = "&Clients";
             this.clientsToolStripMenuItem.Click += new System.EventHandler(this.clientsToolStripMenuItem_Click);
             // 
             // productsToolStripMenuItem
             // 
             this.productsToolStripMenuItem.Name = "productsToolStripMenuItem";
-            this.productsToolStripMenuItem.Size = new System.Drawing.Size(166, 30);
+            this.productsToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
             this.productsToolStripMenuItem.Text = "&Products";
             this.productsToolStripMenuItem.Click += new System.EventHandler(this.productsToolStripMenuItem_Click);
             // 
@@ -287,7 +287,7 @@
             this._grpQuickOrderDetails.Location = new System.Drawing.Point(814, 56);
             this._grpQuickOrderDetails.Name = "_grpQuickOrderDetails";
             this._grpQuickOrderDetails.Size = new System.Drawing.Size(406, 607);
-            this._grpQuickOrderDetails.TabIndex = 4;
+            this._grpQuickOrderDetails.TabIndex = 5;
             this._grpQuickOrderDetails.TabStop = false;
             this._grpQuickOrderDetails.Text = "Quick Order Details";
             // 
@@ -297,7 +297,7 @@
             this._btnQoCancel.Location = new System.Drawing.Point(269, 526);
             this._btnQoCancel.Name = "_btnQoCancel";
             this._btnQoCancel.Size = new System.Drawing.Size(119, 44);
-            this._btnQoCancel.TabIndex = 11;
+            this._btnQoCancel.TabIndex = 9;
             this._btnQoCancel.Text = "&Cancel";
             this._btnQoCancel.UseVisualStyleBackColor = true;
             this._btnQoCancel.Click += new System.EventHandler(this._btnQoCancel_Click);
@@ -310,6 +310,7 @@
             this._txtQOTotal.ReadOnly = true;
             this._txtQOTotal.Size = new System.Drawing.Size(185, 35);
             this._txtQOTotal.TabIndex = 10;
+            this._txtQOTotal.TabStop = false;
             // 
             // _lblTotal
             // 
@@ -327,7 +328,7 @@
             this._btnQOFinalize.Location = new System.Drawing.Point(134, 526);
             this._btnQOFinalize.Name = "_btnQOFinalize";
             this._btnQOFinalize.Size = new System.Drawing.Size(119, 44);
-            this._btnQOFinalize.TabIndex = 7;
+            this._btnQOFinalize.TabIndex = 8;
             this._btnQOFinalize.Text = "&Finalize";
             this._btnQOFinalize.UseVisualStyleBackColor = true;
             this._btnQOFinalize.Click += new System.EventHandler(this._btnQOFinalize_Click);
@@ -340,7 +341,7 @@
             this._lstQOProducts.Location = new System.Drawing.Point(26, 107);
             this._lstQOProducts.Name = "_lstQOProducts";
             this._lstQOProducts.Size = new System.Drawing.Size(362, 352);
-            this._lstQOProducts.TabIndex = 7;
+            this._lstQOProducts.TabIndex = 6;
             this._lstQOProducts.TabStop = false;
             this._lstQOProducts.SelectedIndexChanged += new System.EventHandler(this._lstQOProducts_SelectedIndexChanged);
             // 
@@ -412,7 +413,7 @@
             this._btnRemoveProduct.Location = new System.Drawing.Point(26, 465);
             this._btnRemoveProduct.Name = "_btnRemoveProduct";
             this._btnRemoveProduct.Size = new System.Drawing.Size(33, 31);
-            this._btnRemoveProduct.TabIndex = 15;
+            this._btnRemoveProduct.TabIndex = 7;
             this._btnRemoveProduct.UseVisualStyleBackColor = true;
             this._btnRemoveProduct.Click += new System.EventHandler(this._btnRemoveProduct_Click);
             // 

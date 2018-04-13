@@ -97,7 +97,7 @@
             this._cboOrderClient.Location = new System.Drawing.Point(126, 26);
             this._cboOrderClient.Name = "_cboOrderClient";
             this._cboOrderClient.Size = new System.Drawing.Size(210, 34);
-            this._cboOrderClient.TabIndex = 22;
+            this._cboOrderClient.TabIndex = 1;
             // 
             // _lblClient
             // 
@@ -137,7 +137,7 @@
             this._nmbProductQty.Location = new System.Drawing.Point(123, 228);
             this._nmbProductQty.Name = "_nmbProductQty";
             this._nmbProductQty.Size = new System.Drawing.Size(120, 32);
-            this._nmbProductQty.TabIndex = 18;
+            this._nmbProductQty.TabIndex = 6;
             // 
             // _cboProductSelect
             // 
@@ -146,14 +146,14 @@
             this._cboProductSelect.Location = new System.Drawing.Point(123, 188);
             this._cboProductSelect.Name = "_cboProductSelect";
             this._cboProductSelect.Size = new System.Drawing.Size(296, 34);
-            this._cboProductSelect.TabIndex = 17;
+            this._cboProductSelect.TabIndex = 5;
             // 
             // _btnAddProduct
             // 
             this._btnAddProduct.Location = new System.Drawing.Point(325, 228);
             this._btnAddProduct.Name = "_btnAddProduct";
             this._btnAddProduct.Size = new System.Drawing.Size(36, 31);
-            this._btnAddProduct.TabIndex = 13;
+            this._btnAddProduct.TabIndex = 7;
             this._btnAddProduct.Text = "+";
             this._btnAddProduct.UseVisualStyleBackColor = true;
             this._btnAddProduct.Click += new System.EventHandler(this._btnAddProduct_Click);
@@ -166,6 +166,7 @@
             this._txtTotalCost.ReadOnly = true;
             this._txtTotalCost.Size = new System.Drawing.Size(195, 32);
             this._txtTotalCost.TabIndex = 11;
+            this._txtTotalCost.TabStop = false;
             // 
             // _lstOrderProducts
             // 
@@ -174,7 +175,7 @@
             this._lstOrderProducts.Location = new System.Drawing.Point(123, 262);
             this._lstOrderProducts.Name = "_lstOrderProducts";
             this._lstOrderProducts.Size = new System.Drawing.Size(296, 134);
-            this._lstOrderProducts.TabIndex = 10;
+            this._lstOrderProducts.TabIndex = 8;
             // 
             // label5
             // 
@@ -203,7 +204,7 @@
             this._grpDates.Location = new System.Drawing.Point(19, 66);
             this._grpDates.Name = "_grpDates";
             this._grpDates.Size = new System.Drawing.Size(416, 116);
-            this._grpDates.TabIndex = 15;
+            this._grpDates.TabIndex = 2;
             this._grpDates.TabStop = false;
             this._grpDates.Text = "Dates";
             // 
@@ -213,7 +214,7 @@
             this._dpOrderDate.Location = new System.Drawing.Point(105, 26);
             this._dpOrderDate.Name = "_dpOrderDate";
             this._dpOrderDate.Size = new System.Drawing.Size(295, 32);
-            this._dpOrderDate.TabIndex = 6;
+            this._dpOrderDate.TabIndex = 3;
             // 
             // _lblOrderDate
             // 
@@ -238,7 +239,7 @@
             this._dpDeliveryDate.Location = new System.Drawing.Point(105, 72);
             this._dpDeliveryDate.Name = "_dpDeliveryDate";
             this._dpDeliveryDate.Size = new System.Drawing.Size(296, 32);
-            this._dpDeliveryDate.TabIndex = 7;
+            this._dpDeliveryDate.TabIndex = 4;
             // 
             // _lstOrders
             // 
@@ -249,7 +250,7 @@
             this._lstOrders.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this._lstOrders.Name = "_lstOrders";
             this._lstOrders.Size = new System.Drawing.Size(275, 420);
-            this._lstOrders.TabIndex = 1;
+            this._lstOrders.TabIndex = 0;
             this._lstOrders.SelectedIndexChanged += new System.EventHandler(this._lstOrders_SelectedIndexChanged);
             // 
             // _lblOrder
@@ -268,7 +269,7 @@
             this._btnDelete.Location = new System.Drawing.Point(482, 13);
             this._btnDelete.Name = "_btnDelete";
             this._btnDelete.Size = new System.Drawing.Size(125, 36);
-            this._btnDelete.TabIndex = 3;
+            this._btnDelete.TabIndex = 13;
             this._btnDelete.Text = "&Delete";
             this._btnDelete.UseVisualStyleBackColor = true;
             this._btnDelete.Click += new System.EventHandler(this._btnDelete_Click);
@@ -278,7 +279,7 @@
             this._btnSave.Location = new System.Drawing.Point(175, 13);
             this._btnSave.Name = "_btnSave";
             this._btnSave.Size = new System.Drawing.Size(125, 36);
-            this._btnSave.TabIndex = 4;
+            this._btnSave.TabIndex = 11;
             this._btnSave.Text = "&Save";
             this._btnSave.UseVisualStyleBackColor = true;
             this._btnSave.Click += new System.EventHandler(this._btnSave_Click);
@@ -288,7 +289,7 @@
             this._btnNew.Location = new System.Drawing.Point(19, 13);
             this._btnNew.Name = "_btnNew";
             this._btnNew.Size = new System.Drawing.Size(125, 36);
-            this._btnNew.TabIndex = 5;
+            this._btnNew.TabIndex = 10;
             this._btnNew.Text = "&New";
             this._btnNew.UseVisualStyleBackColor = true;
             this._btnNew.Click += new System.EventHandler(this._btnNew_Click);
@@ -298,7 +299,7 @@
             this._btnCancel.Location = new System.Drawing.Point(627, 13);
             this._btnCancel.Name = "_btnCancel";
             this._btnCancel.Size = new System.Drawing.Size(125, 36);
-            this._btnCancel.TabIndex = 6;
+            this._btnCancel.TabIndex = 14;
             this._btnCancel.Text = "&Cancel";
             this._btnCancel.UseVisualStyleBackColor = true;
             this._btnCancel.Click += new System.EventHandler(this._btnCancel_Click);
@@ -308,7 +309,7 @@
             this._btnEdit.Location = new System.Drawing.Point(331, 13);
             this._btnEdit.Name = "_btnEdit";
             this._btnEdit.Size = new System.Drawing.Size(125, 36);
-            this._btnEdit.TabIndex = 7;
+            this._btnEdit.TabIndex = 12;
             this._btnEdit.Text = "&Edit";
             this._btnEdit.UseVisualStyleBackColor = true;
             this._btnEdit.Click += new System.EventHandler(this._btnEdit_Click);
@@ -349,7 +350,7 @@
             this._chkPaid.Location = new System.Drawing.Point(353, 32);
             this._chkPaid.Name = "_chkPaid";
             this._chkPaid.Size = new System.Drawing.Size(82, 30);
-            this._chkPaid.TabIndex = 23;
+            this._chkPaid.TabIndex = 2;
             this._chkPaid.Text = "Paid";
             this._chkPaid.UseVisualStyleBackColor = true;
             // 
@@ -361,7 +362,7 @@
             this._btnRemoveProduct.Location = new System.Drawing.Point(84, 365);
             this._btnRemoveProduct.Name = "_btnRemoveProduct";
             this._btnRemoveProduct.Size = new System.Drawing.Size(33, 31);
-            this._btnRemoveProduct.TabIndex = 14;
+            this._btnRemoveProduct.TabIndex = 9;
             this._btnRemoveProduct.UseVisualStyleBackColor = true;
             this._btnRemoveProduct.Click += new System.EventHandler(this._btnRemoveProduct_Click);
             // 
