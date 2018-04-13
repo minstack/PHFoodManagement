@@ -36,8 +36,10 @@ namespace PHFoodOrderWebService
         //add a given order record
         public int AddNewOrder(string oDate, string dDate, decimal oTotal, bool paid, int cId)
         {
+            int intPaid = paid ? 1 : 0;
+            
             string query = string.Format(_insertOrder,
-                oDate,dDate,oTotal,paid,cId);
+                oDate,dDate,oTotal,intPaid,cId);
 
             if (RunNonExecuteQuery(query) > 0) {
                 return GetOrderID();

@@ -335,6 +335,8 @@ namespace PHFoodManagement
         private void CreateNewOrder()
         {
             _currOrder = new Order();
+            _dpDeliveryDate.Value = DateTime.Today;
+            _dpOrderDate.Value = DateTime.Today;
             ResetOrderItemList();
         }
 
@@ -495,6 +497,7 @@ namespace PHFoodManagement
                 _txtTotalCost.Text = order.CalculateTotal().ToString();
                 _currOrder = order;
                 _cboOrderClient.SelectedItem = order.Client;
+                _chkPaid.Checked = _currOrder.Paid;
                 ResetOrderItemList();
             }
         }
@@ -567,7 +570,8 @@ namespace PHFoodManagement
         // checks for valid inputs for the form
         private bool ValidInputs(out Control errCtrl)
         {
-            if (_dpDeliveryDate.Value.Date < DateTime.Today)
+            //only new orders should do this check
+            if (!_editing && _dpDeliveryDate.Value.Date < DateTime.Today)
             {
                 errCtrl = _dpDeliveryDate;
                 return false;
@@ -707,12 +711,11 @@ namespace PHFoodManagement
         private void _btnRemoveProduct_Click(object sender, EventArgs e)
         {
             OrderItem selected = (OrderItem)_lstOrderProducts.SelectedItem;
-
-            if (DeleteConfirmed())
+            if (selected != null)
             {
-                if (selected != null)
-                {
-                    _currOrder.OrderItems.Remove(selected);
+                if (DeleteConfirmed())
+                {                
+                    _currOrder.RemoveOrderItem(selected);
                     ResetOrderItemList();
                     UpdateTotalCost();
                 }

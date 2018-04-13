@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace PHFoodManagement
 {
+    //Author: Sung Min Yoon
+    
+    //Models an order at PH Food storing infomation including
+    //OrderNumber, Paid, OrderDate, Client, OrderItems
+    //DeliveryDate
     public class Order
     {
         private DateTime _deliveryDate;
@@ -26,17 +31,15 @@ namespace PHFoodManagement
             }
         }
 
+        //Default constructor which initializes order items
+        //to a new list.
         public Order()
         {
             OrderItems = new List<OrderItem>();
         }
 
-        //TODO need OrderItem and Client classes to have the constructor created
-        //public Order (Client client, OrderItem item)
-        //{
-        //      
-        //}
-
+        //returns the total value of the order by retrieving
+        //order item values
         public decimal CalculateTotal()
         {
             //iterate through all orderitems and calculate the total of this order
@@ -50,6 +53,8 @@ namespace PHFoodManagement
             return Math.Round(totalCost, 2);
         }
 
+        //Creates and adds a new order item with the provided
+        //product and quantity
         public void AddProduct(Product product, double quantity)
         {
             //add the product with quantity to orderitem list
@@ -61,6 +66,7 @@ namespace PHFoodManagement
             OrderItems.Add(newOrderItem);
         }
 
+        //Removes order items which include the given product
         public void RemoveProduct(Product product)
         {
             foreach (OrderItem oi in OrderItems)
@@ -72,6 +78,7 @@ namespace PHFoodManagement
             }
         }
 
+        //Removes the given order item from this order
         public void RemoveOrderItem(OrderItem oItem)
         {
             foreach (OrderItem oi in OrderItems)
@@ -79,6 +86,7 @@ namespace PHFoodManagement
                 if (oi == oItem)
                 {
                     OrderItems.Remove(oi);
+                    break;
                 }
             }
         }
