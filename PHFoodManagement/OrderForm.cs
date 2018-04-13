@@ -231,7 +231,6 @@ namespace PHFoodManagement
         private void DisablInputForm()
         {
             _grpOrderInfo.Enabled = false;
-            
         }
 
         private void EnableInputForm()
@@ -248,6 +247,7 @@ namespace PHFoodManagement
             ResetClientCombo();
             ResetProductCombo();
             ResetDates();
+
             if (_comingFromQuickOrder)
             {
                 //_currOrder = (Order)_lstOrders.SelectedItem;
@@ -260,8 +260,6 @@ namespace PHFoodManagement
                 SetInitialState();
                 _currOrder = null;
             }
-
-            
         }
 
         private void ResetProductCombo()
@@ -420,16 +418,11 @@ namespace PHFoodManagement
         {
             ClearFields();
 
-            ////for cases when user is searching and list is not just the
-            ////original orders
-            //List<Order> currList = (_searching) ? _searchList : _movieList.Movies;
-
             //prevents possible awkward bug of editing something that doesn't exist
             //-> user clicks edit nothing selected
             if (Orders.Count == 0)
             {
                 SetInitialState();
-                //_btnNew.Focus();
             }
             else
             {
@@ -443,7 +436,6 @@ namespace PHFoodManagement
         {
             if (order != null)
             {
-                //_txtOrderNum.Text = order.OrderNumber.ToString();
                 _dpDeliveryDate.Value = order.DeliveryDate;
                 _dpOrderDate.Value = order.OrderDate;
                 _txtTotalCost.Text = order.CalculateTotal().ToString();
@@ -563,15 +555,6 @@ namespace PHFoodManagement
 
             AddNewOrderItem((Product)_cboProductSelect.SelectedItem, qty);
             ClearOrderItems();
-        }
-
-        private bool IsValidProduct(Product selectedItem)
-        {
-            foreach(Product p in Products)
-            {
-                
-            }
-            return true;
         }
 
         private void ClearOrderItems()

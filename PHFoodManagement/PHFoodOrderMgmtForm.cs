@@ -24,7 +24,8 @@ namespace PHFoodManagement
         private Order _quickOrder;
         private List<Client> _clients = new List<Client>();
         private List<Product> _products = new List<Product>();
-        private bool _searching = false;
+        private List<Client> _clientSearchList = new List<Client>();
+        private List<Product> _prodSearchList = new List<Product>();
 
         public PHFoodOrderMgmtForm()
         {
@@ -34,13 +35,8 @@ namespace PHFoodManagement
 
         private void ordersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (_orderForm == null) { _orderForm = new OrderForm(); }
-
             InitOrderForm();
-            _orderForm.ShowDialog();
-
-            //_orderList.Orders = _orderForm.Orders;
-            
+            _orderForm.ShowDialog();            
         }
         
         private void PHFoodOrderMgmtForm_Load(object sender, EventArgs e)
@@ -50,6 +46,9 @@ namespace PHFoodManagement
 
         private void InitSubForms()
         {
+            //not sure if these loading status bar messages will
+            //actually work when there are more items to load from db
+            //since this isn't multithreaded...
             _stsLoadingMessage.Text = "Loading clients...";
             _clientForm = new ClientForm();
             _clients = _clientForm.listClient;
@@ -63,32 +62,24 @@ namespace PHFoodManagement
             _stsLoadingMessage.Text = "Loading orders...";
             InitOrderForm();
             
-            //_orders = _orderForm.Orders;
-            
-
             _stsLoadingMessage.Text = "";
         }
-
-        //private void ResetProductList()
-        //{
-        //    ControlUtil.ResetList(_prodList.Products, _bndProducts, _lstProducts, "ProductName");
-        //}
 
         private void ResetClientList()
         {
             ControlUtil.ResetList(_clients, _bndClients, _lstClients, "name");
         }
         
+        //client form open
         private void clientsToolStripMenuItem_Click(object sender, EventArgs e)
         {            
             _clientForm.ShowDialog();
             ResetClientList();
         }
 
+        //product form open
         private void productsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(_productForm == null) { _productForm = new ProductForm(); }
-            
             _productForm.ShowDialog();
             ResetProductList();
         }
@@ -98,6 +89,7 @@ namespace PHFoodManagement
             ControlUtil.ResetList(_products, _bndProducts, _lstProducts, "ToString");
         }
 
+        //the underlying functionality to make the quick order, quick
         private void _lstProducts_KeyDown(object sender, KeyEventArgs e)
         {
             //to have full functionality as typing in the
@@ -133,7 +125,7 @@ namespace PHFoodManagement
                 }
                 
                 //only populate digits and periods
-                if (System.Text.RegularExpressions.Regex.IsMatch(key, @"^[\d\.]$"))
+                if (Regex.IsMatch(key, @"^[\d\.]$"))
                 {
                     _txtQOProdQty.Text += key;
                 }
@@ -145,25 +137,24 @@ namespace PHFoodManagement
             key = pressed.Substring(pressed.Length - 1);
         }
 
+        //adding product to the quick order
         private void _btnAddProdQuick_Click(object sender, EventArgs e)
         {
             Client client = (Client) _lstClients.SelectedItem;
             Product prod = (Product)_lstProducts.SelectedItem;
             string error = "";
+
             if (!double.TryParse(_txtQOProdQty.Text, out double qty))
             {
-                //error
                 error += "Quantity must be a number.\n";
             }
 
             if (client == null)
             {
-                //error
                 error += "Client must be selected.\n";
             }
             if (prod == null)
             {
-                //error
                 error += "Product must be selected.\n";
             }
 
@@ -193,23 +184,29 @@ namespace PHFoodManagement
             _txtQOProdQty.Clear();
         }
 
+        //to be easily called for a messagebox with icons
+        //prevent typing out all the enums
         private void ShowError(string v, string error)
         {
             MessageBox.Show(error, v, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        //updates the total for the current quick order
         private void UpdateTotal(Order quickOrder)
         {
             _txtQOTotal.Text = quickOrder.CalculateTotal().ToString();
         }
 
+        //resets the quick order order item list
         private void ResetQuickOrderList(List<OrderItem> ois)
         {
             ControlUtil.ResetList(ois, _bndQOorder, _lstQOProducts, "ToString");
         }
 
+        //finalize quick order -> open in editing mode in order form
         private void _btnQOFinalize_Click(object sender, EventArgs e)
         {
+         
             if (_quickOrder == null)
             {
                 ShowError("No Order", 
@@ -223,6 +220,8 @@ namespace PHFoodManagement
                 InitOrderForm();
             }
 
+            //quickorder must be passed for initialization
+            //in order form before showing
             _orderForm.InitQOOrder(_quickOrder);
             _orderForm.ShowDialog();
             ResetQuickOrder();
@@ -238,6 +237,7 @@ namespace PHFoodManagement
             _txtQOTotal.Clear();
         }
 
+        //initializes the order form with all necessary setup
         private void InitOrderForm()
         {
             _orderForm = new OrderForm();
@@ -246,6 +246,7 @@ namespace PHFoodManagement
             _orderForm.LoadOrders();
         }
 
+        //event for when user presses enter to add a product to a quickorder
         private void _lstProducts_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -254,6 +255,8 @@ namespace PHFoodManagement
             }
         }
 
+        //general method to filter and update the lists of product
+        //and client
         private void FilterList<T>(List<T> original, List<T> searchList, 
             ListBox lbox, string searchTerm, BindingSource bndsrc, string dispMemb)
         {
@@ -268,6 +271,8 @@ namespace PHFoodManagement
                 }
                 else
                 {
+                    //this only works since both client and product
+                    //have tostrings overridden with their names
                     foreach (T obj in original)
                     {
                         if (obj.ToString().ToLower().Contains(searchTerm.ToLower()))
@@ -301,56 +306,58 @@ namespace PHFoodManagement
             }
         }
 
+        //filters client search list
         private void _txtClientSearch_TextChanged(object sender, EventArgs e)
         {
             FilterList(_clients, _clientSearchList, 
                 _lstClients, _txtClientSearch.Text, _bndClients, "name");
         }
-
-        private List<Client> _clientSearchList = new List<Client>();
-        private List<Product> _prodSearchList = new List<Product>();
-
+                
+        //filters the list of product search
         private void _txtProdSearch_TextChanged(object sender, EventArgs e)
         {
             FilterList(_products, _prodSearchList,
                 _lstProducts, _txtProdSearch.Text, _bndProducts, "name");
         }
 
+        //general statusbar tooltip for product and client search
         private void SetSearchMessage()
         {
             _stsLoadingMessage.Text = "Start typing to search the list.";
         }
 
+        //clears the statusbar message
         private void ClearStatusMessage()
         {
             _stsLoadingMessage.Text = "";
         }
 
-        private void _txtProdSearch_MouseHover(object sender, EventArgs e)
-        {
-            
-        }
-
+        //Product search statusbar tooltip
         private void _txtProdSearch_MouseEnter(object sender, EventArgs e)
         {
             SetSearchMessage();
         }
 
+        //clear product search statusbar 'tooltip'
         private void _txtProdSearch_MouseLeave(object sender, EventArgs e)
         {
             ClearStatusMessage();
         }
 
+        //client search textbox hover statusbar 'tooltip'
         private void _txtClientSearch_MouseEnter(object sender, EventArgs e)
         {
             SetSearchMessage();
         }
 
+        //clears the statusbar message for search 'tooltip'
         private void _txtClientSearch_MouseLeave(object sender, EventArgs e)
         {
             ClearStatusMessage();
         }
 
+        //if user chooses to type into the qty textbox
+        //ensures that only digits and decimal is allowed
         private void _txtQOProdQty_TextChanged(object sender, EventArgs e)
         {
             _txtQOProdQty.Text = RemoveNonDigits(_txtQOProdQty.Text);
@@ -363,14 +370,33 @@ namespace PHFoodManagement
             return digitsOnly.Replace(text, "");
         }
 
+        //statusbar 'tooltip' for product list, since just by looking at the interface
+        //may not be intuitive of the underlying functionality
         private void _lstProducts_MouseEnter(object sender, EventArgs e)
         {
             _stsLoadingMessage.Text = "Select product and type in quantity. Press enter to add to order.";
         }
 
+        //for clearing statusbar 'tooltip'
         private void _lstProducts_MouseLeave(object sender, EventArgs e)
         {
             ClearStatusMessage();
+        }
+
+        //cancel the current quickorder
+        private void _btnQoCancel_Click(object sender, EventArgs e)
+        {
+            _quickOrder.OrderItems = null;
+            ResetQuickOrderList(_quickOrder.OrderItems);
+            _quickOrder = null;
+            _pnlClients.Enabled = true;
+            _txtQOClient.Clear();
+        }
+
+        //close app
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -48,9 +48,6 @@
             this.ordersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clientsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._grpQuickOrderDetails = new System.Windows.Forms.GroupBox();
             this._txtQOTotal = new System.Windows.Forms.TextBox();
             this._lblTotal = new System.Windows.Forms.Label();
@@ -63,17 +60,23 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this._stsLoadingMessage = new System.Windows.Forms.ToolStripStatusLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this._btnQoCancel = new System.Windows.Forms.Button();
             this._grpQuickOrder.SuspendLayout();
             this._pnlClients.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this._grpQuickOrderDetails.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // _grpQuickOrder
             // 
             this._grpQuickOrder.BackColor = System.Drawing.Color.Transparent;
+            this._grpQuickOrder.Controls.Add(this.pictureBox2);
             this._grpQuickOrder.Controls.Add(this._pnlClients);
             this._grpQuickOrder.Controls.Add(this.label4);
             this._grpQuickOrder.Controls.Add(this._txtProdSearch);
@@ -90,6 +93,7 @@
             // 
             // _pnlClients
             // 
+            this._pnlClients.Controls.Add(this.pictureBox3);
             this._pnlClients.Controls.Add(this._lblClients);
             this._pnlClients.Controls.Add(this._lstClients);
             this._pnlClients.Controls.Add(this._txtClientSearch);
@@ -143,9 +147,9 @@
             // _txtProdSearch
             // 
             this._txtProdSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._txtProdSearch.Location = new System.Drawing.Point(375, 535);
+            this._txtProdSearch.Location = new System.Drawing.Point(374, 535);
             this._txtProdSearch.Name = "_txtProdSearch";
-            this._txtProdSearch.Size = new System.Drawing.Size(316, 35);
+            this._txtProdSearch.Size = new System.Drawing.Size(317, 35);
             this._txtProdSearch.TabIndex = 3;
             this._toolTip.SetToolTip(this._txtProdSearch, "Start typing to search a product.");
             this._txtProdSearch.TextChanged += new System.EventHandler(this._txtProdSearch_TextChanged);
@@ -205,8 +209,7 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.editToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.editToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1232, 33);
@@ -224,8 +227,9 @@
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(139, 30);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
             this.closeToolStripMenuItem.Text = "&Close";
+            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -258,29 +262,9 @@
             this.productsToolStripMenuItem.Text = "&Products";
             this.productsToolStripMenuItem.Click += new System.EventHandler(this.productsToolStripMenuItem_Click);
             // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(61, 29);
-            this.helpToolStripMenuItem.Text = "&Help";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(175, 30);
-            this.toolStripMenuItem1.Text = "&View Help";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(175, 30);
-            this.aboutToolStripMenuItem.Text = "&About";
-            // 
             // _grpQuickOrderDetails
             // 
+            this._grpQuickOrderDetails.Controls.Add(this._btnQoCancel);
             this._grpQuickOrderDetails.Controls.Add(this._txtQOTotal);
             this._grpQuickOrderDetails.Controls.Add(this._lblTotal);
             this._grpQuickOrderDetails.Controls.Add(this._btnQOFinalize);
@@ -298,7 +282,7 @@
             // 
             // _txtQOTotal
             // 
-            this._txtQOTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._txtQOTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._txtQOTotal.Location = new System.Drawing.Point(258, 477);
             this._txtQOTotal.Name = "_txtQOTotal";
             this._txtQOTotal.ReadOnly = true;
@@ -309,7 +293,7 @@
             // 
             this._lblTotal.AutoSize = true;
             this._lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._lblTotal.Location = new System.Drawing.Point(169, 480);
+            this._lblTotal.Location = new System.Drawing.Point(184, 480);
             this._lblTotal.Name = "_lblTotal";
             this._lblTotal.Size = new System.Drawing.Size(68, 29);
             this._lblTotal.TabIndex = 9;
@@ -318,11 +302,11 @@
             // _btnQOFinalize
             // 
             this._btnQOFinalize.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._btnQOFinalize.Location = new System.Drawing.Point(118, 530);
+            this._btnQOFinalize.Location = new System.Drawing.Point(62, 526);
             this._btnQOFinalize.Name = "_btnQOFinalize";
-            this._btnQOFinalize.Size = new System.Drawing.Size(206, 44);
+            this._btnQOFinalize.Size = new System.Drawing.Size(119, 44);
             this._btnQOFinalize.TabIndex = 7;
-            this._btnQOFinalize.Text = "Finalize Order";
+            this._btnQOFinalize.Text = "&Finalize";
             this._btnQOFinalize.UseVisualStyleBackColor = true;
             this._btnQOFinalize.Click += new System.EventHandler(this._btnQOFinalize_Click);
             // 
@@ -350,20 +334,20 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(21, 79);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(95, 25);
+            this.label3.Size = new System.Drawing.Size(104, 26);
             this.label3.TabIndex = 5;
             this.label3.Text = "Products:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(48, 43);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 25);
+            this.label2.Size = new System.Drawing.Size(74, 26);
             this.label2.TabIndex = 4;
             this.label2.Text = "Client:";
             // 
@@ -396,6 +380,39 @@
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.SystemColors.Window;
+            this.pictureBox2.Image = global::PHFoodManagement.Properties.Resources.search_small;
+            this.pictureBox2.Location = new System.Drawing.Point(662, 539);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(29, 35);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 9;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackColor = System.Drawing.SystemColors.Window;
+            this.pictureBox3.Image = global::PHFoodManagement.Properties.Resources.search_small;
+            this.pictureBox3.Location = new System.Drawing.Point(291, 505);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(29, 35);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 10;
+            this.pictureBox3.TabStop = false;
+            // 
+            // _btnQoCancel
+            // 
+            this._btnQoCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._btnQoCancel.Location = new System.Drawing.Point(227, 526);
+            this._btnQoCancel.Name = "_btnQoCancel";
+            this._btnQoCancel.Size = new System.Drawing.Size(119, 44);
+            this._btnQoCancel.TabIndex = 11;
+            this._btnQoCancel.Text = "&Cancel";
+            this._btnQoCancel.UseVisualStyleBackColor = true;
+            this._btnQoCancel.Click += new System.EventHandler(this._btnQoCancel_Click);
+            // 
             // PHFoodOrderMgmtForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -425,6 +442,8 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -437,9 +456,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.GroupBox _grpQuickOrderDetails;
         private System.Windows.Forms.Label _lblProductList;
         private System.Windows.Forms.Button _btnQOFinalize;
@@ -465,6 +481,9 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel _stsLoadingMessage;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Button _btnQoCancel;
     }
 }
 

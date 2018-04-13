@@ -183,5 +183,8 @@
   <ItemGroup>
     <None Include="Resources\pyunghwalogo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search_small.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
