@@ -56,6 +56,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this._stsOrderStatus = new System.Windows.Forms.StatusStrip();
             this._toolStatErrorLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this._chkPaid = new System.Windows.Forms.CheckBox();
             this._grpOrderInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._nmbProductQty)).BeginInit();
             this._grpDates.SuspendLayout();
@@ -65,6 +66,7 @@
             // 
             // _grpOrderInfo
             // 
+            this._grpOrderInfo.Controls.Add(this._chkPaid);
             this._grpOrderInfo.Controls.Add(this._cboOrderClient);
             this._grpOrderInfo.Controls.Add(this._lblClient);
             this._grpOrderInfo.Controls.Add(this._lblProductQty);
@@ -94,7 +96,7 @@
             this._cboOrderClient.FormattingEnabled = true;
             this._cboOrderClient.Location = new System.Drawing.Point(126, 26);
             this._cboOrderClient.Name = "_cboOrderClient";
-            this._cboOrderClient.Size = new System.Drawing.Size(296, 34);
+            this._cboOrderClient.Size = new System.Drawing.Size(210, 34);
             this._cboOrderClient.TabIndex = 22;
             // 
             // _lblClient
@@ -352,6 +354,16 @@
             this._toolStatErrorLabel.Name = "_toolStatErrorLabel";
             this._toolStatErrorLabel.Size = new System.Drawing.Size(0, 17);
             // 
+            // _chkPaid
+            // 
+            this._chkPaid.AutoSize = true;
+            this._chkPaid.Location = new System.Drawing.Point(353, 32);
+            this._chkPaid.Name = "_chkPaid";
+            this._chkPaid.Size = new System.Drawing.Size(82, 30);
+            this._chkPaid.TabIndex = 23;
+            this._chkPaid.Text = "Paid";
+            this._chkPaid.UseVisualStyleBackColor = true;
+            // 
             // OrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 26F);
@@ -414,5 +426,6 @@
         private System.Windows.Forms.Label _lblClient;
         private System.Windows.Forms.Label _lblProductQty;
         private System.Windows.Forms.Label _lblBoxes;
+        private System.Windows.Forms.CheckBox _chkPaid;
     }
 }

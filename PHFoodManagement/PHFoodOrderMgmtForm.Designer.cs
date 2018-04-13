@@ -185,6 +185,8 @@
         "");
             this._lstProducts.KeyDown += new System.Windows.Forms.KeyEventHandler(this._lstProducts_KeyDown);
             this._lstProducts.KeyUp += new System.Windows.Forms.KeyEventHandler(this._lstProducts_KeyUp);
+            this._lstProducts.MouseEnter += new System.EventHandler(this._lstProducts_MouseEnter);
+            this._lstProducts.MouseLeave += new System.EventHandler(this._lstProducts_MouseLeave);
             // 
             // _btnAddProdQuick
             // 

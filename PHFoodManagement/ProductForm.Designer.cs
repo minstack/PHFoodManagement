@@ -70,7 +70,7 @@
             this._cbOrganic.AutoSize = true;
             this._cbOrganic.Location = new System.Drawing.Point(19, 285);
             this._cbOrganic.Name = "_cbOrganic";
-            this._cbOrganic.Size = new System.Drawing.Size(99, 28);
+            this._cbOrganic.Size = new System.Drawing.Size(114, 30);
             this._cbOrganic.TabIndex = 3;
             this._cbOrganic.Text = "Organic";
             this._cbOrganic.UseVisualStyleBackColor = true;
@@ -80,7 +80,7 @@
             this._lblDescription.AutoSize = true;
             this._lblDescription.Location = new System.Drawing.Point(15, 150);
             this._lblDescription.Name = "_lblDescription";
-            this._lblDescription.Size = new System.Drawing.Size(109, 24);
+            this._lblDescription.Size = new System.Drawing.Size(127, 26);
             this._lblDescription.TabIndex = 6;
             this._lblDescription.Text = "Description:";
             // 
@@ -89,7 +89,7 @@
             this._lblPrice.AutoSize = true;
             this._lblPrice.Location = new System.Drawing.Point(15, 88);
             this._lblPrice.Name = "_lblPrice";
-            this._lblPrice.Size = new System.Drawing.Size(58, 24);
+            this._lblPrice.Size = new System.Drawing.Size(68, 26);
             this._lblPrice.TabIndex = 5;
             this._lblPrice.Text = "Price:";
             // 
@@ -98,7 +98,7 @@
             this._lblName.AutoSize = true;
             this._lblName.Location = new System.Drawing.Point(15, 32);
             this._lblName.Name = "_lblName";
-            this._lblName.Size = new System.Drawing.Size(66, 24);
+            this._lblName.Size = new System.Drawing.Size(77, 26);
             this._lblName.TabIndex = 4;
             this._lblName.Text = "Name:";
             // 
@@ -114,14 +114,14 @@
             // 
             this._txtPrice.Location = new System.Drawing.Point(19, 110);
             this._txtPrice.Name = "_txtPrice";
-            this._txtPrice.Size = new System.Drawing.Size(184, 28);
+            this._txtPrice.Size = new System.Drawing.Size(184, 32);
             this._txtPrice.TabIndex = 1;
             // 
             // _txtName
             // 
             this._txtName.Location = new System.Drawing.Point(19, 53);
             this._txtName.Name = "_txtName";
-            this._txtName.Size = new System.Drawing.Size(184, 28);
+            this._txtName.Size = new System.Drawing.Size(184, 32);
             this._txtName.TabIndex = 0;
             // 
             // _btnNew
@@ -212,7 +212,7 @@
             // 
             // ProductForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 26F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(746, 440);
             this.Controls.Add(this._lvProducts);
@@ -223,6 +223,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ProductForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Manage Products";
             this.Load += new System.EventHandler(this.ProductForm_Load);
             this.groupBox1.ResumeLayout(false);

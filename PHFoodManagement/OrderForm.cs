@@ -29,12 +29,15 @@ namespace PHFoodManagement
         private bool _comingFromQuickOrder = false;
         private PHFOrderService.PHFOrderRetrievalServiceClient _orderdb =
             new PHFOrderService.PHFOrderRetrievalServiceClient();
+        private ErrorProvider _errProvider = new ErrorProvider();
+        private Dictionary<int, List<OrderItem>> _orderIdtoOrderItems =
+            new Dictionary<int, List<OrderItem>>();
 
         public OrderForm()
         {
             InitializeComponent();
             SetInitialState();
-
+            
             _requiredControls = new Control[]{
                  _dpDeliveryDate,
                  _cboOrderClient,
@@ -44,14 +47,76 @@ namespace PHFoodManagement
 
             InitRequiredDictionary(_requiredControls);
             InitRequiredErrors(_requiredControls);
-
             Orders = new List<Order>();
+        }
+
+        private Dictionary<int, Product> GetProductIdtoProduct()
+        {
+            Dictionary<int, Product> idToProd = 
+                new Dictionary<int, Product>();
+
+            foreach (Product p in Products)
+            {
+                idToProd.Add(p.Id, p);
+            }
+
+            return idToProd;
+        }
+
+        private Dictionary<int, List<OrderItem>> GetOrderIdToItems()
+        {
+            string fullRecord = _orderdb.GetAllOrderItems(-1);
+            Dictionary<int, Product> idToProd = GetProductIdtoProduct();
+            Dictionary<int, List<OrderItem>> oIdtoItems = 
+                new Dictionary<int, List<OrderItem>>();
+
+            if (string.IsNullOrWhiteSpace(fullRecord))
+            {
+                return oIdtoItems;
+            }
+
+            string[] idToItemsString = fullRecord.Split('|');
+            
+            // ["orderId,prodId,qty",...]
+            foreach (string record in idToItemsString)
+            {
+                string[] fields = record.Split(',');
+                int orderId = int.Parse(fields[0]);
+                int prodId = int.Parse(fields[1]);
+                double qty = double.Parse(fields[2]);
+
+                List<OrderItem> items;
+
+                //check if the dictionary already has a orderId key
+                if (oIdtoItems.ContainsKey(orderId))
+                {
+                    items = oIdtoItems[orderId];
+                }
+                else
+                {
+                    items = new List<OrderItem>();
+                    oIdtoItems.Add(orderId, items);
+                }
+
+                if (idToProd.ContainsKey(prodId))
+                {
+                    items.Add(new OrderItem
+                    {
+                        Product = idToProd[prodId],
+                        Quantity = qty
+                    });
+                }
+                
+            }
+
+            return oIdtoItems;
         }
 
         private void InitOrdersFromDB()
         {
             Orders.Clear();
             Dictionary<int, Client> clientIdToObject = GetIdToClient();
+            Dictionary<int, List<OrderItem>> oIdtoItems = GetOrderIdToItems();
 
             string tempString = _orderdb.GetAllOrders();
 
@@ -68,13 +133,23 @@ namespace PHFoodManagement
                         OrderNumber = int.Parse(order[0]),
                         OrderDate = Convert.ToDateTime(order[1]),
                         DeliveryDate = Convert.ToDateTime(order[2]),
-                        Paid = Convert.ToBoolean(order[3]),
-                        Client = clientIdToObject[int.Parse(order[4])]
+                        Paid = Convert.ToBoolean(order[3])
                     };
 
-                    Orders.Add(currOrder);
-                    //TEMP UNTIL DICTIONARY VIFGURE OUT
-                    //currOrder.OrderItems = new List<OrderItem>();
+                    if (oIdtoItems.ContainsKey(currOrder.OrderNumber))
+                    {
+                        currOrder.OrderItems = oIdtoItems[currOrder.OrderNumber];
+                    }
+
+                    //this is temporary until client-order relationship
+                    //constraint can be enforced or client delete needs
+                    //to be refactored later
+                    int tempClientId = int.Parse(order[4]);
+                    if (clientIdToObject.ContainsKey(tempClientId))
+                    {
+                        currOrder.Client = clientIdToObject[tempClientId];
+                        Orders.Add(currOrder);
+                    }
                 }
             }
             
@@ -102,7 +177,7 @@ namespace PHFoodManagement
                 "At least one product must be selected and added.",
                 "Quantity must be greater than 0 and denominations of 0.5"
             };
-            
+
             for (int i = 0; i < ctrls.Length; i ++)
             {
                 _requiredErrors.Add(ctrls[i], temp[i]);
@@ -240,10 +315,12 @@ namespace PHFoodManagement
             Control errorControl;
 
             RevertPreviousErrorLabel();
+            _errProvider.Clear();
 
             DateTime orderDate = _dpOrderDate.Value;
             DateTime deliveryDate = _dpDeliveryDate.Value;
             Client client = (Client)_cboOrderClient.SelectedItem;
+            bool paid = _chkPaid.Checked;
             //decimal total = decimal.Parse(_txtTotalCost.Text);
 
             if (ValidInputs(out errorControl))
@@ -255,7 +332,7 @@ namespace PHFoodManagement
                 currOrder.DeliveryDate = deliveryDate;
                 currOrder.OrderItems = GetOrderItems();
                 currOrder.Client = client;
-               // currOrder.OrderNumber = int.Parse(_txtOrderNum.Text);
+                currOrder.Paid = paid;
 
                 if (!_editing)
                 {
@@ -405,12 +482,16 @@ namespace PHFoodManagement
         {
             ctrl.Focus();
 
+            string errorMsg = _requiredErrors[ctrl];
+
             _requiredFieldLbls[ctrl].ForeColor = Color.Red;
-            _toolStatErrorLabel.Text = _requiredErrors[ctrl];
+            _toolStatErrorLabel.Text = errorMsg;
 
             //to revert color back to black later
             _prevErrLabel = _requiredFieldLbls[ctrl];
             _prevErrLabel.ForeColor = Color.Red;
+
+            _errProvider.SetError(ctrl, errorMsg);
         }
 
         // Reset color of the previous invalid input label to black

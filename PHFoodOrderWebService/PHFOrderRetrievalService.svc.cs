@@ -173,7 +173,9 @@ namespace PHFoodOrderWebService
 
         public string GetAllOrderItems(int orderId)
         {
-            string query = string.Format(_selectAll, "orderitem", "WHERE orderId=" + orderId);
+            string query = orderId == -1 ?
+                string.Format(_selectAll, "orderitem", "")
+                : string.Format(_selectAll, "orderitem", "WHERE orderId=" + orderId);
 
             OpenConnection();
             string resultString = "";
@@ -185,16 +187,17 @@ namespace PHFoodOrderWebService
                 {
                     while (reader.Read())
                     {
-                        //this allows for splitting of the orderId and productId,qty
+                        //tokens allow for splitting of the orderId and productId,qty
                         //for dictionary to match with orders from calling method
-                        resultString += reader.GetInt32(0) + "|"
+                        resultString += reader.GetInt32(0) + ","
                                         + reader.GetInt32(1) + ","
-                                        + reader.GetDecimal(2) + ",";
+                                        + reader.GetDecimal(2) + "|";
                     }
                 }
             }
 
-            return resultString.Substring(0, resultString.Length-1);
+            return resultString.Length == 0 ? "" 
+                : resultString.Substring(0, resultString.Length-1);
         }
         
         public int DeleteOrderItems(int id)

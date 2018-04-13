@@ -46,7 +46,6 @@ namespace PHFoodManagement
         private void PHFoodOrderMgmtForm_Load(object sender, EventArgs e)
         {
             InitSubForms();
-            
         }
 
         private void InitSubForms()
@@ -280,7 +279,6 @@ namespace PHFoodManagement
                     currList = searchList;
                     ControlUtil.ResetList(searchList, bndsrc, lbox, dispMemb);
                     
-                    
                 }
 
                 SetSearchingState(currList, lbox);
@@ -363,6 +361,16 @@ namespace PHFoodManagement
         {
             Regex digitsOnly = new Regex(@"[^\d^\.]");
             return digitsOnly.Replace(text, "");
+        }
+
+        private void _lstProducts_MouseEnter(object sender, EventArgs e)
+        {
+            _stsLoadingMessage.Text = "Select product and type in quantity. Press enter to add to order.";
+        }
+
+        private void _lstProducts_MouseLeave(object sender, EventArgs e)
+        {
+            ClearStatusMessage();
         }
     }
 }
