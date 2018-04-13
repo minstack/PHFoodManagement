@@ -386,6 +386,11 @@ namespace PHFoodManagement
         //cancel the current quickorder
         private void _btnQoCancel_Click(object sender, EventArgs e)
         {
+            if (_quickOrder == null)
+            {
+                return;
+            }
+
             _quickOrder.OrderItems = null;
             ResetQuickOrderList(_quickOrder.OrderItems);
             _quickOrder = null;

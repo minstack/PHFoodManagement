@@ -50,6 +50,8 @@ namespace PHFoodManagement
             Orders = new List<Order>();
         }
 
+        //dictionary prodID to product used when
+        //initializing order items..linear
         private Dictionary<int, Product> GetProductIdtoProduct()
         {
             Dictionary<int, Product> idToProd = 
@@ -63,6 +65,10 @@ namespace PHFoodManagement
             return idToProd;
         }
 
+        //retrieves orderitems from db
+        //returns dictionary of orderid to list of the order items
+        //O(n) compared to O(n^2) if retrieving orderitems as
+        //orders are created from db retrieval
         private Dictionary<int, List<OrderItem>> GetOrderIdToItems()
         {
             string fullRecord = _orderdb.GetAllOrderItems(-1);
@@ -87,7 +93,7 @@ namespace PHFoodManagement
 
                 List<OrderItem> items;
 
-                //check if the dictionary already has a orderId key
+                //check if orderitems for order id exists
                 if (oIdtoItems.ContainsKey(orderId))
                 {
                     items = oIdtoItems[orderId];
@@ -98,6 +104,9 @@ namespace PHFoodManagement
                     oIdtoItems.Add(orderId, items);
                 }
 
+                //probably don't need this later if the db
+                //is properly implemented with constraints
+                //throwing errors
                 if (idToProd.ContainsKey(prodId))
                 {
                     items.Add(new OrderItem
@@ -108,10 +117,11 @@ namespace PHFoodManagement
                 }
                 
             }
-
             return oIdtoItems;
         }
 
+        //initializes order list with orders from db
+        //complete order objects with client and products/orderitems
         private void InitOrdersFromDB()
         {
             Orders.Clear();
@@ -157,6 +167,9 @@ namespace PHFoodManagement
 
         }
 
+        //client id to client object dictionary
+        //used for initializing orders from db with foreign keys (ints)
+        //without this initializing order is O(n^2) compared to O(n)
         private Dictionary<int, Client> GetIdToClient()
         {
             Dictionary<int, Client> idtoclient = new Dictionary<int, Client>();
@@ -169,6 +182,7 @@ namespace PHFoodManagement
             return idtoclient;
         }
 
+        //controls to error messages
         private void InitRequiredErrors(Control[] ctrls)
         {
             string[] temp = {
@@ -184,6 +198,8 @@ namespace PHFoodManagement
             }
         }
 
+        //required fields dictionary to the corresponding labels
+        //for feedback with red forecolor change
         private void InitRequiredDictionary(Control[] ctrls)
         {
             Label[] temp = {
@@ -199,11 +215,13 @@ namespace PHFoodManagement
             }
         }
 
+        //public method to be called from main form
         public void LoadOrders()
         {
             InitOrdersFromDB();
         }
 
+        //no items in list
         private void SetInitialState()
         {
             ControlUtil.DisableButtons(_btnEdit, _btnDelete, _btnCancel, _btnSave, _btnAddProduct, _btnRemoveProduct);
@@ -211,6 +229,7 @@ namespace PHFoodManagement
             DisablInputForm();
         }
 
+        //adding new order or editing selected
         private void SetEditState()
         {
             ControlUtil.DisableButtons(_btnNew, _btnDelete, _btnEdit);
@@ -219,26 +238,35 @@ namespace PHFoodManagement
             ControlUtil.DisableListBoxes(_lstOrders);
         }
 
+        //selected mode -> edit, delete, new btns enabled
+        //disabling other btns prevents unnecessary bugs
         private void SetItemSelectedState()
         {
             ControlUtil.DisableButtons(_btnSave, _btnCancel, _btnAddProduct, _btnRemoveProduct);
             ControlUtil.EnableButtons(_btnEdit, _btnDelete, _btnNew);
             DisablInputForm();
             ControlUtil.EnableListBoxes(_lstOrders);
-            
         }
 
+        //disables input form group
         private void DisablInputForm()
         {
             _grpOrderInfo.Enabled = false;
         }
 
+        //enables the order input form group
+        //'disables' total cost textbox since
+        //that isn't for the user to input
         private void EnableInputForm()
         {
             _grpOrderInfo.Enabled = true;
             ControlUtil.DisableTextBoxes(_txtTotalCost);
         }
 
+        //order form loads with initialization of orders
+        //from db, resets all lists/comboboxes with updatesvalues
+        //the properties clients and products must be set
+        //before calling this form to show
         private void OrderForm_Load(object sender, EventArgs e)
         {
             InitOrdersFromDB();
@@ -250,7 +278,6 @@ namespace PHFoodManagement
 
             if (_comingFromQuickOrder)
             {
-                //_currOrder = (Order)_lstOrders.SelectedItem;
                 SetEditState();
                 _comingFromQuickOrder = false;
                 _editing = false; //triggers new order
@@ -262,52 +289,63 @@ namespace PHFoodManagement
             }
         }
 
+        //resets product combobox
         private void ResetProductCombo()
         {
             ControlUtil.ResetList(Products, _bndProductCbo, _cboProductSelect, "ToString");
         }
 
+        //resets the client combobox
         private void ResetClientCombo()
         {
             ControlUtil.ResetList(Clients, _bndClientCbo, _cboOrderClient, "name");
-            
         }
 
+        //default dates --> today
         private void ResetDates()
         {
             _dpOrderDate.Value = DateTime.Today;
             _dpDeliveryDate.Value = DateTime.Today;
         }
 
+        //resets order list
         private void ResetOrderList()
         {
             ControlUtil.ResetList(Orders, _bndOrders, _lstOrders, "ToString");
         }
 
+        //resets the orderitem list
         private void ResetOrderItemList()
         {
             ControlUtil.ResetList(_currOrder.OrderItems, _bndOrderItems, _lstOrderProducts, "ToString");
         }
 
+        //new order btn event.  Clear fields, create new order, enable controls
+        //flag editing as false
         private void _btnNew_Click(object sender, EventArgs e)
         {
             SetEditState();
             CreateNewOrder();
+            ClearFields();
             //_txtOrderNum.Text = NextOrderNum.ToString();
             _editing = false;
         }
 
+        //sets current order to new order and resets order item list
         private void CreateNewOrder()
         {
             _currOrder = new Order();
             ResetOrderItemList();
         }
 
+        //save click event
         private void _btnSave_Click(object sender, EventArgs e)
         {
             SaveOrder();
         }
 
+        //saves the order whether new or editing
+        //has error checking for required fields/lists (orderitems)
         private void SaveOrder()
         {
             Control errorControl;
@@ -323,6 +361,9 @@ namespace PHFoodManagement
 
             if (ValidInputs(out errorControl))
             {
+                //this way (and one if block later)
+                //prevents weird nested if's from separating
+                //edit and new
                 Order currOrder = _editing ?
                     (Order)_lstOrders.SelectedItem : new Order();
 
@@ -334,19 +375,22 @@ namespace PHFoodManagement
 
                 if (!_editing)
                 {
+                    //adding to db first and the db method
+                    //returns the orderId to be updated
+                    //right away on client
                     int orderNum = AddToDB(currOrder);
 
                     if (orderNum > 0)
                     {
                         currOrder.OrderNumber = orderNum;
-                        AddOrderItemsToDB(currOrder);
+                        AddOrderItemsToDB(currOrder); //db add
 
                         Orders.Add(currOrder);  
                     }
                 }
                 else
                 {
-                    UpdateDB(currOrder);
+                    UpdateDB(currOrder); //db update (editing)
                 }
 
                 ResetOrderList();
@@ -362,6 +406,8 @@ namespace PHFoodManagement
             }
         }
 
+        //prep order to string values to be sent to
+        //order web service -> update db
         private void UpdateDB(Order currOrder)
         {
             string orderString = string.Format("{0}|{1}|{2}|{3}|{4}|{5}",
@@ -375,12 +421,17 @@ namespace PHFoodManagement
             _orderdb.UpdateOrder(orderString);
 
             //update orderitems
+            //this is the 'simplest' way of updating order
+            //items without the need to figure out which was
+            //updated or not
             _orderdb.DeleteOrderItems(currOrder.OrderNumber);
             AddOrderItemsToDB(currOrder);
 
             
         }
 
+        //adds the given order to the db
+        //through the web service
         private int AddToDB(Order currOrder)
         {
             return _orderdb.AddNewOrder(
@@ -390,24 +441,26 @@ namespace PHFoodManagement
                         currOrder.Paid,
                         currOrder.Client.id
                     );
-
-            
         }
 
+        //adds the orderitems of given order to the db 
         private void AddOrderItemsToDB(Order currOrder)
         {
             foreach (OrderItem oi in currOrder.OrderItems)
             {
-                //_orderdb.AddOrderItem(currOrder.OrderNumber, )
-                _orderdb.AddOrderItem(currOrder.OrderNumber, oi.Product.Id, oi.Quantity);
+                _orderdb.AddOrderItem(
+                    currOrder.OrderNumber, oi.Product.Id, oi.Quantity);
             }
         }
-
+        
+        //initializes the form to the given quick order
+        //coming from the main form.  sets the current order to the
+        //given quick order, populates it and flags the corresponding
+        //variable to true for further processing when form loads
         internal void InitQOOrder(Order quickOrder)
         {
             ResetOrderList();
             _currOrder = quickOrder;
-            //_lstOrders.SelectedIndex = Orders.Count - 1;
             PopulateOrder(quickOrder);
             _comingFromQuickOrder = true;
         }
@@ -432,6 +485,7 @@ namespace PHFoodManagement
             }
         }
 
+        //populates the order form with the given order
         private void PopulateOrder(Order order)
         {
             if (order != null)
@@ -444,19 +498,15 @@ namespace PHFoodManagement
                 ResetOrderItemList();
             }
         }
-
-        private void SetSelectedState()
-        {
-            ControlUtil.DisableButtons(_btnSave, _btnCancel);
-            ControlUtil.EnableButtons(_btnNew, _btnDelete, _btnEdit);
-        }
-
+        
+        //clears all fields
         private void ClearFields()
         {
             ControlUtil.ClearTextBoxes(_txtTotalCost);
             ControlUtil.ClearComboBoxes(_cboOrderClient, _cboProductSelect);
         }
 
+        //retreives orderitems currently in the listbox
         private List<OrderItem> GetOrderItems()
         {
             var items = _lstOrderProducts.Items;
@@ -470,6 +520,7 @@ namespace PHFoodManagement
             return tempOI;
         }
 
+        //sets error message based on given control
         private void SetRequiredError(Control ctrl)
         {
             ctrl.Focus();
@@ -513,6 +564,7 @@ namespace PHFoodManagement
             _prevErrLabel.ForeColor = Color.Red;
         }
 
+        // checks for valid inputs for the form
         private bool ValidInputs(out Control errCtrl)
         {
             if (_dpDeliveryDate.Value.Date < DateTime.Today)
@@ -537,32 +589,33 @@ namespace PHFoodManagement
             return true;
         }
 
+        //'closing' by hiding for future opens
         private void OrderForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Hide();
         }
 
+        //add product event
         private void _btnAddProduct_Click(object sender, EventArgs e)
         {
             double qty = (double)_nmbProductQty.Value;
             RevertPreviousErrorLabel();
             
-            if (qty == 0 || qty % .5 != 0)
+            if (qty == 0 )
             {
                 SetError(_nmbProductQty, _requiredErrors[_nmbProductQty]);
                 return;
             }
 
+            //only allows .5 denominations without the need for errors
+            qty -= (qty % .5);
+
             AddNewOrderItem((Product)_cboProductSelect.SelectedItem, qty);
-            ClearOrderItems();
+            _nmbProductQty.Value = _nmbProductQty.Minimum;
         }
 
-        private void ClearOrderItems()
-        {
-            ControlUtil.ClearComboBoxes(_cboProductSelect);
-            ControlUtil.ClearNumUpDown(_nmbProductQty);
-        }
-
+        //adds given product and to current order
+        //resets totalcost and orderitemlist
         private void AddNewOrderItem(Product prod, double qty)
         {
             _currOrder.AddProduct(prod, qty);
@@ -570,11 +623,16 @@ namespace PHFoodManagement
             UpdateTotalCost();
         }
 
+        //recalculates total.  called when item added/deleted
         private void UpdateTotalCost()
         {
             _txtTotalCost.Text = _currOrder.CalculateTotal().ToString();
         }
 
+        //listbox event selected item change
+        //populates order if selected.  If no order selected
+        //(empty list) then set to initial state -> all input controls
+        //disabled, only listbox and new button enabled
         private void _lstOrders_SelectedIndexChanged(object sender, EventArgs e)
         {
             Order selected = (Order)_lstOrders.SelectedItem;
@@ -591,24 +649,39 @@ namespace PHFoodManagement
             
         }
 
+        //edit click event -> enable input form controls
+        //flag editing true
         private void _btnEdit_Click(object sender, EventArgs e)
         {
             SetEditState();
             _editing = true;
         }
 
+        //deletes selected order as long as it is null
         private void _btnDelete_Click(object sender, EventArgs e)
         {
             Order selected = (Order)_lstOrders.SelectedItem;
-
-            if (selected != null)
+            
+            if (DeleteConfirmed())
             {
-                DeleteOrderFromDB(selected);
-                Orders.Remove(selected);
-                ResetOrderList();
+                if (selected != null)
+                {
+                    DeleteOrderFromDB(selected);
+                    Orders.Remove(selected);
+                    ResetOrderList();
+                }
             }
+            
         }
 
+        //returns true or false if the delete action was confirmed 'yes'
+        private bool DeleteConfirmed()
+        {
+            return DialogResult.Yes == MessageBox.Show("Are you sure you would like to delete selected item?",
+                "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+        }
+
+        //deletes the given order from the database
         private void DeleteOrderFromDB(Order selected)
         {
             foreach (OrderItem oi in selected.OrderItems)
@@ -619,6 +692,7 @@ namespace PHFoodManagement
             _orderdb.DeleteOrder(selected.OrderNumber);
         }
 
+        //cancels any edits or new orders
         private void _btnCancel_Click(object sender, EventArgs e)
         {
             
@@ -629,15 +703,21 @@ namespace PHFoodManagement
             ResetErrors();
         }
 
+        //delete order item
         private void _btnRemoveProduct_Click(object sender, EventArgs e)
         {
             OrderItem selected = (OrderItem)_lstOrderProducts.SelectedItem;
 
-            if (selected != null)
+            if (DeleteConfirmed())
             {
-                _currOrder.OrderItems.Remove(selected);
-                ResetOrderItemList();
+                if (selected != null)
+                {
+                    _currOrder.OrderItems.Remove(selected);
+                    ResetOrderItemList();
+                    UpdateTotalCost();
+                }
             }
+            
         }
     }
 }

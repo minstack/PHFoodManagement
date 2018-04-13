@@ -10,8 +10,8 @@ using MySql.Data.MySqlClient;
 
 namespace PHFoodOrderWebService
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "PHFOrderRetrievalService" in code, svc and config file together.
-    // NOTE: In order to launch WCF Test Client for testing this service, please select PHFOrderRetrievalService.svc or PHFOrderRetrievalService.svc.cs at the Solution Explorer and start debugging.
+    //Order Web Service, to manipulate order and orderitem tables from DB
+    //All return values are 'primitive' types
     public class PHFOrderRetrievalService : IPHFOrderRetrievalService
     {
         private string _connString = Properties.Settings.Default.ConnectionString;
@@ -33,6 +33,7 @@ namespace PHFoodOrderWebService
             _conn.ConnectionString = _connString;
         }
 
+        //add a given order record
         public int AddNewOrder(string oDate, string dDate, decimal oTotal, bool paid, int cId)
         {
             string query = string.Format(_insertOrder,
@@ -45,6 +46,8 @@ namespace PHFoodOrderWebService
             return -1;
         }
 
+        //probably not the best way of updating the order number on the client side
+        //called right after an insert and returns the 'last' order id
         private int GetOrderID()
         {
             OpenConnection();
@@ -60,18 +63,19 @@ namespace PHFoodOrderWebService
                     }
                 }
             }
-
             return -1;
         }
 
+        //adds the given orderitem record
         public int AddOrderItem(int orderId, int productId, double quantity)
         {
             string query = string.Format(_insertOrderItem, orderId, productId, quantity);
 
             return RunNonExecuteQuery(query);
-
         }
 
+        //the general method to be called for any non-execute method.
+        //the given query must be valid
         private int RunNonExecuteQuery(string query)
         {
             OpenConnection();
@@ -87,9 +91,14 @@ namespace PHFoodOrderWebService
             return rows;
         }
         
+        //updates the given order to the values within the order itself
+        //uses the order id within the string
+        //token used is the pipe '|'
         public int UpdateOrder(string o)
         {
             string[] temp = o.Split('|');
+
+            //mysql syntax, since all strings -> literal quotes
             string setStatement = "orderDate=\"" + temp[1] + "\","
                                    + " deliveryDate=\"" + temp[2] + "\","
                                    + " orderTotal=\"" + temp[3] + "\","
@@ -99,9 +108,10 @@ namespace PHFoodOrderWebService
             string query = string.Format(_updateQuery, "`order`", setStatement, "orderId=" + temp[0]);
 
             return RunNonExecuteQuery(query);
-
         }
 
+        //Deletes the given order id number
+        //the caller must take care of referential integrity 
         public int DeleteOrder(int id)
         {
             string query = string.Format(_deleteQuery, "`order`", "orderId=\"" + id + "\"");
@@ -109,6 +119,7 @@ namespace PHFoodOrderWebService
             return RunNonExecuteQuery(query);
         }
 
+        //retreives the order with the given id
         public string GetOrder(int id)
         {
             string query = string.Format(_selectAll, "`order`", "WHERE orderId=\"" + id + "\" LIMIT 1");
@@ -131,10 +142,10 @@ namespace PHFoodOrderWebService
                     }
                 }
             }
-
             return resultString;
         }
 
+        //retrieves all orders in the order table
         public string GetAllOrders()
         {
             string query = string.Format(_selectAll, "`order`", "");
@@ -158,10 +169,12 @@ namespace PHFoodOrderWebService
                 }
             }
 
+            //prevents substring fail
             return resultString.Length == 0 ? "" 
                 : resultString.Substring(0, resultString.Length - 1);
         }
 
+        //opens the connection with the connection string
         private void OpenConnection()
         {
             if (_conn != null && _conn.State != ConnectionState.Open)
@@ -171,6 +184,8 @@ namespace PHFoodOrderWebService
             }
         }
 
+        //retrieves all the order items based on the given
+        //orderId.  If the orderId is -1, returns all order items
         public string GetAllOrderItems(int orderId)
         {
             string query = orderId == -1 ?
@@ -196,10 +211,12 @@ namespace PHFoodOrderWebService
                 }
             }
 
+            //prevents substring error when no rows found
             return resultString.Length == 0 ? "" 
                 : resultString.Substring(0, resultString.Length-1);
         }
         
+        //deletes all order items that match the given order id
         public int DeleteOrderItems(int id)
         {
             string query = string.Format(_deleteQuery, "orderitem", "orderId=" + id);
