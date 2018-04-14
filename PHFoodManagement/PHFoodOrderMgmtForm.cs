@@ -396,8 +396,9 @@ namespace PHFoodManagement
             _quickOrder = null;
             _pnlClients.Enabled = true;
             _txtQOClient.Clear();
+            _txtQOTotal.Clear();
         }
-
+        
         //close app
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {

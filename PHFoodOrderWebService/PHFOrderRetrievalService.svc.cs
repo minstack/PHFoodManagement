@@ -100,11 +100,13 @@ namespace PHFoodOrderWebService
         {
             string[] temp = o.Split('|');
 
+            int paid = temp[4].ToLower() == "true" ? 1 : 0;
+
             //mysql syntax, since all strings -> literal quotes
             string setStatement = "orderDate=\"" + temp[1] + "\","
                                    + " deliveryDate=\"" + temp[2] + "\","
                                    + " orderTotal=\"" + temp[3] + "\","
-                                   + " paid=\"" + temp[4] + "\","
+                                   + " paid=\"" + paid + "\","
                                    + " clientId=\"" + temp[5] + "\"";
 
             string query = string.Format(_updateQuery, "`order`", setStatement, "orderId=" + temp[0]);

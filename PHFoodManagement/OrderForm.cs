@@ -281,6 +281,7 @@ namespace PHFoodManagement
                 SetEditState();
                 _comingFromQuickOrder = false;
                 _editing = false; //triggers new order
+                _cboOrderClient.SelectedItem = _currOrder.Client;
             }
             else
             {
