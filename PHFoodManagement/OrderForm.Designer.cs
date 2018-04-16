@@ -28,13 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this._grpOrderInfo = new System.Windows.Forms.GroupBox();
+            this._chkPaid = new System.Windows.Forms.CheckBox();
             this._cboOrderClient = new System.Windows.Forms.ComboBox();
             this._lblClient = new System.Windows.Forms.Label();
             this._lblProductQty = new System.Windows.Forms.Label();
             this._lblBoxes = new System.Windows.Forms.Label();
             this._nmbProductQty = new System.Windows.Forms.NumericUpDown();
             this._cboProductSelect = new System.Windows.Forms.ComboBox();
+            this._btnRemoveProduct = new System.Windows.Forms.Button();
             this._btnAddProduct = new System.Windows.Forms.Button();
             this._txtTotalCost = new System.Windows.Forms.TextBox();
             this._lstOrderProducts = new System.Windows.Forms.ListBox();
@@ -55,13 +58,16 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this._stsOrderStatus = new System.Windows.Forms.StatusStrip();
             this._toolStatErrorLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this._chkPaid = new System.Windows.Forms.CheckBox();
-            this._btnRemoveProduct = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this._txtOrderSearch = new System.Windows.Forms.TextBox();
+            this._toolStripOrderSearch = new System.Windows.Forms.ToolStripStatusLabel();
+            this._tooltipSearch = new System.Windows.Forms.ToolTip(this.components);
             this._grpOrderInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._nmbProductQty)).BeginInit();
             this._grpDates.SuspendLayout();
             this.panel1.SuspendLayout();
             this._stsOrderStatus.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // _grpOrderInfo
@@ -89,6 +95,16 @@
             this._grpOrderInfo.TabIndex = 0;
             this._grpOrderInfo.TabStop = false;
             this._grpOrderInfo.Text = "Order Information";
+            // 
+            // _chkPaid
+            // 
+            this._chkPaid.AutoSize = true;
+            this._chkPaid.Location = new System.Drawing.Point(353, 32);
+            this._chkPaid.Name = "_chkPaid";
+            this._chkPaid.Size = new System.Drawing.Size(82, 30);
+            this._chkPaid.TabIndex = 2;
+            this._chkPaid.Text = "Paid";
+            this._chkPaid.UseVisualStyleBackColor = true;
             // 
             // _cboOrderClient
             // 
@@ -147,6 +163,18 @@
             this._cboProductSelect.Name = "_cboProductSelect";
             this._cboProductSelect.Size = new System.Drawing.Size(296, 34);
             this._cboProductSelect.TabIndex = 5;
+            // 
+            // _btnRemoveProduct
+            // 
+            this._btnRemoveProduct.BackgroundImage = global::PHFoodManagement.Properties.Resources.trash;
+            this._btnRemoveProduct.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this._btnRemoveProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._btnRemoveProduct.Location = new System.Drawing.Point(84, 365);
+            this._btnRemoveProduct.Name = "_btnRemoveProduct";
+            this._btnRemoveProduct.Size = new System.Drawing.Size(33, 31);
+            this._btnRemoveProduct.TabIndex = 9;
+            this._btnRemoveProduct.UseVisualStyleBackColor = true;
+            this._btnRemoveProduct.Click += new System.EventHandler(this._btnRemoveProduct_Click);
             // 
             // _btnAddProduct
             // 
@@ -249,7 +277,7 @@
             this._lstOrders.Location = new System.Drawing.Point(507, 40);
             this._lstOrders.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this._lstOrders.Name = "_lstOrders";
-            this._lstOrders.Size = new System.Drawing.Size(275, 420);
+            this._lstOrders.Size = new System.Drawing.Size(275, 368);
             this._lstOrders.TabIndex = 0;
             this._lstOrders.SelectedIndexChanged += new System.EventHandler(this._lstOrders_SelectedIndexChanged);
             // 
@@ -331,10 +359,11 @@
             this._stsOrderStatus.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._stsOrderStatus.ImageScalingSize = new System.Drawing.Size(24, 24);
             this._stsOrderStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this._toolStatErrorLabel});
-            this._stsOrderStatus.Location = new System.Drawing.Point(0, 542);
+            this._toolStatErrorLabel,
+            this._toolStripOrderSearch});
+            this._stsOrderStatus.Location = new System.Drawing.Point(0, 529);
             this._stsOrderStatus.Name = "_stsOrderStatus";
-            this._stsOrderStatus.Size = new System.Drawing.Size(812, 22);
+            this._stsOrderStatus.Size = new System.Drawing.Size(812, 35);
             this._stsOrderStatus.TabIndex = 9;
             this._stsOrderStatus.Text = "statusStrip1";
             // 
@@ -342,35 +371,48 @@
             // 
             this._toolStatErrorLabel.ForeColor = System.Drawing.Color.Red;
             this._toolStatErrorLabel.Name = "_toolStatErrorLabel";
-            this._toolStatErrorLabel.Size = new System.Drawing.Size(0, 17);
+            this._toolStatErrorLabel.Size = new System.Drawing.Size(0, 30);
             // 
-            // _chkPaid
+            // pictureBox2
             // 
-            this._chkPaid.AutoSize = true;
-            this._chkPaid.Location = new System.Drawing.Point(353, 32);
-            this._chkPaid.Name = "_chkPaid";
-            this._chkPaid.Size = new System.Drawing.Size(82, 30);
-            this._chkPaid.TabIndex = 2;
-            this._chkPaid.Text = "Paid";
-            this._chkPaid.UseVisualStyleBackColor = true;
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.pictureBox2.BackColor = System.Drawing.SystemColors.Window;
+            this.pictureBox2.Image = global::PHFoodManagement.Properties.Resources.search_small;
+            this.pictureBox2.Location = new System.Drawing.Point(749, 426);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(29, 21);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 11;
+            this.pictureBox2.TabStop = false;
             // 
-            // _btnRemoveProduct
+            // _txtOrderSearch
             // 
-            this._btnRemoveProduct.BackgroundImage = global::PHFoodManagement.Properties.Resources.trash;
-            this._btnRemoveProduct.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this._btnRemoveProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._btnRemoveProduct.Location = new System.Drawing.Point(84, 365);
-            this._btnRemoveProduct.Name = "_btnRemoveProduct";
-            this._btnRemoveProduct.Size = new System.Drawing.Size(33, 31);
-            this._btnRemoveProduct.TabIndex = 9;
-            this._btnRemoveProduct.UseVisualStyleBackColor = true;
-            this._btnRemoveProduct.Click += new System.EventHandler(this._btnRemoveProduct_Click);
+            this._txtOrderSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this._txtOrderSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._txtOrderSearch.Location = new System.Drawing.Point(507, 422);
+            this._txtOrderSearch.Name = "_txtOrderSearch";
+            this._txtOrderSearch.Size = new System.Drawing.Size(275, 35);
+            this._txtOrderSearch.TabIndex = 10;
+            this._tooltipSearch.SetToolTip(this._txtOrderSearch, "Type Order# or Client name to filter list.");
+            this._txtOrderSearch.TextChanged += new System.EventHandler(this._txtOrderSearch_TextChanged);
+            this._txtOrderSearch.MouseEnter += new System.EventHandler(this._txtOrderSearch_MouseEnter);
+            this._txtOrderSearch.MouseLeave += new System.EventHandler(this._txtOrderSearch_MouseLeave);
+            // 
+            // _toolStripOrderSearch
+            // 
+            this._toolStripOrderSearch.Name = "_toolStripOrderSearch";
+            this._toolStripOrderSearch.Size = new System.Drawing.Size(215, 30);
+            this._toolStripOrderSearch.Text = "toolStripStatusLabel1";
             // 
             // OrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 26F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(812, 564);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this._txtOrderSearch);
             this.Controls.Add(this._stsOrderStatus);
             this.Controls.Add(this._lblOrder);
             this.Controls.Add(this._lstOrders);
@@ -393,6 +435,7 @@
             this.panel1.ResumeLayout(false);
             this._stsOrderStatus.ResumeLayout(false);
             this._stsOrderStatus.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -429,5 +472,9 @@
         private System.Windows.Forms.Label _lblProductQty;
         private System.Windows.Forms.Label _lblBoxes;
         private System.Windows.Forms.CheckBox _chkPaid;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.TextBox _txtOrderSearch;
+        private System.Windows.Forms.ToolStripStatusLabel _toolStripOrderSearch;
+        private System.Windows.Forms.ToolTip _tooltipSearch;
     }
 }

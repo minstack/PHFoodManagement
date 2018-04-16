@@ -31,7 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PHFoodOrderMgmtForm));
             this._grpQuickOrder = new System.Windows.Forms.GroupBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this._pnlClients = new System.Windows.Forms.Panel();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this._lblClients = new System.Windows.Forms.Label();
             this._lstClients = new System.Windows.Forms.ListBox();
             this._txtClientSearch = new System.Windows.Forms.TextBox();
@@ -49,6 +51,7 @@
             this.clientsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._grpQuickOrderDetails = new System.Windows.Forms.GroupBox();
+            this._btnRemoveProduct = new System.Windows.Forms.Button();
             this._btnQoCancel = new System.Windows.Forms.Button();
             this._txtQOTotal = new System.Windows.Forms.TextBox();
             this._lblTotal = new System.Windows.Forms.Label();
@@ -61,17 +64,14 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this._stsLoadingMessage = new System.Windows.Forms.ToolStripStatusLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this._btnRemoveProduct = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this._grpQuickOrder.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this._pnlClients.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this._grpQuickOrderDetails.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // _grpQuickOrder
@@ -92,6 +92,20 @@
             this._grpQuickOrder.TabStop = false;
             this._grpQuickOrder.Text = "Quick Order";
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.pictureBox2.BackColor = System.Drawing.SystemColors.Window;
+            this.pictureBox2.Image = global::PHFoodManagement.Properties.Resources.search_small;
+            this.pictureBox2.Location = new System.Drawing.Point(662, 539);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(29, 35);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 9;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            // 
             // _pnlClients
             // 
             this._pnlClients.Controls.Add(this.pictureBox3);
@@ -102,6 +116,19 @@
             this._pnlClients.Name = "_pnlClients";
             this._pnlClients.Size = new System.Drawing.Size(323, 552);
             this._pnlClients.TabIndex = 1;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.pictureBox3.BackColor = System.Drawing.SystemColors.Window;
+            this.pictureBox3.Image = global::PHFoodManagement.Properties.Resources.search_small;
+            this.pictureBox3.Location = new System.Drawing.Point(291, 505);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(29, 35);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 10;
+            this.pictureBox3.TabStop = false;
             // 
             // _lblClients
             // 
@@ -254,21 +281,21 @@
             // ordersToolStripMenuItem
             // 
             this.ordersToolStripMenuItem.Name = "ordersToolStripMenuItem";
-            this.ordersToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.ordersToolStripMenuItem.Size = new System.Drawing.Size(166, 30);
             this.ordersToolStripMenuItem.Text = "&Orders";
             this.ordersToolStripMenuItem.Click += new System.EventHandler(this.ordersToolStripMenuItem_Click);
             // 
             // clientsToolStripMenuItem
             // 
             this.clientsToolStripMenuItem.Name = "clientsToolStripMenuItem";
-            this.clientsToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.clientsToolStripMenuItem.Size = new System.Drawing.Size(166, 30);
             this.clientsToolStripMenuItem.Text = "&Clients";
             this.clientsToolStripMenuItem.Click += new System.EventHandler(this.clientsToolStripMenuItem_Click);
             // 
             // productsToolStripMenuItem
             // 
             this.productsToolStripMenuItem.Name = "productsToolStripMenuItem";
-            this.productsToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.productsToolStripMenuItem.Size = new System.Drawing.Size(166, 30);
             this.productsToolStripMenuItem.Text = "&Products";
             this.productsToolStripMenuItem.Click += new System.EventHandler(this.productsToolStripMenuItem_Click);
             // 
@@ -290,6 +317,19 @@
             this._grpQuickOrderDetails.TabIndex = 5;
             this._grpQuickOrderDetails.TabStop = false;
             this._grpQuickOrderDetails.Text = "Quick Order Details";
+            // 
+            // _btnRemoveProduct
+            // 
+            this._btnRemoveProduct.BackgroundImage = global::PHFoodManagement.Properties.Resources.trash;
+            this._btnRemoveProduct.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this._btnRemoveProduct.Enabled = false;
+            this._btnRemoveProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._btnRemoveProduct.Location = new System.Drawing.Point(26, 465);
+            this._btnRemoveProduct.Name = "_btnRemoveProduct";
+            this._btnRemoveProduct.Size = new System.Drawing.Size(33, 31);
+            this._btnRemoveProduct.TabIndex = 7;
+            this._btnRemoveProduct.UseVisualStyleBackColor = true;
+            this._btnRemoveProduct.Click += new System.EventHandler(this._btnRemoveProduct_Click);
             // 
             // _btnQoCancel
             // 
@@ -404,45 +444,6 @@
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             // 
-            // _btnRemoveProduct
-            // 
-            this._btnRemoveProduct.BackgroundImage = global::PHFoodManagement.Properties.Resources.trash;
-            this._btnRemoveProduct.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this._btnRemoveProduct.Enabled = false;
-            this._btnRemoveProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._btnRemoveProduct.Location = new System.Drawing.Point(26, 465);
-            this._btnRemoveProduct.Name = "_btnRemoveProduct";
-            this._btnRemoveProduct.Size = new System.Drawing.Size(33, 31);
-            this._btnRemoveProduct.TabIndex = 7;
-            this._btnRemoveProduct.UseVisualStyleBackColor = true;
-            this._btnRemoveProduct.Click += new System.EventHandler(this._btnRemoveProduct_Click);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBox2.BackColor = System.Drawing.SystemColors.Window;
-            this.pictureBox2.Image = global::PHFoodManagement.Properties.Resources.search_small;
-            this.pictureBox2.Location = new System.Drawing.Point(662, 539);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(29, 35);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 9;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBox3.BackColor = System.Drawing.SystemColors.Window;
-            this.pictureBox3.Image = global::PHFoodManagement.Properties.Resources.search_small;
-            this.pictureBox3.Location = new System.Drawing.Point(291, 505);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(29, 35);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 10;
-            this.pictureBox3.TabStop = false;
-            // 
             // PHFoodOrderMgmtForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -463,8 +464,10 @@
             this.Load += new System.EventHandler(this.PHFoodOrderMgmtForm_Load);
             this._grpQuickOrder.ResumeLayout(false);
             this._grpQuickOrder.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this._pnlClients.ResumeLayout(false);
             this._pnlClients.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this._grpQuickOrderDetails.ResumeLayout(false);
@@ -472,8 +475,6 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -437,5 +437,10 @@ namespace PHFoodManagement
         {
             _btnRemoveProduct.Enabled = _lstQOProducts.Items.Count > 0;
         }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

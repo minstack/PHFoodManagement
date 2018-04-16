@@ -91,6 +91,8 @@ namespace PHFoodManagement
             }
         }
 
+        //string override -> for default display member for bound source
+        //order number - client name
         public override string ToString()
         {
             return string.Format("#{0} - {1}", OrderNumber, Client.name);

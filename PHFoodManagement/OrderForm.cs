@@ -20,6 +20,7 @@ namespace PHFoodManagement
         private BindingSource _bndOrderItems = new BindingSource();
         private BindingSource _bndProductCbo = new BindingSource();
         private BindingSource _bndClientCbo = new BindingSource();
+        private BindingSource _bndSearch = new BindingSource();
         private Dictionary<Control, Label> _requiredFieldLbls = new Dictionary<Control, Label>();
         private Dictionary<Control, string> _requiredErrors = new Dictionary<Control, string>();
         private Control[] _requiredControls;
@@ -32,6 +33,8 @@ namespace PHFoodManagement
         private ErrorProvider _errProvider = new ErrorProvider();
         private Dictionary<int, List<OrderItem>> _orderIdtoOrderItems =
             new Dictionary<int, List<OrderItem>>();
+        private Order _quickOrder;
+        private List<Order> _searchList = new List<Order>();
 
         public OrderForm()
         {
@@ -224,7 +227,8 @@ namespace PHFoodManagement
         //no items in list
         private void SetInitialState()
         {
-            ControlUtil.DisableButtons(_btnEdit, _btnDelete, _btnCancel, _btnSave, _btnAddProduct, _btnRemoveProduct);
+            ControlUtil.DisableButtons(_btnEdit, _btnDelete, 
+                _btnCancel, _btnSave, _btnAddProduct, _btnRemoveProduct);
             ControlUtil.EnableButtons(_btnNew);
             DisablInputForm();
         }
@@ -279,9 +283,11 @@ namespace PHFoodManagement
             if (_comingFromQuickOrder)
             {
                 SetEditState();
+                _currOrder = _quickOrder;
                 _comingFromQuickOrder = false;
                 _editing = false; //triggers new order
                 _cboOrderClient.SelectedItem = _currOrder.Client;
+                PopulateOrder(_currOrder);
             }
             else
             {
@@ -318,7 +324,8 @@ namespace PHFoodManagement
         //resets the orderitem list
         private void ResetOrderItemList()
         {
-            ControlUtil.ResetList(_currOrder.OrderItems, _bndOrderItems, _lstOrderProducts, "ToString");
+            ControlUtil.ResetList(_currOrder.OrderItems, 
+                _bndOrderItems, _lstOrderProducts, "ToString");
         }
 
         //new order btn event.  Clear fields, create new order, enable controls
@@ -461,10 +468,9 @@ namespace PHFoodManagement
         //given quick order, populates it and flags the corresponding
         //variable to true for further processing when form loads
         internal void InitQOOrder(Order quickOrder)
-        {
-            ResetOrderList();
-            _currOrder = quickOrder;
-            PopulateOrder(quickOrder);
+        {            
+            _quickOrder = quickOrder;
+            //PopulateOrder(_currOrder);
             _comingFromQuickOrder = true;
         }
 
@@ -722,6 +728,55 @@ namespace PHFoodManagement
                 }
             }
             
+        }
+
+        private void _txtOrderSearch_TextChanged(object sender, EventArgs e)
+        {
+            FilterSearchList();
+        }
+
+        private void FilterSearchList()
+        {
+            List<Order> currList = Orders;
+            string searchTerm = _txtOrderSearch.Text;
+
+            if (currList.Count > 0)
+            {
+                _searchList.Clear();
+
+                if (string.IsNullOrWhiteSpace(searchTerm))
+                {
+                    ControlUtil.ResetList(Orders, _bndOrders, _lstOrders, "ToString");
+                }
+                else
+                {
+                    foreach (Order o in Orders)
+                    {
+                        //searches both order # and client name
+                        if (o.ToString().ToLower().Contains(searchTerm.ToLower()))
+                        {
+                            _searchList.Add(o);
+                        }
+                    }
+
+                    currList = _searchList;
+                    ControlUtil.ResetList(_searchList, _bndOrders, _lstOrders, "ToString");
+
+                }
+
+                //SetSearchingState(currList, lbox);
+            }
+        }
+
+        //mouse enter order search
+        private void _txtOrderSearch_MouseEnter(object sender, EventArgs e)
+        {
+            _toolStripOrderSearch.Text = "Search Order # or client name.";
+        }
+
+        private void _txtOrderSearch_MouseLeave(object sender, EventArgs e)
+        {
+            _toolStripOrderSearch.Text = "";
         }
     }
 }
